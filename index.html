@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Multiverse Creature Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="field"></div>
+
+<header>
+  <div class="brand">
+    <div class="logo">MCA</div>
+    <div class="brand-sub">Multiverse Creature Archive</div>
+  </div>
+
+  <nav>
+    <a href="#" class="active">Trang chủ</a>
+    <a href="#kho">Kho dữ liệu</a>
+    <a href="#form">Tạo hồ sơ</a>
+    <a href="#">Điều tra viên</a>
+  </nav>
+
+  <div class="investigator">
+    <div class="avatar"></div>
+    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
+  </div>
+</header>
+
+<div id="view-list">
+
+<section class="hero">
+  <span class="eyebrow">Hệ thống nội bộ · Tổ chức Quan sát Đa Thiên Hà</span>
+  <h1>Multiverse Creature Archive</h1>
+  <p>
+    Không có sinh vật nào bị bỏ sót. Chỉ có những hồ sơ chưa được khám phá.
+    Mọi sinh vật đều phải được xác minh trước khi trở thành hồ sơ chính thức.
+  </p>
+
+  <div class="search-box">
+    <input type="text" placeholder="Tìm theo tên, chủng tộc, hành tinh hoặc mã hồ sơ...">
+    <button type="button">Tìm</button>
+  </div>
+
+  <div class="stat-strip">
+    <div><div class="num">128.493</div><div class="label">Sinh vật</div></div>
+    <div><div class="num">3.824</div><div class="label">Hành tinh</div></div>
+    <div><div class="num">18.920</div><div class="label">Điều tra viên</div></div>
+    <div><div class="num">427</div><div class="label">Chờ xác minh</div></div>
+  </div>
+</section>
+
+<section class="cards" id="kho">
+  <div class="section-head">
+    <h2>Sinh vật nổi bật</h2>
+    <span class="tag">Cập nhật hôm nay</span>
+  </div>
+
+  <div class="card-container">
+
+    <div class="card" data-id="leviathan" tabindex="0" role="button">
+      <div class="thumb">
+        <img src="https://picsum.photos/400/250?random=1" alt="Astral Leviathan">
+        <span class="tier">Cấp A</span>
+      </div>
+      <div class="info">
+        <h3>Astral Leviathan</h3>
+        <span class="type">Rồng Không Gian</span>
+        <p>Sinh vật khổng lồ sống giữa các dòng năng lượng thiên hà.</p>
+        <div class="bottom">
+          <span class="likes">❤ 4.200</span>
+          <span class="status verified">Đã xác minh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-id="voidwolf" tabindex="0" role="button">
+      <div class="thumb">
+        <img src="https://picsum.photos/400/250?random=2" alt="Void Wolf">
+        <span class="tier">Cấp B</span>
+      </div>
+      <div class="info">
+        <h3>Void Wolf</h3>
+        <span class="type">Thú Hư Không</span>
+        <p>Có khả năng dịch chuyển khoảng cách ngắn trong bóng tối.</p>
+        <div class="bottom">
+          <span class="likes">❤ 2.180</span>
+          <span class="status verified">Đã xác minh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-id="mantis" tabindex="0" role="button">
+      <div class="thumb">
+        <img src="https://picsum.photos/400/250?random=3" alt="Crystal Mantis">
+        <span class="tier">Cấp C</span>
+      </div>
+      <div class="info">
+        <h3>Crystal Mantis</h3>
+        <span class="type">Côn trùng tinh thể</span>
+        <p>Lớp giáp phản xạ ánh sáng giúp gần như vô hình.</p>
+        <div class="bottom">
+          <span class="likes">❤ 1.620</span>
+          <span class="status pending">Chờ điều tra</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="form-section" id="form">
+  <div class="section-head">
+    <h2>Gửi hồ sơ sinh vật</h2>
+    <span class="tag">Trạng thái: Chờ xác minh sau khi gửi</span>
+  </div>
+
+  <div class="form-shell">
+    <p class="lede">Điền đầy đủ thông tin bên dưới. Hồ sơ sẽ được một Điều tra viên cấp cao xác minh trước khi công khai.</p>
+
+    <form id="creatureForm">
+      <div class="grid">
+        <div>
+          <label for="f-name">Tên sinh vật</label>
+          <input id="f-name" type="text" required>
+        </div>
+        <div>
+          <label for="f-race">Chủng tộc</label>
+          <input id="f-race" type="text" required>
+        </div>
+        <div>
+          <label for="f-source">Nguồn sức mạnh</label>
+          <select id="f-source">
+            <option>Sinh học</option>
+            <option>Ma thuật</option>
+            <option>Công nghệ</option>
+            <option>Tâm linh</option>
+            <option>Dị thường</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-tier">Cấp đề xuất</label>
+          <select id="f-tier">
+            <option>F</option><option>E</option><option>D</option>
+            <option>C</option><option>B</option><option>A</option><option>S</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="f-desc">Mô tả</label>
+      <textarea id="f-desc" rows="5"></textarea>
+
+      <div class="field-danger">
+        <label class="danger" for="f-weak">Điểm yếu (Bắt buộc)</label>
+        <textarea id="f-weak" rows="3" required></textarea>
+      </div>
+
+      <div class="field-warning">
+        <label class="warning" for="f-trigger">Điều kiện kích hoạt sức mạnh mạnh nhất</label>
+        <textarea id="f-trigger" rows="3"></textarea>
+      </div>
+
+      <button class="submit-btn" type="submit">Gửi báo cáo</button>
+    </form>
+  </div>
+</section>
+
+</div>
+
+<section class="detail-view" id="view-detail" hidden></section>
+
+<footer>
+  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
+</footer>
+
+<div class="toast" id="toast">
+  <b>Hồ sơ đã được gửi.</b><br>Trạng thái: Chờ xác minh.
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
