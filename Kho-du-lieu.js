@@ -1,24 +1,13 @@
-const form = document.getElementById('creatureForm');
-const toast = document.getElementById('toast');
-
 /* ---------- creature dossier data ---------- */
 const TIERS = ['F','E','D','C','B','A','S','SS','X'];
-
-const supabaseUrl = "https://yshuioniclrndglvhbak.supabase.co";
-const supabaseKey = "sb_publishable_DnQPDbWweR7OqnYgRWIacA_zfconAgQ";
-
-const supabase = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
-
-
 const CREATURES = {
   leviathan:{
     name:'Astral Leviathan', race:'Rồng Không Gian', code:'VX-2047',
     status:'verified', threat:'A', investigator:'Điều tra viên Kenya',
     planet:'Nebula-9', age:'Chưa xác định', size:'12 km', element:'Không Gian', rarity:'Hiếm',
-    image:'https://picsum.photos/900/500?random=1',
+    desc:'Sinh vật khổng lồ sống giữa các dòng năng lượng thiên hà.',
+    likes:'4.200', tierLabel:'A', image:'https://picsum.photos/900/500?random=1',
+    thumb:'https://picsum.photos/400/250?random=1',
     skills:[
       {name:'Bẻ cong Không Gian', range:'200 m', duration:'8 giây', cooldown:'24 giờ'},
       {name:'Trường hấp dẫn cục bộ', range:'50 m', duration:'12 giây', cooldown:'6 giờ'}
@@ -34,7 +23,9 @@ const CREATURES = {
     name:'Void Wolf', race:'Thú Hư Không', code:'VX-1183',
     status:'verified', threat:'B', investigator:'Điều tra viên Kenya',
     planet:'Chưa xác định', age:'~3 năm', size:'1.4 m', element:'Hư Không', rarity:'Không phổ biến',
-    image:'https://picsum.photos/900/500?random=2',
+    desc:'Có khả năng dịch chuyển khoảng cách ngắn trong bóng tối.',
+    likes:'2.180', tierLabel:'B', image:'https://picsum.photos/900/500?random=2',
+    thumb:'https://picsum.photos/400/250?random=2',
     skills:[
       {name:'Dịch chuyển bóng tối', range:'15 m', duration:'Tức thời', cooldown:'45 giây'}
     ],
@@ -48,7 +39,9 @@ const CREATURES = {
     name:'Crystal Mantis', race:'Côn trùng tinh thể', code:'VX-0542',
     status:'pending', threat:'C', investigator:'Chờ phân công',
     planet:'Prax-4', age:'Không rõ', size:'40 cm', element:'Khoáng chất', rarity:'Phổ biến',
-    image:'https://picsum.photos/900/500?random=3',
+    desc:'Lớp giáp phản xạ ánh sáng giúp gần như vô hình.',
+    likes:'1.620', tierLabel:'C', image:'https://picsum.photos/900/500?random=3',
+    thumb:'https://picsum.photos/400/250?random=3',
     skills:[
       {name:'Ngụy trang phản xạ', range:'Bản thân', duration:'Liên tục', cooldown:'Không'}
     ],
@@ -61,6 +54,50 @@ const CREATURES = {
 
 const viewList = document.getElementById('view-list');
 const viewDetail = document.getElementById('view-detail');
+const cardContainer = document.getElementById('card-container');
+const searchInput = document.getElementById('search-input');
+const resultTag = document.getElementById('result-tag');
+
+function renderCards(ids){
+  cardContainer.innerHTML = ids.map(id => {
+    const c = CREATURES[id];
+    const statusLabel = c.status === 'verified' ? 'Đã xác minh' : 'Chờ điều tra';
+    return `
+      <div class="card" data-id="${id}" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="${c.thumb}" alt="${c.name}">
+          <span class="tier">Cấp ${c.tierLabel}</span>
+        </div>
+        <div class="info">
+          <h3>${c.name}</h3>
+          <span class="type">${c.race}</span>
+          <p>${c.desc}</p>
+          <div class="bottom">
+            <span class="likes">❤ ${c.likes}</span>
+            <span class="status ${c.status}">${statusLabel}</span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  cardContainer.querySelectorAll('.card[data-id]').forEach(card => {
+    card.addEventListener('click', () => showDetail(card.dataset.id));
+    card.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); showDetail(card.dataset.id); }
+    });
+  });
+}
+
+function filterCreatures(){
+  const q = searchInput.value.trim().toLowerCase();
+  const ids = Object.keys(CREATURES).filter(id => {
+    if(!q) return true;
+    const c = CREATURES[id];
+    return [c.name, c.race, c.planet, c.code].join(' ').toLowerCase().includes(q);
+  });
+  resultTag.textContent = q ? `${ids.length} kết quả cho "${searchInput.value.trim()}"` : 'Tất cả hồ sơ';
+  renderCards(ids);
+}
 
 function renderDetail(c){
   const tierIndex = TIERS.indexOf(c.threat);
@@ -144,17 +181,21 @@ function showList(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-document.querySelectorAll('.card[data-id]').forEach(card => {
-  card.addEventListener('click', () => showDetail(card.dataset.id));
-  card.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); showDetail(card.dataset.id); }
-  });
-});
+/* ---------- init: render all cards, honor ?id= and ?q= from URL ---------- */
+renderCards(Object.keys(CREATURES));
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  toast.classList.add('show');
-  form.reset();
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+const params = new URLSearchParams(window.location.search);
+const openId = params.get('id');
+const initialQuery = params.get('q');
+
+if(initialQuery){
+  searchInput.value = initialQuery;
+  filterCreatures();
+}
+if(openId && CREATURES[openId]){
+  showDetail(openId);
+}
+
+searchInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') filterCreatures();
 });

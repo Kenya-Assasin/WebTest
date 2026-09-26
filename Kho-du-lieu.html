@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<title>Multiverse Creature Archive — Kho dữ liệu</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="field"></div>
+
+<header>
+  <div class="brand">
+    <div class="logo">MCA</div>
+    <div class="brand-sub">Multiverse Creature Archive</div>
+  </div>
+
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="kho-du-lieu.html" class="active">Kho dữ liệu</a>
+    <a href="tao-ho-so.html">Tạo hồ sơ</a>
+    <a href="dieu-tra-vien.html">Điều tra viên</a>
+  </nav>
+
+  <div class="investigator">
+    <div class="avatar"></div>
+    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
+  </div>
+</header>
+
+<div id="view-list">
+
+<section class="cards" style="padding-top:60px;">
+  <div class="section-head">
+    <h2>Kho dữ liệu sinh vật</h2>
+    <span class="tag" id="result-tag">Tất cả hồ sơ</span>
+  </div>
+
+  <form class="search-box" style="max-width:560px; margin-bottom:40px;" onsubmit="return false;">
+    <input type="text" id="search-input" placeholder="Tìm theo tên, chủng tộc, hành tinh hoặc mã hồ sơ...">
+    <button type="button" onclick="filterCreatures()">Tìm</button>
+  </form>
+
+  <div class="card-container" id="card-container"></div>
+</section>
+
+</div>
+
+<section class="detail-view" id="view-detail" hidden></section>
+
+<footer>
+  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
+</footer>
+
+<script src="kho-du-lieu.js"></script>
+
+</body>
+</html>

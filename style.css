@@ -230,6 +230,7 @@ nav a.active{ color:var(--accent); background:#0f2534; }
   overflow:hidden;
   transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
+.card-link{ display:block; text-decoration:none; color:inherit; }
 .card{ cursor:pointer; }
 .card:hover, .card:focus-visible{
   transform:translateY(-6px);
@@ -410,6 +411,9 @@ textarea{ resize:vertical; }
   .dossier-name, .attr-table, .threat-block, .skills-block, .weak-block, .log-block{ margin-left:18px; margin-right:18px; }
   .attr-row .k{ width:120px; }
 }
+
+.see-more{ text-align:center; margin-top:40px; }
+.see-more .back-btn{ display:inline-flex; }
 
 footer{
   text-align:center; padding:36px 20px;
