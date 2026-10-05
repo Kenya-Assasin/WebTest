@@ -1,130 +1,1638 @@
+
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<title>Multiverse Creature Archive — Trang chủ</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+
+    <!-- =====================================================
+         THÔNG TIN TRANG
+    ====================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MCA - Multiverse Creature Archive. Cơ sở dữ liệu sinh vật đa vũ trụ."
+    >
+
+    <title>
+        MCA | Multiverse Creature Archive
+    </title>
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <!-- CSS dùng chung Header + Footer -->
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <!-- CSS riêng Trang chủ -->
+    <link
+        rel="stylesheet"
+        href="css/home.css"
+    >
+
 </head>
-<body>
 
-<div class="field"></div>
 
-<header>
-  <div class="brand">
-    <div class="logo">MCA</div>
-    <div class="brand-sub">Multiverse Creature Archive</div>
-  </div>
+<body data-page="home">
 
-  <nav>
-    <a href="index.html" class="active">Trang chủ</a>
-    <a href="kho-du-lieu.html">Kho dữ liệu</a>
-    <a href="tao-ho-so.html">Tạo hồ sơ</a>
-    <a href="dieu-tra-vien.html">Điều tra viên</a>
-  </nav>
 
-  <div class="investigator">
-    <div class="avatar"></div>
-    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
-  </div>
-</header>
+    <!-- =====================================================
+         HEADER
 
-<section class="hero">
-  <span class="eyebrow">Hệ thống nội bộ · Tổ chức Quan sát Đa Thiên Hà</span>
-  <h1>Multiverse Creature Archive</h1>
-  <p>
-    Không có sinh vật nào bị bỏ sót. Chỉ có những hồ sơ chưa được khám phá.
-    Mọi sinh vật đều phải được xác minh trước khi trở thành hồ sơ chính thức.
-  </p>
+         Nội dung được load từ:
+         components/header.html
+    ====================================================== -->
 
-  <form class="search-box" action="kho-du-lieu.html" method="get">
-    <input type="text" name="q" placeholder="Tìm theo tên, chủng tộc, hành tinh hoặc mã hồ sơ...">
-    <button type="submit">Tìm</button>
-  </form>
+    <div id="site-header"></div>
 
-  <div class="stat-strip">
-    <div><div class="num">128.493</div><div class="label">Sinh vật</div></div>
-    <div><div class="num">3.824</div><div class="label">Hành tinh</div></div>
-    <div><div class="num">18.920</div><div class="label">Điều tra viên</div></div>
-    <div><div class="num">427</div><div class="label">Chờ xác minh</div></div>
-  </div>
-</section>
 
-<section class="cards">
-  <div class="section-head">
-    <h2>Sinh vật nổi bật</h2>
-    <span class="tag">Cập nhật hôm nay</span>
-  </div>
 
-  <div class="card-container">
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-    <a class="card-link" href="kho-du-lieu.html?id=leviathan">
-      <div class="card">
-        <div class="thumb">
-          <img src="https://picsum.photos/400/250?random=1" alt="Astral Leviathan">
-          <span class="tier">Cấp A</span>
+    <main class="home-main">
+
+
+        <!-- =================================================
+             1. HERO
+        ================================================== -->
+
+        <section class="home-hero">
+
+
+            <!-- HERO CONTENT -->
+
+            <div class="hero-content">
+
+                <div class="hero-label">
+                    MULTIVERSE CREATURE ARCHIVE
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    KHÁM PHÁ
+
+                    <br>
+
+                    <span>
+                        SINH VẬT ĐA VŨ TRỤ
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Cơ sở dữ liệu trung tâm lưu trữ các hồ sơ
+                    sinh vật được phát hiện trên hàng nghìn
+                    hành tinh, thiên hà và vũ trụ khác nhau.
+
+                    Tham gia cùng các điều tra viên MCA để
+                    khám phá, nghiên cứu và mở rộng kho lưu
+                    trữ sinh vật đa vũ trụ.
+
+                </p>
+
+
+                <!-- BUTTON -->
+
+                <div class="hero-actions">
+
+                    <a
+                        href="kho-du-lieu.html"
+                        class="home-primary-button"
+                    >
+
+                        KHÁM PHÁ KHO DỮ LIỆU
+
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="create.html"
+                        class="home-secondary-button"
+                    >
+
+                        + TẠO HỒ SƠ SINH VẬT
+
+                    </a>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="hero-statistics">
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            128.493
+                        </strong>
+
+                        <span>
+                            Sinh vật
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            3.824
+                        </strong>
+
+                        <span>
+                            Hành tinh
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            18.920
+                        </strong>
+
+                        <span>
+                            Điều tra viên
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            427
+                        </strong>
+
+                        <span>
+                            Chờ xác minh
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GALAXY MAP
+            ================================================== -->
+
+            <aside class="galaxy-card">
+
+
+                <div class="galaxy-card-image"></div>
+
+
+                <div class="galaxy-card-content">
+
+
+                    <span class="galaxy-card-label">
+                        MULTIVERSE NAVIGATION
+                    </span>
+
+
+                    <h3>
+                        BẢN ĐỒ ĐA THIÊN HÀ
+                    </h3>
+
+
+                    <p>
+
+                        Khám phá các thiên hà,
+                        hành tinh và khu vực đã
+                        được MCA ghi nhận.
+
+                    </p>
+
+
+                    <a
+                        href="explore.html"
+                        class="home-secondary-button"
+                    >
+
+                        MỞ BẢN ĐỒ
+
+                        →
+
+                    </a>
+
+
+                </div>
+
+            </aside>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             2. SEARCH
+        ================================================== -->
+
+        <section class="home-search-section">
+
+
+            <!-- SEARCH BOX -->
+
+            <div class="home-search-box">
+
+
+                <span class="home-search-icon">
+                    ⌕
+                </span>
+
+
+                <input
+                    type="text"
+                    id="homeSearchInput"
+                    placeholder="Tìm tên sinh vật hoặc mã hồ sơ..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    type="button"
+                    id="homeSearchButton"
+                    class="home-search-button"
+                    title="Tìm kiếm"
+                >
+
+                    →
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- THREAT FILTER -->
+
+            <select id="homeThreatFilter">
+
+                <option value="all">
+                    Mọi cấp đe dọa
+                </option>
+
+                <option value="F">Cấp F</option>
+                <option value="E">Cấp E</option>
+                <option value="D">Cấp D</option>
+                <option value="C">Cấp C</option>
+                <option value="B">Cấp B</option>
+                <option value="A">Cấp A</option>
+                <option value="S">Cấp S</option>
+                <option value="SS">Cấp SS</option>
+                <option value="X">Cấp X</option>
+
+            </select>
+
+
+
+            <!-- SPECIES FILTER -->
+
+            <select id="homeSpeciesFilter">
+
+                <option value="all">
+                    Mọi loài
+                </option>
+
+                <option value="dragon">
+                    Rồng
+                </option>
+
+                <option value="beast">
+                    Thú
+                </option>
+
+                <option value="entity">
+                    Thực thể
+                </option>
+
+                <option value="insect">
+                    Côn trùng
+                </option>
+
+            </select>
+
+
+
+            <!-- STATUS FILTER -->
+
+            <select id="homeStatusFilter">
+
+                <option value="all">
+                    Mọi trạng thái
+                </option>
+
+                <option value="verified">
+                    Đã xác minh
+                </option>
+
+                <option value="pending">
+                    Chờ xác minh
+                </option>
+
+                <option value="investigation">
+                    Cần điều tra thêm
+                </option>
+
+            </select>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             3. HOME CONTENT
+        ================================================== -->
+
+        <div class="home-content">
+
+
+            <div class="home-dashboard">
+
+
+                <!-- =============================================
+                     LEFT CONTENT
+                ============================================== -->
+
+                <div class="home-dashboard-main">
+
+
+                    <!-- =========================================
+                         CREATURE PANEL
+                    ========================================== -->
+
+                    <section class="home-panel">
+
+
+                        <!-- PANEL HEADER -->
+
+                        <div class="home-panel-header">
+
+
+                            <div class="home-panel-title">
+
+
+                                <span class="home-panel-icon">
+                                    ◈
+                                </span>
+
+
+                                <div>
+
+                                    <h2>
+                                        HỒ SƠ SINH VẬT NỔI BẬT
+                                    </h2>
+
+                                    <p>
+
+                                        Những hồ sơ đang nhận được
+                                        sự chú ý từ cộng đồng MCA.
+
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- TABS -->
+
+                            <div class="creature-tabs">
+
+
+                                <button
+                                    type="button"
+                                    class="active"
+                                    data-tab="featured"
+                                >
+                                    NỔI BẬT
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    data-tab="new"
+                                >
+                                    MỚI NHẤT
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    data-tab="popular"
+                                >
+                                    PHỔ BIẾN
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    data-tab="all"
+                                >
+                                    TẤT CẢ
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- =====================================
+                             CREATURE GRID
+                        ====================================== -->
+
+                        <div class="home-creature-grid">
+
+
+
+                            <!-- =================================
+                                 CREATURE 1
+                            ================================== -->
+
+                            <article
+                                class="home-creature-card"
+                                data-name="Astral Leviathan"
+                                data-code="VX-2047"
+                                data-species="dragon"
+                                data-threat="A"
+                                data-status="verified"
+                                data-featured="true"
+                                data-new="false"
+                                data-popular="true"
+                                onclick="openCreature('VX-2047')"
+                            >
+
+
+                                <div
+                                    class="creature-image"
+                                    style="
+                                        background-image:
+                                        linear-gradient(
+                                            rgba(3,7,13,0.05),
+                                            rgba(3,7,13,0.15)
+                                        ),
+                                        url('assets/creatures/astral-leviathan.jpg');
+                                    "
+                                >
+
+
+                                    <span class="creature-status">
+                                        ĐÃ XÁC MINH
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="creature-like"
+                                        aria-label="Yêu thích"
+                                        aria-pressed="false"
+                                    >
+
+                                        ♡
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="creature-content">
+
+
+                                    <span class="creature-code">
+                                        VX-2047 • CẤP A
+                                    </span>
+
+
+                                    <h3>
+                                        Astral Leviathan
+                                    </h3>
+
+
+                                    <span class="creature-type">
+                                        Rồng vũ trụ
+                                    </span>
+
+
+                                    <div class="creature-tags">
+
+                                        <span>
+                                            Không gian
+                                        </span>
+
+                                        <span>
+                                            Nebula Sector
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="creature-meta">
+
+                                        <span>
+                                            ♡ 1.842
+                                        </span>
+
+                                        <span>
+                                            ◉ 24.7K
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </article>
+
+
+
+                            <!-- =================================
+                                 CREATURE 2
+                            ================================== -->
+
+                            <article
+                                class="home-creature-card"
+                                data-name="Void Wolf"
+                                data-code="VX-1982"
+                                data-species="beast"
+                                data-threat="B"
+                                data-status="verified"
+                                data-featured="true"
+                                data-new="false"
+                                data-popular="true"
+                                onclick="openCreature('VX-1982')"
+                            >
+
+
+                                <div
+                                    class="creature-image"
+                                    style="
+                                        background-image:
+                                        url('assets/creatures/void-wolf.jpg');
+                                    "
+                                >
+
+
+                                    <span class="creature-status">
+                                        ĐÃ XÁC MINH
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="creature-like"
+                                        aria-label="Yêu thích"
+                                        aria-pressed="false"
+                                    >
+
+                                        ♡
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="creature-content">
+
+
+                                    <span class="creature-code">
+                                        VX-1982 • CẤP B
+                                    </span>
+
+
+                                    <h3>
+                                        Void Wolf
+                                    </h3>
+
+
+                                    <span class="creature-type">
+                                        Thú hư không
+                                    </span>
+
+
+                                    <div class="creature-tags">
+
+                                        <span>
+                                            Hư không
+                                        </span>
+
+                                        <span>
+                                            Andromeda
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="creature-meta">
+
+                                        <span>
+                                            ♡ 1.429
+                                        </span>
+
+                                        <span>
+                                            ◉ 18.2K
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </article>
+
+
+
+                            <!-- =================================
+                                 CREATURE 3
+                            ================================== -->
+
+                            <article
+                                class="home-creature-card"
+                                data-name="Crystal Mantis"
+                                data-code="VX-1765"
+                                data-species="insect"
+                                data-threat="C"
+                                data-status="pending"
+                                data-featured="true"
+                                data-new="true"
+                                data-popular="false"
+                                onclick="openCreature('VX-1765')"
+                            >
+
+
+                                <div
+                                    class="creature-image"
+                                    style="
+                                        background-image:
+                                        url('assets/creatures/crystal-mantis.jpg');
+                                    "
+                                >
+
+
+                                    <span class="creature-status pending">
+                                        CHỜ XÁC MINH
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="creature-like"
+                                        aria-label="Yêu thích"
+                                        aria-pressed="false"
+                                    >
+
+                                        ♡
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="creature-content">
+
+
+                                    <span class="creature-code">
+                                        VX-1765 • CẤP C
+                                    </span>
+
+
+                                    <h3>
+                                        Crystal Mantis
+                                    </h3>
+
+
+                                    <span class="creature-type">
+                                        Côn trùng tinh thể
+                                    </span>
+
+
+                                    <div class="creature-tags">
+
+                                        <span>
+                                            Tinh thể
+                                        </span>
+
+                                        <span>
+                                            Milky Way
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="creature-meta">
+
+                                        <span>
+                                            ♡ 987
+                                        </span>
+
+                                        <span>
+                                            ◉ 12.5K
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </article>
+
+
+
+                            <!-- =================================
+                                 CREATURE 4
+                            ================================== -->
+
+                            <article
+                                class="home-creature-card"
+                                data-name="Lava Serpent"
+                                data-code="VX-1432"
+                                data-species="beast"
+                                data-threat="A"
+                                data-status="verified"
+                                data-featured="true"
+                                data-new="false"
+                                data-popular="true"
+                                onclick="openCreature('VX-1432')"
+                            >
+
+
+                                <div
+                                    class="creature-image"
+                                    style="
+                                        background-image:
+                                        url('assets/creatures/lava-serpent.jpg');
+                                    "
+                                >
+
+
+                                    <span class="creature-status">
+                                        ĐÃ XÁC MINH
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="creature-like"
+                                        aria-label="Yêu thích"
+                                        aria-pressed="false"
+                                    >
+
+                                        ♡
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="creature-content">
+
+
+                                    <span class="creature-code">
+                                        VX-1432 • CẤP A
+                                    </span>
+
+
+                                    <h3>
+                                        Lava Serpent
+                                    </h3>
+
+
+                                    <span class="creature-type">
+                                        Cự xà dung nham
+                                    </span>
+
+
+                                    <div class="creature-tags">
+
+                                        <span>
+                                            Lửa
+                                        </span>
+
+                                        <span>
+                                            Milky Way
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="creature-meta">
+
+                                        <span>
+                                            ♡ 1.305
+                                        </span>
+
+                                        <span>
+                                            ◉ 16.9K
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </article>
+
+
+
+                            <!-- =================================
+                                 CREATURE 5
+                            ================================== -->
+
+                            <article
+                                class="home-creature-card"
+                                data-name="Ethereal Nomad"
+                                data-code="VX-0976"
+                                data-species="entity"
+                                data-threat="S"
+                                data-status="investigation"
+                                data-featured="true"
+                                data-new="true"
+                                data-popular="true"
+                                onclick="openCreature('VX-0976')"
+                            >
+
+
+                                <div
+                                    class="creature-image"
+                                    style="
+                                        background-image:
+                                        url('assets/creatures/ethereal-nomad.jpg');
+                                    "
+                                >
+
+
+                                    <span class="creature-status review">
+                                        CẦN ĐIỀU TRA THÊM
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="creature-like"
+                                        aria-label="Yêu thích"
+                                        aria-pressed="false"
+                                    >
+
+                                        ♡
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="creature-content">
+
+
+                                    <span class="creature-code">
+                                        VX-0976 • CẤP S
+                                    </span>
+
+
+                                    <h3>
+                                        Ethereal Nomad
+                                    </h3>
+
+
+                                    <span class="creature-type">
+                                        Thực thể bí ẩn
+                                    </span>
+
+
+                                    <div class="creature-tags">
+
+                                        <span>
+                                            Ánh sáng
+                                        </span>
+
+                                        <span>
+                                            Không xác định
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="creature-meta">
+
+                                        <span>
+                                            ♡ 2.410
+                                        </span>
+
+                                        <span>
+                                            ◉ 31.8K
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </article>
+
+
+                        </div>
+
+
+
+                        <!-- NO RESULT -->
+
+                        <div
+                            id="homeNoResult"
+                            class="home-no-result"
+                        >
+
+                            Không tìm thấy sinh vật
+                            phù hợp với điều kiện tìm kiếm.
+
+                        </div>
+
+
+                        <!-- RESULT COUNT -->
+
+                        <div
+                            style="
+                                padding:
+                                0 15px 15px;
+
+                                color:
+                                #607d8f;
+
+                                font-size:
+                                8px;
+                            "
+                        >
+
+                            Đang hiển thị
+
+                            <strong
+                                id="homeResultCount"
+                                style="
+                                    color:
+                                    #2bdcff;
+                                "
+                            >
+                                5
+                            </strong>
+
+                            hồ sơ.
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         FEATURE SECTION
+                    ========================================== -->
+
+                    <section class="home-panel">
+
+
+                        <div class="home-panel-header">
+
+
+                            <div class="home-panel-title">
+
+
+                                <span class="home-panel-icon">
+                                    ◇
+                                </span>
+
+
+                                <div>
+
+                                    <h2>
+                                        KHÁM PHÁ MCA
+                                    </h2>
+
+                                    <p>
+                                        Truy cập các hệ thống chính
+                                        của kho lưu trữ.
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="home-feature-grid">
+
+
+                            <a
+                                href="kho-du-lieu.html"
+                                class="home-feature-card"
+                            >
+
+                                <div class="feature-icon">
+                                    ▣
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        KHO DỮ LIỆU
+                                    </h3>
+
+                                    <p>
+                                        Tra cứu toàn bộ
+                                        hồ sơ sinh vật.
+                                    </p>
+
+                                </div>
+
+                                <span class="feature-arrow">
+                                    →
+                                </span>
+
+                            </a>
+
+
+
+                            <a
+                                href="explore.html"
+                                class="home-feature-card"
+                            >
+
+                                <div class="feature-icon">
+                                    ◎
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        KHÁM PHÁ
+                                    </h3>
+
+                                    <p>
+                                        Khám phá các thế giới
+                                        trong đa vũ trụ.
+                                    </p>
+
+                                </div>
+
+                                <span class="feature-arrow">
+                                    →
+                                </span>
+
+                            </a>
+
+
+
+                            <a
+                                href="create.html"
+                                class="home-feature-card"
+                            >
+
+                                <div class="feature-icon">
+                                    +
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        TẠO HỒ SƠ
+                                    </h3>
+
+                                    <p>
+                                        Gửi phát hiện sinh vật
+                                        mới tới MCA.
+                                    </p>
+
+                                </div>
+
+                                <span class="feature-arrow">
+                                    →
+                                </span>
+
+                            </a>
+
+
+
+                            <a
+                                href="ranking.html"
+                                class="home-feature-card"
+                            >
+
+                                <div class="feature-icon">
+                                    ♜
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        XẾP HẠNG
+                                    </h3>
+
+                                    <p>
+                                        Theo dõi các điều tra viên
+                                        nổi bật.
+                                    </p>
+
+                                </div>
+
+                                <span class="feature-arrow">
+                                    →
+                                </span>
+
+                            </a>
+
+
+
+                            <a
+                                href="community.html"
+                                class="home-feature-card"
+                            >
+
+                                <div class="feature-icon">
+                                    ♧
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        CỘNG ĐỒNG
+                                    </h3>
+
+                                    <p>
+                                        Thảo luận và đóng góp
+                                        nghiên cứu.
+                                    </p>
+
+                                </div>
+
+                                <span class="feature-arrow">
+                                    →
+                                </span>
+
+                            </a>
+
+
+                        </div>
+
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     RIGHT SIDEBAR
+                ============================================== -->
+
+                <aside class="home-sidebar">
+
+
+                    <!-- =========================================
+                         NOTIFICATIONS
+                    ========================================== -->
+
+                    <section class="sidebar-panel">
+
+
+                        <div class="sidebar-title">
+
+                            <h3>
+                                THÔNG BÁO
+                            </h3>
+
+                            <a href="notifications.html">
+                                Xem tất cả
+                            </a>
+
+                        </div>
+
+
+
+                        <div class="home-notification">
+
+
+                            <div class="notification-icon">
+                                ✓
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong>
+
+                                    Hồ sơ VX-2047
+                                    đã được xác minh.
+
+                                </strong>
+
+                                <small>
+                                    5 phút trước
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="home-notification">
+
+
+                            <div class="notification-icon">
+                                ◈
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong>
+
+                                    Có ghi chú điều tra mới
+                                    trong hồ sơ của bạn.
+
+                                </strong>
+
+                                <small>
+                                    32 phút trước
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="home-notification">
+
+
+                            <div class="notification-icon">
+                                !
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong>
+
+                                    Hồ sơ VX-0976 được chuyển
+                                    sang Cần điều tra thêm.
+
+                                </strong>
+
+                                <small>
+                                    2 giờ trước
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         WEEKLY RANKING
+                    ========================================== -->
+
+                    <section class="sidebar-panel">
+
+
+                        <div class="sidebar-title">
+
+                            <h3>
+                                XẾP HẠNG TUẦN
+                            </h3>
+
+                            <a href="ranking.html">
+                                Xem bảng
+                            </a>
+
+                        </div>
+
+
+
+                        <ol class="ranking-list">
+
+
+                            <li class="ranking-item">
+
+                                <span class="ranking-position">
+                                    01
+                                </span>
+
+                                <div class="ranking-avatar">
+                                    A
+                                </div>
+
+                                <span class="ranking-name">
+                                    AstraNova
+                                </span>
+
+                                <span class="ranking-score">
+                                    9.842
+                                </span>
+
+                            </li>
+
+
+                            <li class="ranking-item">
+
+                                <span class="ranking-position">
+                                    02
+                                </span>
+
+                                <div class="ranking-avatar">
+                                    K
+                                </div>
+
+                                <span class="ranking-name">
+                                    Kenya
+                                </span>
+
+                                <span class="ranking-score">
+                                    8.910
+                                </span>
+
+                            </li>
+
+
+                            <li class="ranking-item">
+
+                                <span class="ranking-position">
+                                    03
+                                </span>
+
+                                <div class="ranking-avatar">
+                                    V
+                                </div>
+
+                                <span class="ranking-name">
+                                    VoidHunter
+                                </span>
+
+                                <span class="ranking-score">
+                                    7.426
+                                </span>
+
+                            </li>
+
+
+                            <li class="ranking-item">
+
+                                <span class="ranking-position">
+                                    04
+                                </span>
+
+                                <div class="ranking-avatar">
+                                    N
+                                </div>
+
+                                <span class="ranking-name">
+                                    NebulaX
+                                </span>
+
+                                <span class="ranking-score">
+                                    6.901
+                                </span>
+
+                            </li>
+
+
+                            <li class="ranking-item">
+
+                                <span class="ranking-position">
+                                    05
+                                </span>
+
+                                <div class="ranking-avatar">
+                                    E
+                                </div>
+
+                                <span class="ranking-name">
+                                    Etheria
+                                </span>
+
+                                <span class="ranking-score">
+                                    6.355
+                                </span>
+
+                            </li>
+
+
+                        </ol>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         SYSTEM STATUS
+                    ========================================== -->
+
+                    <section class="sidebar-panel">
+
+
+                        <div class="sidebar-title">
+
+                            <h3>
+                                TRẠNG THÁI HỆ THỐNG
+                            </h3>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                color:
+                                #6e899a;
+
+                                font-size:
+                                8px;
+
+                                line-height:
+                                2;
+                            "
+                        >
+
+                            <p>
+                                <span style="color:#46e6ae;">
+                                    ●
+                                </span>
+
+                                Database:
+                                Online
+                            </p>
+
+
+                            <p>
+                                <span style="color:#46e6ae;">
+                                    ●
+                                </span>
+
+                                Multiverse Network:
+                                Stable
+                            </p>
+
+
+                            <p>
+                                <span style="color:#f6ca63;">
+                                    ●
+                                </span>
+
+                                Hồ sơ chờ xử lý:
+                                427
+                            </p>
+
+
+                        </div>
+
+
+                    </section>
+
+
+                </aside>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 4. CTA
+            ================================================== -->
+
+            <section class="home-cta">
+
+
+                <div>
+
+
+                    <span class="hero-label">
+                        MCA INVESTIGATION NETWORK
+                    </span>
+
+
+                    <h2>
+
+                        BẠN ĐÃ PHÁT HIỆN
+                        MỘT SINH VẬT MỚI?
+
+                    </h2>
+
+
+                    <p>
+
+                        Gửi hồ sơ nghiên cứu của bạn tới
+                        Multiverse Creature Archive.
+
+                        Những hồ sơ có giá trị sẽ được xác minh
+                        và có thể trở thành một phần chính thức
+                        của kho dữ liệu đa vũ trụ.
+
+                    </p>
+
+
+                </div>
+
+
+                <a
+                    href="create.html"
+                    class="home-primary-button"
+                >
+
+                    TẠO HỒ SƠ
+
+                    →
+
+                </a>
+
+
+            </section>
+
+
         </div>
-        <div class="info">
-          <h3>Astral Leviathan</h3>
-          <span class="type">Rồng Không Gian</span>
-          <p>Sinh vật khổng lồ sống giữa các dòng năng lượng thiên hà.</p>
-          <div class="bottom">
-            <span class="likes">❤ 4.200</span>
-            <span class="status verified">Đã xác minh</span>
-          </div>
-        </div>
-      </div>
-    </a>
 
-    <a class="card-link" href="kho-du-lieu.html?id=voidwolf">
-      <div class="card">
-        <div class="thumb">
-          <img src="https://picsum.photos/400/250?random=2" alt="Void Wolf">
-          <span class="tier">Cấp B</span>
-        </div>
-        <div class="info">
-          <h3>Void Wolf</h3>
-          <span class="type">Thú Hư Không</span>
-          <p>Có khả năng dịch chuyển khoảng cách ngắn trong bóng tối.</p>
-          <div class="bottom">
-            <span class="likes">❤ 2.180</span>
-            <span class="status verified">Đã xác minh</span>
-          </div>
-        </div>
-      </div>
-    </a>
 
-    <a class="card-link" href="kho-du-lieu.html?id=mantis">
-      <div class="card">
-        <div class="thumb">
-          <img src="https://picsum.photos/400/250?random=3" alt="Crystal Mantis">
-          <span class="tier">Cấp C</span>
-        </div>
-        <div class="info">
-          <h3>Crystal Mantis</h3>
-          <span class="type">Côn trùng tinh thể</span>
-          <p>Lớp giáp phản xạ ánh sáng giúp gần như vô hình.</p>
-          <div class="bottom">
-            <span class="likes">❤ 1.620</span>
-            <span class="status pending">Chờ điều tra</span>
-          </div>
-        </div>
-      </div>
-    </a>
+    </main>
 
-  </div>
 
-  <div class="see-more">
-    <a class="back-btn" href="kho-du-lieu.html">Xem toàn bộ kho dữ liệu →</a>
-  </div>
-</section>
 
-<footer>
-  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
-</footer>
+    <!-- =====================================================
+         FOOTER
+
+         Nội dung được load từ:
+         components/footer.html
+    ====================================================== -->
+
+    <div id="site-footer"></div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <!-- Load Header + Footer -->
+    <script src="js/components.js"></script>
+
+    <!-- JS riêng Trang chủ -->
+    <script src="js/home.js"></script>
+
 
 </body>
+
 </html>

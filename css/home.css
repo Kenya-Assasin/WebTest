@@ -1,0 +1,1563 @@
+/* =========================================================
+   MCA - HOME PAGE
+   Multiverse Creature Archive
+   Dark Fantasy + Future Technology
+========================================================= */
+
+
+/* =========================================================
+   1. BIẾN MÀU DÙNG CHO HOME
+========================================================= */
+
+:root {
+    --home-bg: #03070d;
+    --home-bg-light: #07121d;
+
+    --home-panel: rgba(6, 18, 31, 0.92);
+    --home-panel-light: rgba(9, 27, 43, 0.88);
+
+    --home-cyan: #2bdcff;
+    --home-blue: #168cff;
+    --home-purple: #9b55ff;
+
+    --home-text: #e8f7ff;
+    --home-muted: #7e98aa;
+
+    --home-border: rgba(43, 220, 255, 0.25);
+    --home-border-strong: rgba(43, 220, 255, 0.65);
+
+    --home-danger: #ff4f72;
+    --home-warning: #f6ca63;
+    --home-success: #46e6ae;
+}
+
+
+/* =========================================================
+   2. BODY / NỀN TRANG CHỦ
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 75% 15%,
+            rgba(88, 56, 180, 0.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 15% 65%,
+            rgba(0, 160, 220, 0.10),
+            transparent 35%
+        ),
+
+        var(--home-bg);
+
+    color: var(--home-text);
+
+    overflow-x: hidden;
+}
+
+
+/* Lưới công nghệ phía sau */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: -2;
+
+    background-image:
+
+        linear-gradient(
+            rgba(43, 220, 255, 0.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(43, 220, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 60px 60px;
+}
+
+
+/* =========================================================
+   3. MAIN
+========================================================= */
+
+.home-main {
+    width: 100%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   4. HERO SECTION
+========================================================= */
+
+.home-hero {
+    min-height: 430px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 60px 55px;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--home-border);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(2, 7, 13, 0.96) 0%,
+            rgba(2, 7, 13, 0.82) 35%,
+            rgba(2, 7, 13, 0.20) 70%,
+            rgba(2, 7, 13, 0.80) 100%
+        ),
+
+        linear-gradient(
+            0deg,
+            var(--home-bg),
+            transparent 65%
+        ),
+
+        url("../assets/mca-background.png");
+
+    background-size: cover;
+
+    background-position: center 35%;
+}
+
+
+/* Lớp ánh sáng tím */
+
+.home-hero::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            circle at 70% 35%,
+            rgba(151, 76, 255, 0.15),
+            transparent 25%
+        );
+}
+
+
+/* =========================================================
+   5. HERO CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 800px;
+}
+
+
+.hero-label {
+    color: var(--home-cyan);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 14px;
+}
+
+
+.hero-title {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(40px, 5vw, 68px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+    color: #f1fbff;
+
+    text-shadow:
+
+        0 0 25px rgba(43, 220, 255, 0.20);
+}
+
+
+.hero-title span {
+    color: var(--home-cyan);
+
+    text-shadow:
+
+        0 0 30px rgba(43, 220, 255, 0.35);
+}
+
+
+.hero-description {
+    max-width: 650px;
+
+    color: #9ab0c0;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+.hero-quote {
+    color: #9fb6c6;
+
+    font-style: italic;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   6. HERO BUTTONS
+========================================================= */
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+
+.home-primary-button,
+.home-secondary-button {
+    min-height: 42px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 2px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+
+.home-primary-button {
+    color: white;
+
+    border: 1px solid #55dfff;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #087ebc,
+            #2458dc
+        );
+
+    box-shadow:
+
+        0 0 22px rgba(0, 157, 255, 0.25);
+}
+
+
+.home-primary-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+
+        0 0 30px rgba(43, 220, 255, 0.45);
+}
+
+
+.home-secondary-button {
+    color: #a8ddeb;
+
+    border: 1px solid var(--home-border-strong);
+
+    background: rgba(4, 17, 28, 0.85);
+}
+
+
+.home-secondary-button:hover {
+    color: white;
+
+    border-color: var(--home-cyan);
+
+    background: rgba(9, 35, 52, 0.95);
+}
+
+
+/* =========================================================
+   7. HERO STATISTICS
+========================================================= */
+
+.hero-statistics {
+    display: flex;
+
+    margin-top: 38px;
+}
+
+
+.hero-stat {
+    min-width: 120px;
+
+    padding: 0 28px;
+
+    border-left:
+
+        1px solid rgba(43, 220, 255, 0.25);
+}
+
+
+.hero-stat:first-child {
+    padding-left: 0;
+
+    border-left: none;
+}
+
+
+.hero-stat strong {
+    display: block;
+
+    color: var(--home-cyan);
+
+    font-size: 20px;
+
+    margin-bottom: 4px;
+}
+
+
+.hero-stat span {
+    color: var(--home-muted);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+/* =========================================================
+   8. GALAXY MAP CARD
+========================================================= */
+
+.galaxy-card {
+    width: 300px;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    z-index: 2;
+
+    overflow: hidden;
+
+    border: 1px solid var(--home-border-strong);
+
+    background: rgba(3, 15, 25, 0.92);
+
+    box-shadow:
+
+        0 0 35px rgba(0, 170, 255, 0.12);
+}
+
+
+.galaxy-card-image {
+    height: 135px;
+
+    background:
+
+        linear-gradient(
+            0deg,
+            rgba(3, 15, 25, 0.9),
+            transparent
+        ),
+
+        url("../assets/mca-background.png");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.galaxy-card-content {
+    padding: 18px;
+}
+
+
+.galaxy-card-label {
+    color: var(--home-cyan);
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+}
+
+
+.galaxy-card h3 {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 15px;
+
+    margin: 8px 0;
+}
+
+
+.galaxy-card p {
+    color: var(--home-muted);
+
+    font-size: 9px;
+
+    line-height: 1.6;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   9. SEARCH AREA
+========================================================= */
+
+.home-search-section {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 45px;
+
+    border-bottom: 1px solid var(--home-border);
+
+    background: rgba(4, 12, 21, 0.96);
+}
+
+
+.home-search-box {
+    flex: 1;
+
+    min-width: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+
+        1px solid rgba(43, 220, 255, 0.65);
+
+    background: #061522;
+}
+
+
+.home-search-icon {
+    padding: 0 13px;
+
+    color: var(--home-cyan);
+
+    font-size: 18px;
+}
+
+
+.home-search-box input {
+    flex: 1;
+
+    height: 42px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 11px;
+}
+
+
+.home-search-box input::placeholder {
+    color: #587386;
+}
+
+
+.home-search-button {
+    width: 48px;
+
+    height: 42px;
+
+    border: none;
+
+    color: white;
+
+    cursor: pointer;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #0878b8,
+            #1457c9
+        );
+}
+
+
+.home-search-section select {
+    height: 42px;
+
+    min-width: 145px;
+
+    padding: 0 12px;
+
+    color: #a0bac9;
+
+    border: 1px solid #17617e;
+
+    outline: none;
+
+    background: #061522;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   10. HOME CONTENT
+========================================================= */
+
+.home-content {
+    padding: 24px 32px 40px;
+}
+
+
+/* =========================================================
+   11. SECTION PANEL
+========================================================= */
+
+.home-panel {
+    position: relative;
+
+    border: 1px solid var(--home-border);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(7, 20, 33, 0.96),
+            rgba(4, 11, 18, 0.96)
+        );
+
+    box-shadow:
+
+        0 12px 30px rgba(0, 0, 0, 0.45);
+
+    margin-bottom: 20px;
+}
+
+
+.home-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: -1px;
+
+    width: 40px;
+    height: 40px;
+
+    border-top: 1px solid var(--home-cyan);
+
+    border-left: 1px solid var(--home-cyan);
+
+    pointer-events: none;
+}
+
+
+.home-panel-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 20px;
+
+    border-bottom:
+
+        1px solid rgba(43, 220, 255, 0.16);
+}
+
+
+.home-panel-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.home-panel-icon {
+    color: var(--home-cyan);
+
+    font-size: 21px;
+
+    text-shadow:
+
+        0 0 15px var(--home-cyan);
+}
+
+
+.home-panel-title h2 {
+    font-family: "Orbitron", sans-serif;
+
+    color: #bcefff;
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+
+.home-panel-title p {
+    color: var(--home-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   12. CREATURE TABS
+========================================================= */
+
+.creature-tabs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 3px;
+}
+
+
+.creature-tabs button {
+    padding: 9px 12px;
+
+    color: #6c8495;
+
+    border: none;
+
+    border-bottom: 2px solid transparent;
+
+    background: none;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.creature-tabs button:hover,
+.creature-tabs button.active {
+    color: white;
+
+    border-bottom-color: var(--home-cyan);
+}
+
+
+/* =========================================================
+   13. CREATURE GRID
+========================================================= */
+
+.home-creature-grid {
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+
+    padding: 14px;
+}
+
+
+/* =========================================================
+   14. CREATURE CARD
+========================================================= */
+
+.home-creature-card {
+    overflow: hidden;
+
+    position: relative;
+
+    border:
+
+        1px solid rgba(43, 220, 255, 0.22);
+
+    background: #06101a;
+
+    transition:
+
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+}
+
+
+.home-creature-card:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--home-cyan);
+
+    box-shadow:
+
+        0 10px 30px rgba(0, 191, 255, 0.16);
+}
+
+
+/* =========================================================
+   15. CREATURE IMAGE
+========================================================= */
+
+.creature-image {
+    height: 200px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.creature-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            0deg,
+            #06101a 0%,
+            transparent 60%
+        );
+}
+
+
+/* =========================================================
+   16. STATUS
+========================================================= */
+
+.creature-status {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 9px;
+    left: 9px;
+
+    padding: 5px 7px;
+
+    color: white;
+
+    border: 1px solid #48e5ff;
+
+    background: rgba(5, 112, 145, 0.86);
+
+    font-size: 7px;
+}
+
+
+.creature-status.pending {
+    color: #ffe395;
+
+    border-color: var(--home-warning);
+
+    background: rgba(101, 78, 22, 0.9);
+}
+
+
+.creature-status.review {
+    color: #e0a7ff;
+
+    border-color: var(--home-purple);
+
+    background: rgba(79, 31, 107, 0.9);
+}
+
+
+/* =========================================================
+   17. LIKE BUTTON
+========================================================= */
+
+.creature-like {
+    position: absolute;
+
+    z-index: 3;
+
+    top: 8px;
+    right: 8px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    color: white;
+
+    background: rgba(2, 7, 12, 0.75);
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+
+.creature-like:hover,
+.creature-like.liked {
+    color: #ff5079;
+}
+
+
+/* =========================================================
+   18. CARD CONTENT
+========================================================= */
+
+.creature-content {
+    padding: 12px;
+}
+
+
+.creature-code {
+    color: #45a9ca;
+
+    font-size: 8px;
+}
+
+
+.creature-content h3 {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 13px;
+
+    margin: 6px 0;
+
+    color: #effbff;
+}
+
+
+.creature-type {
+    color: #7f95a5;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   19. TAGS
+========================================================= */
+
+.creature-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin: 10px 0;
+}
+
+
+.creature-tags span {
+    padding: 4px 6px;
+
+    color: #75ddff;
+
+    border: 1px solid #176482;
+
+    background: #062b40;
+
+    font-size: 7px;
+}
+
+
+.creature-tags span:nth-child(even) {
+    color: #c9a8ff;
+
+    border-color: #653b9c;
+
+    background: #251440;
+}
+
+
+/* =========================================================
+   20. CARD META
+========================================================= */
+
+.creature-meta {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 9px;
+
+    border-top:
+
+        1px solid rgba(43, 220, 255, 0.12);
+
+    color: #678294;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   21. HOME GRID
+   Main content + Sidebar
+========================================================= */
+
+.home-dashboard {
+    display: grid;
+
+    grid-template-columns:
+
+        minmax(0, 1fr)
+        330px;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   22. SIDEBAR
+========================================================= */
+
+.home-sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+.sidebar-panel {
+    padding: 15px;
+
+    border: 1px solid var(--home-border);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(7, 20, 33, 0.96),
+            rgba(4, 11, 18, 0.96)
+        );
+}
+
+
+.sidebar-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.sidebar-title h3 {
+    font-family: "Orbitron", sans-serif;
+
+    color: #bcefff;
+
+    font-size: 10px;
+}
+
+
+.sidebar-title a {
+    color: var(--home-cyan);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   23. NOTIFICATIONS
+========================================================= */
+
+.home-notification {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 11px 0;
+
+    border-bottom:
+
+        1px solid rgba(43, 220, 255, 0.10);
+}
+
+
+.home-notification:last-child {
+    border-bottom: none;
+}
+
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    color: var(--home-cyan);
+
+    border: 1px solid #17799d;
+}
+
+
+.notification-info strong {
+    display: block;
+
+    color: #d7eaf2;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+.notification-info small {
+    display: block;
+
+    color: #587183;
+
+    font-size: 7px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   24. RANKING
+========================================================= */
+
+.ranking-list {
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0;
+}
+
+
+.ranking-item {
+    display: grid;
+
+    grid-template-columns:
+
+        30px
+        30px
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 0;
+
+    border-bottom:
+
+        1px solid rgba(43, 220, 255, 0.10);
+}
+
+
+.ranking-position {
+    color: #7891a2;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.ranking-item:nth-child(1)
+.ranking-position {
+    color: #ffd85e;
+}
+
+
+.ranking-item:nth-child(2)
+.ranking-position {
+    color: #d4e4ec;
+}
+
+
+.ranking-item:nth-child(3)
+.ranking-position {
+    color: #d89461;
+}
+
+
+.ranking-avatar {
+    width: 27px;
+    height: 27px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #ccefff;
+
+    background: #15344c;
+
+    font-size: 9px;
+}
+
+
+.ranking-name {
+    font-size: 8px;
+}
+
+
+.ranking-score {
+    color: #77aec5;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   25. FEATURE SECTION
+========================================================= */
+
+.home-feature-grid {
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(5, 1fr);
+
+    gap: 10px;
+
+    padding: 14px;
+}
+
+
+.home-feature-card {
+    min-height: 95px;
+
+    display: grid;
+
+    grid-template-columns:
+
+        42px
+        1fr
+        15px;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    color: inherit;
+
+    border: 1px solid #125876;
+
+    background: #06121e;
+
+    transition: 0.25s;
+}
+
+
+.home-feature-card:hover {
+    border-color: var(--home-cyan);
+
+    background: #081b2b;
+
+    transform: translateY(-2px);
+}
+
+
+.feature-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: var(--home-cyan);
+
+    border: 1px solid #159bd0;
+
+    box-shadow:
+
+        0 0 18px rgba(0, 191, 255, 0.15);
+}
+
+
+.home-feature-card h3 {
+    font-size: 9px;
+
+    margin-bottom: 5px;
+}
+
+
+.home-feature-card p {
+    color: #667f91;
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+.feature-arrow {
+    color: var(--home-cyan);
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   26. CALL TO ACTION
+========================================================= */
+
+.home-cta {
+    margin-top: 20px;
+
+    padding: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border: 1px solid var(--home-border);
+
+    background:
+
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(101, 62, 190, 0.14),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            100deg,
+            #071726,
+            #080e1b
+        );
+}
+
+
+.home-cta h2 {
+    max-width: 700px;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 22px;
+
+    margin: 8px 0;
+}
+
+
+.home-cta p {
+    max-width: 750px;
+
+    color: #7893a5;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   27. EMPTY SEARCH RESULT
+========================================================= */
+
+.home-no-result {
+    display: none;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #718a9b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   28. RESPONSIVE - 1300PX
+========================================================= */
+
+@media (max-width: 1300px) {
+
+    .home-creature-grid {
+        grid-template-columns:
+
+            repeat(3, 1fr);
+    }
+
+
+    .home-feature-grid {
+        grid-template-columns:
+
+            repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   29. RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .home-hero {
+        padding: 45px 25px;
+
+        min-height: 420px;
+    }
+
+
+    .galaxy-card {
+        display: none;
+    }
+
+
+    .home-search-section {
+        padding: 14px 20px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .home-search-box {
+        width: 100%;
+
+        flex-basis: 100%;
+    }
+
+
+    .home-search-section select {
+        flex: 1;
+    }
+
+
+    .home-content {
+        padding:
+
+            20px 18px
+            35px;
+    }
+
+
+    .home-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+
+    .home-sidebar {
+        display: grid;
+
+        grid-template-columns:
+
+            repeat(2, 1fr);
+    }
+
+
+    .home-feature-grid {
+        grid-template-columns:
+
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   30. RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .home-hero {
+        min-height: 500px;
+
+        padding: 45px 18px;
+    }
+
+
+    .hero-title {
+        font-size: 34px;
+    }
+
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .hero-statistics {
+        display: grid;
+
+        grid-template-columns:
+
+            repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+
+    .hero-stat {
+        padding-left: 15px;
+    }
+
+
+    .hero-stat:nth-child(odd) {
+        border-left: none;
+
+        padding-left: 0;
+    }
+
+
+    .home-search-section select {
+        width: 100%;
+
+        flex: none;
+    }
+
+
+    .home-creature-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .creature-tabs {
+        display: none;
+    }
+
+
+    .home-sidebar {
+        display: block;
+    }
+
+
+    .sidebar-panel {
+        margin-bottom: 15px;
+    }
+
+
+    .home-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .home-cta {
+        display: block;
+
+        padding: 25px 20px;
+    }
+
+
+    .home-cta .home-primary-button {
+        margin-top: 20px;
+    }
+
+}

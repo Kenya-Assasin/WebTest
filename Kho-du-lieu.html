@@ -1,62 +1,1598 @@
+
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<title>Multiverse Creature Archive — Kho dữ liệu</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Kho dữ liệu sinh vật đa vũ trụ - Multiverse Creature Archive."
+    >
+
+    <title>
+        Kho dữ liệu | MCA
+    </title>
+
+
+    <!-- CSS dùng chung -->
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <!-- CSS riêng Kho dữ liệu -->
+    <link
+        rel="stylesheet"
+        href="css/kho-du-lieu.css"
+    >
+
 </head>
-<body>
 
-<div class="field"></div>
 
-<header>
-  <div class="brand">
-    <div class="logo">MCA</div>
-    <div class="brand-sub">Multiverse Creature Archive</div>
-  </div>
+<body data-page="archive">
 
-  <nav>
-    <a href="index.html">Trang chủ</a>
-    <a href="kho-du-lieu.html" class="active">Kho dữ liệu</a>
-    <a href="tao-ho-so.html">Tạo hồ sơ</a>
-    <a href="dieu-tra-vien.html">Điều tra viên</a>
-  </nav>
 
-  <div class="investigator">
-    <div class="avatar"></div>
-    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
-  </div>
-</header>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-<div id="view-list">
+    <div id="site-header"></div>
 
-<section class="cards" style="padding-top:60px;">
-  <div class="section-head">
-    <h2>Kho dữ liệu sinh vật</h2>
-    <span class="tag" id="result-tag">Tất cả hồ sơ</span>
-  </div>
 
-  <form class="search-box" style="max-width:560px; margin-bottom:40px;" onsubmit="return false;">
-    <input type="text" id="search-input" placeholder="Tìm theo tên, chủng tộc, hành tinh hoặc mã hồ sơ...">
-    <button type="button" onclick="filterCreatures()">Tìm</button>
-  </form>
 
-  <div class="card-container" id="card-container"></div>
-</section>
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-</div>
+    <main class="archive-main">
 
-<section class="detail-view" id="view-detail" hidden></section>
 
-<footer>
-  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
-</footer>
+        <!-- =================================================
+             1. ARCHIVE HERO
+        ================================================== -->
 
-<script src="Kho-du-lieu.js"></script>
+        <section class="archive-hero">
+
+
+            <div class="archive-hero-content">
+
+
+                <div class="archive-label">
+                    CENTRAL DATABASE / ARCHIVE
+                </div>
+
+
+                <h1 class="archive-title">
+
+                    KHO DỮ LIỆU
+
+                    <br>
+
+                    <span>
+                        SINH VẬT ĐA VŨ TRỤ
+                    </span>
+
+                </h1>
+
+
+                <p class="archive-description">
+
+                    Truy cập hệ thống lưu trữ trung tâm của MCA.
+                    Tìm kiếm, phân loại và nghiên cứu những sinh vật
+                    đã được phát hiện trên khắp các vũ trụ,
+                    thiên hà và hành tinh.
+
+                </p>
+
+
+
+                <!-- DATABASE STATUS -->
+
+                <div class="database-status">
+
+
+                    <span class="database-status-dot"></span>
+
+
+                    <div class="database-status-info">
+
+                        <strong>
+                            DATABASE ONLINE
+                        </strong>
+
+                        <span>
+                            Kết nối ổn định
+                        </span>
+
+                    </div>
+
+
+                    <div class="database-sync">
+
+                        LAST SYNC
+
+                        <strong>
+                            2 PHÚT TRƯỚC
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             2. DATABASE STATISTICS
+        ================================================== -->
+
+        <section class="archive-statistics">
+
+
+            <div class="archive-stat">
+
+                <div class="archive-stat-icon">
+                    ◈
+                </div>
+
+                <div>
+
+                    <strong>
+                        128.493
+                    </strong>
+
+                    <span>
+                        Tổng sinh vật
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="archive-stat">
+
+                <div class="archive-stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        96.821
+                    </strong>
+
+                    <span>
+                        Đã xác minh
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="archive-stat">
+
+                <div class="archive-stat-icon">
+                    ◎
+                </div>
+
+                <div>
+
+                    <strong>
+                        31.245
+                    </strong>
+
+                    <span>
+                        Cần điều tra thêm
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="archive-stat">
+
+                <div class="archive-stat-icon">
+                    !
+                </div>
+
+                <div>
+
+                    <strong>
+                        427
+                    </strong>
+
+                    <span>
+                        Chờ xử lý
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="archive-stat">
+
+                <div class="archive-stat-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <strong>
+                        3.824
+                    </strong>
+
+                    <span>
+                        Hành tinh
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             3. ARCHIVE CONTENT
+        ================================================== -->
+
+        <section class="archive-content">
+
+
+            <!-- =================================================
+                 LEFT FILTER
+            ================================================== -->
+
+            <aside class="archive-filter">
+
+
+                <!-- FILTER HEADER -->
+
+                <div class="archive-filter-header">
+
+                    <div>
+
+                        <span>
+                            DATABASE FILTER
+                        </span>
+
+                        <h2>
+                            BỘ LỌC
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="archiveClearFilter"
+                        class="archive-clear-filter"
+                    >
+                        XÓA
+                    </button>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     SEARCH
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        TÌM KIẾM
+                    </h3>
+
+
+                    <div class="archive-filter-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="archiveSearchInput"
+                            placeholder="Tên hoặc mã hồ sơ..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     STATUS
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        TRẠNG THÁI HỒ SƠ
+                    </h3>
+
+
+                    <label class="archive-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="archiveStatus"
+                            value="verified"
+                            data-label="Đã xác minh"
+                        >
+
+                        <span>
+                            Đã xác minh
+                        </span>
+
+                    </label>
+
+
+                    <label class="archive-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="archiveStatus"
+                            value="pending"
+                            data-label="Chờ xác minh"
+                        >
+
+                        <span>
+                            Chờ xác minh
+                        </span>
+
+                    </label>
+
+
+                    <label class="archive-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="archiveStatus"
+                            value="investigation"
+                            data-label="Cần điều tra thêm"
+                        >
+
+                        <span>
+                            Cần điều tra thêm
+                        </span>
+
+                    </label>
+
+
+                    <label class="archive-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="archiveStatus"
+                            value="conflicting"
+                            data-label="Thông tin mâu thuẫn"
+                        >
+
+                        <span>
+                            Thông tin mâu thuẫn
+                        </span>
+
+                    </label>
+
+
+                    <label class="archive-checkbox">
+
+                        <input
+                            type="checkbox"
+                            name="archiveStatus"
+                            value="canon"
+                            data-label="Hồ sơ chính sử"
+                        >
+
+                        <span>
+                            Hồ sơ chính sử
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     THREAT LEVEL
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        CẤP ĐE DỌA
+                    </h3>
+
+
+                    <div class="threat-filter-grid">
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="F"
+                        >
+                            F
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="E"
+                        >
+                            E
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="D"
+                        >
+                            D
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="C"
+                        >
+                            C
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="B"
+                        >
+                            B
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="A"
+                        >
+                            A
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="S"
+                        >
+                            S
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="SS"
+                        >
+                            SS
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="threat-filter-button"
+                            data-threat="X"
+                        >
+                            X
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     SPECIES
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        LOÀI
+                    </h3>
+
+
+                    <select
+                        id="archiveSpeciesFilter"
+                        class="archive-select"
+                    >
+
+                        <option value="all">
+                            Tất cả loài
+                        </option>
+
+                        <option value="dragon">
+                            Rồng
+                        </option>
+
+                        <option value="beast">
+                            Thú
+                        </option>
+
+                        <option value="entity">
+                            Thực thể
+                        </option>
+
+                        <option value="insect">
+                            Côn trùng
+                        </option>
+
+                        <option value="mythical">
+                            Thần thoại
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     ELEMENT
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        NGUYÊN TỐ
+                    </h3>
+
+
+                    <select
+                        id="archiveElementFilter"
+                        class="archive-select"
+                    >
+
+                        <option value="all">
+                            Tất cả nguyên tố
+                        </option>
+
+                        <option value="fire">
+                            Lửa
+                        </option>
+
+                        <option value="ice">
+                            Băng
+                        </option>
+
+                        <option value="light">
+                            Ánh sáng
+                        </option>
+
+                        <option value="void">
+                            Hư không
+                        </option>
+
+                        <option value="space">
+                            Không gian
+                        </option>
+
+                        <option value="crystal">
+                            Tinh thể
+                        </option>
+
+                        <option value="multi">
+                            Đa nguyên tố
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     ORIGIN
+                ============================================== -->
+
+                <div class="filter-group">
+
+                    <h3 class="filter-title">
+                        NGUỒN GỐC
+                    </h3>
+
+
+                    <select
+                        id="archiveOriginFilter"
+                        class="archive-select"
+                    >
+
+                        <option value="all">
+                            Mọi nguồn gốc
+                        </option>
+
+                        <option value="milky-way">
+                            Milky Way
+                        </option>
+
+                        <option value="andromeda">
+                            Andromeda
+                        </option>
+
+                        <option value="nebula-sector">
+                            Nebula Sector
+                        </option>
+
+                        <option value="unknown">
+                            Không xác định
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- APPLY -->
+
+                <button
+                    type="button"
+                    class="archive-filter-button"
+                    onclick="applyArchiveFilters()"
+                >
+                    ÁP DỤNG BỘ LỌC
+                </button>
+
+
+            </aside>
+
+
+
+            <!-- =================================================
+                 RIGHT RESULTS
+            ================================================== -->
+
+            <div class="archive-results">
+
+
+                <!-- =============================================
+                     RESULT HEADER
+                ============================================== -->
+
+                <div class="archive-results-header">
+
+
+                    <div>
+
+                        <span class="archive-results-label">
+                            DATABASE RECORDS
+                        </span>
+
+
+                        <h2>
+
+                            KẾT QUẢ TÌM KIẾM
+
+                            <span class="archive-result-count">
+
+                                <span id="archiveResultCount">
+                                    8
+                                </span>
+
+                                HỒ SƠ
+
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- TOOLBAR -->
+
+                    <div class="archive-toolbar">
+
+
+                        <select
+                            id="archiveSort"
+                            class="archive-sort"
+                        >
+
+                            <option value="newest">
+                                Mới nhất
+                            </option>
+
+                            <option value="popular">
+                                Phổ biến nhất
+                            </option>
+
+                            <option value="name">
+                                Tên A-Z
+                            </option>
+
+                            <option value="threat">
+                                Cấp đe dọa
+                            </option>
+
+                        </select>
+
+
+
+                        <button
+                            type="button"
+                            id="archiveGridView"
+                            class="archive-view-button active"
+                            title="Dạng lưới"
+                        >
+                            ▦
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="archiveListView"
+                            class="archive-view-button"
+                            title="Dạng danh sách"
+                        >
+                            ☰
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     ACTIVE FILTERS
+                ============================================== -->
+
+                <div
+                    id="activeFilterList"
+                    class="active-filter-list"
+                ></div>
+
+
+
+                <!-- =============================================
+                     CREATURE GRID
+                ============================================== -->
+
+                <div
+                    id="archiveCreatureGrid"
+                    class="archive-creature-grid"
+                >
+
+
+                    <!-- =========================================
+                         1. ASTRAL LEVIATHAN
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Astral Leviathan"
+                        data-code="VX-2047"
+                        data-status="verified"
+                        data-threat="A"
+                        data-species="dragon"
+                        data-element="space"
+                        data-origin="nebula-sector"
+                        data-likes="1842"
+                        data-date="2026-09-28"
+                        onclick="openArchiveCreature('VX-2047')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/astral-leviathan.jpg');
+                            "
+                        >
+
+                            <span class="archive-status">
+                                ĐÃ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat high">
+                                A
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-2047
+                            </span>
+
+                            <h3>
+                                Astral Leviathan
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Rồng vũ trụ
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Không gian
+                                </span>
+
+                                <span>
+                                    Nebula Sector
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 1.842
+                                </span>
+
+                                <span>
+                                    ◉ 24.7K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         2. VOID WOLF
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Void Wolf"
+                        data-code="VX-1982"
+                        data-status="verified"
+                        data-threat="B"
+                        data-species="beast"
+                        data-element="void"
+                        data-origin="andromeda"
+                        data-likes="1429"
+                        data-date="2026-09-25"
+                        onclick="openArchiveCreature('VX-1982')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/void-wolf.jpg');
+                            "
+                        >
+
+                            <span class="archive-status">
+                                ĐÃ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat">
+                                B
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-1982
+                            </span>
+
+                            <h3>
+                                Void Wolf
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Thú hư không
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Hư không
+                                </span>
+
+                                <span>
+                                    Andromeda
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 1.429
+                                </span>
+
+                                <span>
+                                    ◉ 18.2K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         3. CRYSTAL MANTIS
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Crystal Mantis"
+                        data-code="VX-1765"
+                        data-status="pending"
+                        data-threat="C"
+                        data-species="insect"
+                        data-element="crystal"
+                        data-origin="milky-way"
+                        data-likes="987"
+                        data-date="2026-10-02"
+                        onclick="openArchiveCreature('VX-1765')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/crystal-mantis.jpg');
+                            "
+                        >
+
+                            <span class="archive-status pending">
+                                CHỜ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat">
+                                C
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-1765
+                            </span>
+
+                            <h3>
+                                Crystal Mantis
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Côn trùng tinh thể
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Tinh thể
+                                </span>
+
+                                <span>
+                                    Milky Way
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 987
+                                </span>
+
+                                <span>
+                                    ◉ 12.5K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         4. LAVA SERPENT
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Lava Serpent"
+                        data-code="VX-1432"
+                        data-status="verified"
+                        data-threat="A"
+                        data-species="beast"
+                        data-element="fire"
+                        data-origin="milky-way"
+                        data-likes="1305"
+                        data-date="2026-09-18"
+                        onclick="openArchiveCreature('VX-1432')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/lava-serpent.jpg');
+                            "
+                        >
+
+                            <span class="archive-status">
+                                ĐÃ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat high">
+                                A
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-1432
+                            </span>
+
+                            <h3>
+                                Lava Serpent
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Cự xà dung nham
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Lửa
+                                </span>
+
+                                <span>
+                                    Milky Way
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 1.305
+                                </span>
+
+                                <span>
+                                    ◉ 16.9K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         5. ETHEREAL NOMAD
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Ethereal Nomad"
+                        data-code="VX-0976"
+                        data-status="investigation"
+                        data-threat="S"
+                        data-species="mythical"
+                        data-element="light"
+                        data-origin="unknown"
+                        data-likes="2410"
+                        data-date="2026-10-01"
+                        onclick="openArchiveCreature('VX-0976')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/ethereal-nomad.jpg');
+                            "
+                        >
+
+                            <span class="archive-status review">
+                                CẦN ĐIỀU TRA THÊM
+                            </span>
+
+                            <span class="archive-threat high">
+                                S
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-0976
+                            </span>
+
+                            <h3>
+                                Ethereal Nomad
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Thực thể thần thoại
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Ánh sáng
+                                </span>
+
+                                <span>
+                                    Không xác định
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 2.410
+                                </span>
+
+                                <span>
+                                    ◉ 31.8K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         6. OBSIDIAN TITAN
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Obsidian Titan"
+                        data-code="VX-0821"
+                        data-status="verified"
+                        data-threat="S"
+                        data-species="entity"
+                        data-element="void"
+                        data-origin="nebula-sector"
+                        data-likes="3102"
+                        data-date="2026-08-29"
+                        onclick="openArchiveCreature('VX-0821')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/obsidian-titan.jpg');
+                            "
+                        >
+
+                            <span class="archive-status">
+                                ĐÃ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat high">
+                                S
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-0821
+                            </span>
+
+                            <h3>
+                                Obsidian Titan
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Thực thể hư không
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Hư không
+                                </span>
+
+                                <span>
+                                    Nebula Sector
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 3.102
+                                </span>
+
+                                <span>
+                                    ◉ 40.1K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         7. FROST WYVERN
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Frost Wyvern"
+                        data-code="VX-0714"
+                        data-status="pending"
+                        data-threat="B"
+                        data-species="dragon"
+                        data-element="ice"
+                        data-origin="andromeda"
+                        data-likes="761"
+                        data-date="2026-10-04"
+                        onclick="openArchiveCreature('VX-0714')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/frost-wyvern.jpg');
+                            "
+                        >
+
+                            <span class="archive-status pending">
+                                CHỜ XÁC MINH
+                            </span>
+
+                            <span class="archive-threat">
+                                B
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-0714
+                            </span>
+
+                            <h3>
+                                Frost Wyvern
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Rồng băng
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Băng
+                                </span>
+
+                                <span>
+                                    Andromeda
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 761
+                                </span>
+
+                                <span>
+                                    ◉ 9.7K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =========================================
+                         8. NULL ANGEL
+                    ========================================== -->
+
+                    <article
+                        class="archive-creature-card"
+                        data-name="Null Angel"
+                        data-code="VX-0041"
+                        data-status="investigation"
+                        data-threat="SS"
+                        data-species="entity"
+                        data-element="void"
+                        data-origin="unknown"
+                        data-likes="5276"
+                        data-date="2026-10-03"
+                        onclick="openArchiveCreature('VX-0041')"
+                    >
+
+
+                        <div
+                            class="archive-creature-image"
+                            style="
+                                background-image:
+                                url('assets/creatures/null-angel.jpg');
+                            "
+                        >
+
+                            <span class="archive-status review">
+                                CẦN ĐIỀU TRA THÊM
+                            </span>
+
+                            <span class="archive-threat high">
+                                SS
+                            </span>
+
+                        </div>
+
+
+                        <div class="archive-card-content">
+
+                            <span class="archive-creature-code">
+                                VX-0041
+                            </span>
+
+                            <h3>
+                                Null Angel
+                            </h3>
+
+                            <span class="archive-creature-type">
+                                Thực thể hư không
+                            </span>
+
+
+                            <div class="archive-tags">
+
+                                <span>
+                                    Hư không
+                                </span>
+
+                                <span>
+                                    Không xác định
+                                </span>
+
+                            </div>
+
+
+                            <div class="archive-card-footer">
+
+                                <span>
+                                    ♡ 5.276
+                                </span>
+
+                                <span>
+                                    ◉ 72.4K
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     NO RESULT
+                ============================================== -->
+
+                <div
+                    id="archiveNoResult"
+                    class="archive-no-result"
+                >
+
+                    <h3>
+                        KHÔNG TÌM THẤY HỒ SƠ
+                    </h3>
+
+                    <p>
+
+                        Không có sinh vật nào phù hợp
+                        với các điều kiện tìm kiếm hiện tại.
+
+                    </p>
+
+                    <button
+                        type="button"
+                        class="archive-filter-button"
+                        onclick="clearArchiveFilters()"
+                    >
+                        XÓA BỘ LỌC
+                    </button>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     PAGINATION
+                ============================================== -->
+
+                <nav
+                    class="archive-pagination"
+                    aria-label="Phân trang"
+                >
+
+                    <button
+                        type="button"
+                        disabled
+                    >
+                        ‹
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="active"
+                    >
+                        1
+                    </button>
+
+
+                    <button type="button">
+                        2
+                    </button>
+
+
+                    <button type="button">
+                        3
+                    </button>
+
+
+                    <button type="button">
+                        4
+                    </button>
+
+
+                    <span>
+                        ...
+                    </span>
+
+
+                    <button type="button">
+                        128
+                    </button>
+
+
+                    <button type="button">
+                        ›
+                    </button>
+
+
+                </nav>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div id="site-footer"></div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <!-- Header + Footer -->
+    <script src="js/components.js"></script>
+
+    <!-- Kho dữ liệu -->
+    <script src="js/kho-du-lieu.js"></script>
+
 
 </body>
+
 </html>
