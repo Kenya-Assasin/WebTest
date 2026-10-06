@@ -26,9 +26,10 @@
     "test": "node scripts/test.mjs",
     "test:ui": "node scripts/playwright.mjs test --ui",
     "test:install": "node scripts/playwright.mjs install chromium",
-    "test:db": "node --test tests/database.test.mjs tests/audited-database.test.mjs",
+    "test:db": "node --test tests/database.test.mjs tests/audited-database.test.mjs tests/origins-database.test.mjs",
     "test:phase2": "node scripts/playwright.mjs test tests/migration.spec.ts tests/phase2.spec.ts",
-    "test:phase3": "node scripts/playwright-phase3.mjs test tests/phase3.spec.ts"
+    "test:phase3": "node scripts/playwright-phase3.mjs test tests/phase3.spec.ts",
+    "test:origins": "node scripts/playwright-origins.mjs test tests/origins.spec.ts"
   },
   "engines": {
     "node": ">=20.9.0"

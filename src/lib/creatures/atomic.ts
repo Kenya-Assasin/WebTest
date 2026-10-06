@@ -43,7 +43,7 @@ export async function submitAtomic(client: SupabaseClient, attempt: SubmissionAt
   if (authError || user?.id !== owner) throw new SubmissionError('Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại để kiểm tra yêu cầu này.', undefined, true);
   let result;
   try {
-    result = await client.rpc('mca_submit_creature', { p_request_id: attempt.requestId, p_draft: attempt.draft, p_image_path: attempt.imagePath });
+    result = await client.rpc(attempt.draft.originPlanetId ? 'mca_submit_creature_with_origin' : 'mca_submit_creature', { p_request_id: attempt.requestId, p_draft: attempt.draft, p_image_path: attempt.imagePath });
   } catch { throw new SubmissionError('Kết nối bị gián đoạn. Hãy kiểm tra lại cùng yêu cầu này; hệ thống sẽ không tạo hồ sơ trùng.', undefined, true); }
   const { data, error, status } = result;
   if (error || !data?.id) {

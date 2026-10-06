@@ -174,3 +174,9 @@
 .mca-favorite-button[aria-pressed="true"] { color: #67e8f9; border-color: #22d3ee; }
 .mca-favorite-login { display: inline-block; font-size: 12px; color: #8cb7c7; }
 .mca-favorite-control [role="alert"] { font-size: 12px; flex-basis: 100%; }
+
+.mca-origin-level { min-width: 0; }
+.mca-origin-level small { display: block; margin: 8px 0; color: #9bb0bf; }
+.mca-origin-add { margin-top: 12px; padding: 14px; border: 1px solid #24424f; }
+.mca-origin-review { padding: 22px 0; border-top: 1px solid #24424f; }
+.mca-origin-review h2, .mca-origin-review p { overflow-wrap: anywhere; }

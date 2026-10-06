@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { creatureCode, detailPath, elementNames, rarityNames, speciesNames, threatLevels, type Creature, type RecordId } from '@/lib/creatures/model';
-import { emptyDraft, fieldLimits, restoreDraft, validateDraft, validateImage, type CreatureDraft } from '@/lib/creatures/draft';
+import { emptyDraft, fieldLimits, restoreDraft, validateDraft, validateImage, type CreatureDraft, type DraftTextField } from '@/lib/creatures/draft';
 import { SubmissionError, submitCreature } from '@/lib/creatures/mutations';
-import { phase3Enabled } from '@/lib/supabase/features';
+import { phase3Enabled, originsEnabled } from '@/lib/supabase/features';
+import { OriginPicker } from './origin-picker';
+import type { Origin } from '@/lib/creatures/origins';
 import { prepareAttempt, restoreAttempt, submissionKey, submitAtomic, type SubmissionAttempt } from '@/lib/creatures/atomic';
 
-type Field = Exclude<keyof CreatureDraft, 'abilities'>;
+type Field = DraftTextField;
 const fields: { key: Field; id: string; label: string; required?: boolean; options?: Record<string, string>; text?: boolean }[] = [
   { key: 'name', id: 'creatureName', label: 'Tên sinh vật', required: true },
   { key: 'species', id: 'creatureSpecies', label: 'Loài sinh vật', required: true, options: speciesNames },
@@ -32,6 +34,7 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState('');
   const [busy, setBusy] = useState(false);
+  const [originBusy,setOriginBusy]=useState(false);
   const [message, setMessage] = useState('');
   const [draftMessage, setDraftMessage] = useState('');
   const [blocked, setBlocked] = useState(false);
@@ -105,11 +108,19 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
     try { localStorage.removeItem(key); } catch { /* Autosave reports storage errors. */ }
   }
   function update(field: Field, value: string) { setDraft(old => ({ ...old, [field]: value })); }
+  function selectOrigin(index:number,node:Origin|null){
+    setDraft(old=>{
+      const ids=[...(old.originIds||[])];ids[index]=node?.id||'';ids.length=index+1;
+      return {...old,originIds:ids,originPlanetId:ids[4]||undefined,
+        ...(index===0?{universe:node?.name||'',galaxy:'',planet:''}:index===1?{galaxy:node?.name||'',planet:''}:index===4?{planet:node?.name||''}:{planet:''})};
+    });
+  }
   function updateAbility(index: number, field: 'name' | 'description', value: string) { setDraft(old => ({ ...old, abilities: old.abilities.map((ability, i) => i === index ? { ...ability, [field]: value } : ability) })); }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting.current || (blocked && !attempt) || complete.current) return;
-    const validation = validateDraft(draft);
+    if (submitting.current || originBusy || (blocked && !attempt) || complete.current) return;
+    if(originsEnabled&&!attempt&&!draft.originPlanetId){setMessage('Hãy chọn đủ nguồn gốc từ vũ trụ đến hành tinh.');return;}
+    const validation = validateDraft(attempt?.draft || draft);
     if (validation) { setMessage(validation); return; }
     submitting.current = true; setBusy(true); setMessage('');
     try {
@@ -144,9 +155,9 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
   return <main className="mca-main"><header className="mca-page-heading"><div><span className="mca-eyebrow">MCA / NEW RECORD</span><h1>TẠO HỒ SƠ SINH VẬT</h1><p>Ghi nhận phát hiện của bạn. Hồ sơ mới được gửi ở trạng thái chờ xác minh.</p></div></header>
     {legacyDraft && <div className="mca-panel"><p>Có bản nháp từ phiên bản cũ trên trình duyệt này.</p><button type="button" onClick={importOldDraft}>Khôi phục bản nháp cũ</button></div>}
     <form id="creatureForm" className="mca-form" onSubmit={submit} noValidate>
-      <fieldset disabled={busy || !ready || blocked}>
+      <fieldset disabled={busy || originBusy || !ready || blocked}>
         <section className="mca-panel"><h2>01 · Thông tin cơ bản</h2>{renderFields(['name', 'species', 'age', 'size', 'element', 'rarity'])}</section>
-        <section className="mca-panel"><h2>02 · Nguồn gốc</h2>{renderFields(['universe', 'galaxy', 'planet', 'world'])}</section>
+        <section className="mca-panel"><h2>02 · Nguồn gốc</h2>{originsEnabled&&(!attempt||attempt.draft.originPlanetId)?<OriginPicker locked={Boolean(attempt)} ids={draft.originIds||[]} onChange={selectOrigin} onBusy={setOriginBusy}/>:renderFields(['universe', 'galaxy', 'planet', 'world'])}</section>
         <section className="mca-panel"><h2>03 · Sức mạnh</h2>{renderFields(['threatLevel', 'powerSource'])}<p className="mca-muted">Cấp đe dọa chính thức do quản trị viên xác minh.</p></section>
         <section className="mca-panel"><h2>04 · Ảnh sinh vật</h2><label htmlFor="creatureImage">Chọn ảnh JPG, PNG hoặc WEBP · tối đa 5MB</label><input ref={imageInput} id="creatureImage" type="file" accept="image/jpeg,image/png,image/webp" onChange={event => { const file = event.target.files?.[0]; if (!file) { setImage(null); return; } const error = validateImage(file); if (error) { setMessage(error); event.target.value = ''; setImage(null); } else { setImage(file); setMessage(''); } }} />{preview && <div className="mca-upload-preview"><img id="creatureImagePreview" src={preview} alt="Ảnh sinh vật đang chọn" /><button type="button" onClick={() => { setImage(null); if (imageInput.current) imageInput.current.value = ''; }}>Bỏ ảnh</button></div>}<p className="mca-muted">Ảnh không được lưu trong bản nháp. Hãy chọn lại ảnh sau khi khôi phục.</p></section>
         <section className="mca-panel"><h2>05 · Mô tả và ngoại hình</h2>{renderFields(['description', 'appearance'])}</section>
@@ -155,7 +166,7 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
       </fieldset>
       {message && <div id="createMessage" className="mca-panel mca-error" role="alert"><p>{message}</p>{unresolvedId && <Link href={detailPath(unresolvedId)}>Mở hồ sơ đã lưu một phần</Link>}{blocked && <p><Link href="/dieu-tra-vien">Kiểm tra hồ sơ của tôi</Link></p>}</div>}
       <p className="mca-muted" role="status" id="draftStatus">{draftMessage}</p>
-      <div className="mca-actions mca-form-actions"><button type="button" id="resetCreatureButton" disabled={busy || blocked} onClick={reset}>Nhập lại</button><button type="button" id="saveDraftButton" disabled={!ready || busy} onClick={saveDraft}>Lưu bản nháp</button><button type="submit" className="mca-button create-submit-button" disabled={!ready || busy || (blocked && !attempt)}>{busy ? 'ĐANG GỬI HỒ SƠ...' : attempt && blocked ? 'KIỂM TRA LẠI YÊU CẦU' : 'GỬI HỒ SƠ ĐIỀU TRA'}</button></div>
+      <div className="mca-actions mca-form-actions"><button type="button" id="resetCreatureButton" disabled={busy || originBusy || blocked} onClick={reset}>Nhập lại</button><button type="button" id="saveDraftButton" disabled={!ready || busy || originBusy} onClick={saveDraft}>Lưu bản nháp</button><button type="submit" className="mca-button create-submit-button" disabled={!ready || busy || originBusy || (blocked && !attempt)}>{busy ? 'ĐANG GỬI HỒ SƠ...' : attempt && blocked ? 'KIỂM TRA LẠI YÊU CẦU' : 'GỬI HỒ SƠ ĐIỀU TRA'}</button></div>
     </form>
   </main>;
 }

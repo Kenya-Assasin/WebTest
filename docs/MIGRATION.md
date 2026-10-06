@@ -52,5 +52,7 @@ Hướng dẫn thao tác và giới hạn cụ thể: [PHASE3.md](PHASE3.md). Ba
 
 ## Lựa chọn công nghệ
 
+Phần nguồn gốc theo năm cấp đã bổ sung riêng sau giai đoạn 3: danh mục có quan hệ, người dùng đề xuất, admin duyệt trước khi hiển thị chung và RPC lưu nguồn gốc chuẩn theo Hành tinh. Chủ dự án đã chạy SQL trên Supabase thật, sáu kiểm tra quyền/schema trực tuyến đạt và cờ nguồn gốc trên máy đã bật. Còn triển khai code mới với `NEXT_PUBLIC_MCA_ORIGINS=true` trên Vercel và kiểm thử bằng tài khoản thật. Xem [ORIGINS.md](ORIGINS.md).
+
 Giữ **Next.js + Supabase** là hợp lý vì backend đã dùng Supabase và website cần xác thực, nội dung công khai và quản trị. Chưa cần thêm Express/NestJS riêng: Postgres, Storage và RPC đáp ứng chức năng hiện có; Next.js có thể xử lý tác vụ phía máy chủ khi cần. Nếu về sau chỉ cần một ứng dụng trên trình duyệt và không cần SSR/SEO, Vite + React là phương án ít cấu hình hơn, nhưng không có lợi rõ ràng để đổi hướng trong lần chuyển này.
 

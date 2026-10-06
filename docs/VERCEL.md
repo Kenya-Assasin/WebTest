@@ -32,6 +32,7 @@ Trong **Settings → Environment Variables**, thêm cho Production và Preview:
 | NEXT_PUBLIC_SUPABASE_URL | URL dự án Supabase đang dùng, lấy từ .env.local |
 | NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY | Publishable key đang dùng, lấy từ .env.local |
 | NEXT_PUBLIC_MCA_PHASE3 | true |
+| NEXT_PUBLIC_MCA_ORIGINS | true (SQL nguồn gốc đã được chủ dự án áp dụng và kiểm tra trực tuyến) |
 
 Không đưa `.env.local` lên GitHub. Cờ giai đoạn 3 phải được đặt trước lúc build vì Next.js đưa biến NEXT_PUBLIC vào mã trình duyệt.
 

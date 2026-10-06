@@ -1,15 +1,18 @@
 import http from 'node:http';
 import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
+import { randomUUID } from 'node:crypto';
 
 const require = createRequire(import.meta.url);
 const owner = '11111111-1111-4111-8111-111111111111';
 const adminId = '22222222-2222-4222-8222-222222222222';
-let records, abilities, calls, failures, usernames, favorites, submissions;
+let records, abilities, calls, failures, usernames, favorites, submissions, origins;
 function reset() {
   records = Array.from({ length: 25 }, (_, index) => ({ id: index + 1, creator_id: owner, creature_code: `VX-${String(index + 1).padStart(4, '0')}`, name: index === 0 ? 'Sinh vật kiểm thử' : `Sinh vật ${index + 1}`, species: index % 2 ? 'dragon' : 'beast', universe: 'Vũ trụ thử nghiệm', galaxy: 'Ngân Hà', planet: 'Hành tinh thử nghiệm', element: index % 2 ? 'fire' : 'water', rarity: 'rare', proposed_threat_level: 'B', verified_threat_level: index % 2 ? 'A' : null, status: index % 2 ? 'verified' : 'pending', description: 'Một sinh vật có mô tả đầy đủ để dùng trong kiểm thử.', weaknesses: 'Ánh sáng mạnh', created_at: `2026-09-${String(index + 1).padStart(2, '0')}T00:00:00Z`, image_url: null }));
   abilities = [{ id: 1, creature_id: 1, ability_name: 'Dịch chuyển', ability_description: 'Mở cổng không gian.' }];
   calls = []; failures = {}; favorites = []; submissions = new Map(); usernames = { [owner]: 'Điều tra viên thật', [adminId]: 'Quản trị viên' };
+  origins=['universe','galaxy','nebula','star_system','planet'].map((kind,index)=>({id:`aaaaaaaa-aaaa-4aaa-8aaa-${String(index+1).padStart(12,'0')}`,kind,name:['Vũ trụ A','Thiên hà A','Tinh vân A','Hệ sao A','Hành tinh A'][index],parent_id:index?`aaaaaaaa-aaaa-4aaa-8aaa-${String(index).padStart(12,'0')}`:null,status:'approved',review_note:null,created_by:null}));
+  origins.push({id:'bbbbbbbb-bbbb-4bbb-8bbb-000000000001',kind:'universe',name:'Vũ trụ B',parent_id:null,status:'approved',review_note:null,created_by:null});
 }
 reset();
 function identity(request) {
@@ -33,9 +36,10 @@ function send(response, status, data, headers = {}) {
 }
 function filter(rows, params) {
   let result = [...rows];
-  for (const field of ['id', 'user_id', 'creator_id', 'creature_id', 'status', 'species', 'element']) {
+  for (const field of ['id', 'user_id', 'creator_id', 'creature_id', 'status', 'species', 'element', 'parent_id', 'kind']) {
     const value = params.get(field);
     if (value?.startsWith('eq.')) result = result.filter(row => String(row[field]) === value.slice(3));
+    if (value==='is.null') result=result.filter(row=>row[field]===null);
     if (value?.startsWith('in.(')) result = result.filter(row => value.slice(4, -1).split(',').includes(String(row[field])));
   }
   const or = params.getAll('or').join(',');
@@ -54,7 +58,7 @@ const backend = http.createServer(async (request, response) => {
     const url = new URL(request.url, 'http://127.0.0.1:54399');
     if (request.method === 'OPTIONS') return send(response, 200);
     if (url.pathname === '/__test/reset') { reset(); return send(response, 200, {}); }
-    if (url.pathname === '/__test/state') return send(response, 200, { records, abilities, calls, favorites });
+    if (url.pathname === '/__test/state') return send(response, 200, { records, abilities, calls, favorites, origins });
     if (url.pathname === '/__test/fail') { Object.assign(failures, await body(request)); return send(response, 200, {}); }
     if (url.pathname === '/__test/seed-favorites') {
       const { count=25 }=await body(request);
@@ -99,7 +103,31 @@ const backend = http.createServer(async (request, response) => {
       const data=matched.slice(start,start+limit);
       return send(response,200,url.searchParams.get('select')?.includes('creature:') ? data.map(row=>({creature:records.find(creature=>String(creature.id)===String(row.creature_id))})) : data,{'Content-Range':`${start}-${Math.max(start,start+data.length-1)}/${matched.length}`});
     }
-    if (url.pathname === '/rest/v1/rpc/mca_submit_creature') {
+    if (url.pathname === '/rest/v1/origin_locations') {
+      if(request.method!=='GET')return send(response,403,{message:'WRITE_DENIED'});
+      if(failures.origins)return send(response,500,{message:'CATALOG_FAILED'});
+      const matched=filter(origins.filter(n=>n.status==='approved'||(claims&&(n.created_by===claims.sub||claims.sub===adminId))),url.searchParams);
+      const start=Number(url.searchParams.get('offset')||0),limit=Number(url.searchParams.get('limit')||500);
+      if(request.headers.accept?.includes('vnd.pgrst.object'))return send(response,200,matched[0]||null);
+      return send(response,200,matched.slice(start,start+limit),{'Content-Range':`${start}-${Math.max(start,start+Math.min(limit,matched.length)-1)}/${matched.length}`});
+    }
+    if(url.pathname==='/rest/v1/rpc/mca_add_origin'){
+      const values=await body(request);calls.push({method:'POST',table:'add_origin',body:values});
+      if(!claims)return send(response,403,{message:'AUTH_REQUIRED'});
+      if(failures.addOrigin)return send(response,500,{message:'NETWORK_FAILED'});
+      const name=values.p_name?.trim().replace(/\s+/g,' ');if(!name||name.length>100)return send(response,400,{message:'ORIGIN_NAME_INVALID'});
+      const existing=origins.find(n=>n.kind===values.p_kind&&n.parent_id===values.p_parent_id&&n.name.toLowerCase()===name.toLowerCase());
+      if(existing){if(existing.status==='rejected')return send(response,400,{message:'ORIGIN_REJECTED'});if(existing.status!=='approved'&&existing.created_by!==claims.sub)return send(response,400,{message:'ORIGIN_NAME_RESERVED'});return send(response,200,existing);}
+      const node={id:randomUUID(),kind:values.p_kind,name,parent_id:values.p_parent_id,status:'pending',review_note:null,created_by:claims.sub};origins.push(node);return send(response,200,node);
+    }
+    if(url.pathname==='/rest/v1/rpc/mca_review_origin'){
+      const values=await body(request);calls.push({method:'POST',table:'review_origin',body:values});
+      if(claims?.sub!==adminId)return send(response,403,{message:'ADMIN_REQUIRED'});
+      const node=origins.find(n=>n.id===values.p_id);if(!node)return send(response,404,{message:'ORIGIN_NOT_FOUND'});
+      if(values.p_status==='approved'&&node.parent_id&&origins.find(n=>n.id===node.parent_id)?.status!=='approved')return send(response,400,{message:'ORIGIN_APPROVE_PARENT_FIRST'});
+      node.status=values.p_status;node.review_note=values.p_note;return send(response,200,null);
+    }
+    if (url.pathname === '/rest/v1/rpc/mca_submit_creature' || url.pathname === '/rest/v1/rpc/mca_submit_creature_with_origin') {
       const values=await body(request); calls.push({method:'POST',table:'submit_rpc',body:values});
       if (!claims) return send(response,403,{message:'AUTH_REQUIRED'});
       if (failures.submitMissing) return send(response,404,{code:'PGRST202',message:'Function not found'});
@@ -109,6 +137,12 @@ const backend = http.createServer(async (request, response) => {
       if (failures.creature_abilities) return send(response,500,{message:'ABILITY_FAILED'});
       const draft=values.p_draft;
       const created={...draft,id:100+records.length,creator_id:claims.sub,creature_code:`VX-${100+records.length}`,proposed_threat_level:draft.threatLevel,verified_threat_level:null,status:'pending',image_url:values.p_image_path?`/storage/v1/object/public/creature-images/${values.p_image_path}`:null,created_at:new Date().toISOString()};
+      if(url.pathname.endsWith('mca_submit_creature_with_origin')){
+        const chain=[];let node=origins.find(n=>n.id===draft.originPlanetId);
+        while(node&&chain.length<5){chain.unshift(node);node=origins.find(n=>n.id===node.parent_id);}
+        if(chain.length!==5||chain.some(n=>!(n.status==='approved'||(n.status==='pending'&&n.created_by===claims.sub))))return send(response,400,{code:'22023',message:'DRAFT_INVALID: origin'});
+        Object.assign(created,{universe:chain[0].name,galaxy:chain[1].name,nebula:chain[2].name,star_system:chain[3].name,planet:chain[4].name,origin_planet_id:chain[4].id});
+      }
       records.push(created);
       abilities.push(...draft.abilities.map((ability,index)=>({id:100+abilities.length+index,creature_id:created.id,ability_name:ability.name,ability_description:ability.description})));
       submissions.set(key,created);
@@ -161,7 +195,7 @@ const backend = http.createServer(async (request, response) => {
 });
 backend.listen(54399, '127.0.0.1', () => console.log('Mock Supabase ready at 127.0.0.1:54399'));
 const next = spawn(process.execPath, [require.resolve('next/dist/bin/next'), 'dev', '--hostname', '127.0.0.1', '--port', '3100'], {
-  stdio: 'inherit', env: { ...process.env, MCA_TEST: '1', NEXT_PUBLIC_MCA_PHASE3: process.env.MCA_TEST_PHASE3 === '1' ? 'true' : 'false', NEXT_PUBLIC_SUPABASE_URL: 'http://127.0.0.1:54399', NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_test' },
+  stdio: 'inherit', env: { ...process.env, MCA_TEST: '1', NEXT_PUBLIC_MCA_ORIGINS: process.env.MCA_TEST_ORIGINS==='1'?'true':'false', NEXT_PUBLIC_MCA_PHASE3: process.env.MCA_TEST_PHASE3 === '1' ? 'true' : 'false', NEXT_PUBLIC_SUPABASE_URL: 'http://127.0.0.1:54399', NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_test' },
 });
 next.on('exit', code => { backend.close(); process.exit(code ?? 1); });
 process.on('SIGTERM', () => { next.kill(); backend.close(); });

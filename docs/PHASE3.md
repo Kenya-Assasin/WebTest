@@ -1,5 +1,7 @@
 # Giai đoạn 3 — Backend Supabase
 
+Nguồn gốc theo năm cấp là bản bổ sung dùng **SQL riêng**, không chạy lại bộ giai đoạn 3. Hướng dẫn chạy `apply-origins.sql`, bật cờ và duyệt địa danh tại [ORIGINS.md](ORIGINS.md).
+
 **Trạng thái ngày 06/10/2026:** chủ dự án đã xác nhận chạy SQL trên Supabase thật với `MCA_PHASE3_APPLIED` và `mca_phase3_ready = true`. Đã bật `NEXT_PUBLIC_MCA_PHASE3=true` trong `.env.local`, biên dịch thành công và khởi động lại bản chạy trên máy. Chưa triển khai lên mạng hoặc kiểm thử các thao tác bằng tài khoản thật.
 
 ## Kiểm tra sau khi bật
