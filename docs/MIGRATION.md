@@ -46,7 +46,7 @@ Kiểm thử gồm dữ liệu, phiên tài khoản và vai trò trên Supabase 
 Còn phải làm trước khi hoàn tất giai đoạn 3:
 
 1. Kiểm thử tài khoản thường/admin, đăng ký/xác nhận email và Storage thật: yêu thích riêng theo tài khoản, hồ sơ có ảnh/kỹ năng, duyệt và cập nhật tên.
-2. Chọn hosting/tên miền, bật cờ giai đoạn 3 tại hosting, cấu hình Auth URLs, kiểm tra bản preview rồi triển khai.
+2. Đã chọn Vercel và tên miền `mo-mca.vercel.app`; cần áp dụng cấu hình Next.js để sửa 404, bật cờ giai đoạn 3 tại hosting, cấu hình Auth URLs, kiểm tra bản preview rồi triển khai. Xem [VERCEL.md](VERCEL.md).
 
 Hướng dẫn thao tác và giới hạn cụ thể: [PHASE3.md](PHASE3.md). Backend đã áp dụng và ứng dụng trên máy đã bật; giai đoạn 3 còn kiểm thử tài khoản thật và triển khai.
 

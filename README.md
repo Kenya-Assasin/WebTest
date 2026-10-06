@@ -1,6 +1,6 @@
 # MCA — Next.js + Supabase
 
-Frontend đã chuyển sang Next.js App Router, TypeScript và React cho toàn bộ 9 trang. Backend tiếp tục dùng dự án Supabase hiện có (Auth, Postgres, Storage và RPC). **Giai đoạn 2 đã chuyển các màn hình nghiệp vụ sang React và bỏ lớp tương thích.** Chủ dự án đã xác nhận áp dụng SQL giai đoạn 3 trên Supabase thật ngày 06/10/2026; bản chạy trên máy đã bật yêu thích theo tài khoản và RPC giao dịch/duyệt mới, biên dịch và kiểm tra khi chưa đăng nhập thành công. Còn kiểm thử bằng tài khoản thật và chọn hosting. Xem hướng dẫn trong `docs/PHASE3.md`.
+Frontend đã chuyển sang Next.js App Router, TypeScript và React cho toàn bộ 9 trang. Backend tiếp tục dùng dự án Supabase hiện có (Auth, Postgres, Storage và RPC). **Giai đoạn 2 đã chuyển các màn hình nghiệp vụ sang React và bỏ lớp tương thích.** Chủ dự án đã xác nhận áp dụng SQL giai đoạn 3 trên Supabase thật ngày 06/10/2026; bản chạy trên máy đã bật yêu thích theo tài khoản và RPC giao dịch/duyệt mới, biên dịch và kiểm tra khi chưa đăng nhập thành công. Đã chọn Vercel với tên miền `mo-mca.vercel.app`; đang sửa cấu hình triển khai trả 404, còn kiểm thử bằng tài khoản thật. Xem hướng dẫn trong `docs/PHASE3.md` và `docs/VERCEL.md`.
 
 ## Chạy trên máy
 
@@ -63,6 +63,7 @@ Các file HTML, CSS và JavaScript ban đầu được giữ nguyên để đố
 - `supabase/audit.sql`: truy vấn chỉ đọc, trả về một ô JSON để đối chiếu schema/quyền.
 - `supabase/migrations/`: bộ cập nhật giai đoạn 3 đã đối chiếu với audit; dùng `supabase/apply-phase3.sql` để chạy một lần trong SQL Editor.
 - `docs/PHASE3.md`: hướng dẫn kiểm tra Supabase và áp dụng/triển khai.
+- `vercel.json` và `docs/VERCEL.md`: cấu hình Next.js và hướng dẫn sửa triển khai Vercel cho `mo-mca.vercel.app`.
 - `src/lib/supabase/features.ts`: cờ bật chức năng giai đoạn 3 sau khi cập nhật backend.
 
 Các component sử dụng state React, hủy yêu cầu khi đổi bộ lọc hoặc rời trang, và render nội dung từ Supabase như văn bản. Các file generated, runtime tương thích và script đồng bộ đã được bỏ. Sửa bản mới trực tiếp trong `src/`.
@@ -90,7 +91,7 @@ Các kiểm thử trình duyệt chạy với Next.js riêng tại `127.0.0.1:31
 - Bộ SQL mới dùng RPC cho mọi ghi sinh vật/kỹ năng và duyệt hồ sơ. Sau khi áp dụng quyền giai đoạn 3, luồng ghi của website HTML cũ và giai đoạn 2 phải được thay bằng bản Next.js đã bật cờ; chỉ tắt cờ không khôi phục quyền trước đó.
 - Ảnh tải trước RPC, không nằm cùng transaction Postgres. Yêu cầu có kết quả chưa rõ giữ nguyên mã và ảnh để thử lại an toàn; ảnh bị bỏ lại do đóng trình duyệt trước RPC có thể cần dọn sau.
 - Hồ sơ cá nhân hiện sửa tên; bio, đổi avatar và quy tắc tăng cấp/danh tiếng cần thống nhất schema riêng.
-- Chưa chọn hosting/tên miền hoặc triển khai. Chi tiết bước audit, kiểm thử và đưa lên mạng trong `docs/PHASE3.md`.
+- Đã chọn Vercel và tên miền `mo-mca.vercel.app`. Website hiện trả 404 cho các trang nhưng phục vụ CSS mới; đã bổ sung cấu hình Next.js trên máy, chưa push hoặc triển khai bản sửa. Các thiết lập Vercel, biến môi trường và Auth URLs còn cần áp dụng; xem `docs/VERCEL.md`.
 
 Tài liệu tham khảo: [Next.js App Router](https://nextjs.org/docs/app), [Supabase SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client?framework=nextjs).
 

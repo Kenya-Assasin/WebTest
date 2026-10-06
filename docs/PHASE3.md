@@ -73,7 +73,7 @@ Bộ kiểm thử gồm 32 kiểm thử SQL và 30 kiểm thử trình duyệt. 
 
 Máy này đã bật `NEXT_PUBLIC_MCA_PHASE3=true` và biên dịch lại. Khi chuyển sang hosting, đặt cùng cờ trong cấu hình Next.js trước khi build. Biến này được đưa vào bản build nên cần rebuild/redeploy khi đổi. `.env.example` vẫn để cờ mặc định false cho môi trường chưa áp dụng SQL; không sao chép đè `.env.local` hiện có.
 
-Chưa chọn hosting/tên miền hoặc tạo deployment. Bản này cần môi trường chạy Next.js có máy chủ. Nếu chọn Vercel, import repository, dùng preset Next.js và ba biến trong `.env.example`, kiểm tra preview trước. Máy chủ riêng dùng Node.js, `npm run build` và `npm start` sau proxy HTTPS với tiến trình được quản lý.
+Chủ dự án đã chọn Vercel với tên miền `mo-mca.vercel.app`. Deployment của commit mới được Vercel báo thành công nhưng tên miền chỉ phục vụ CSS và trả 404 cho các trang. Đã chuẩn bị cấu hình Next.js trong `vercel.json`; chưa push hoặc triển khai bản sửa. Hướng dẫn thiết lập dự án, biến môi trường và Auth URLs trong [VERCEL.md](VERCEL.md). Bản này cần Next.js có hỗ trợ máy chủ, không dùng chế độ chỉ phục vụ HTML trong public.
 
 Trong Supabase → Authentication → URL Configuration, đặt Site URL và Redirect URLs `/auth/callback` cho đúng địa chỉ dùng kiểm thử/triển khai. Kiểm tra preview trước khi chuyển tên miền.
 
