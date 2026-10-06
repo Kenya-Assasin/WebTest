@@ -19,6 +19,522 @@
 /* =========================================================
    1. KHỞI TẠO
 ========================================================= */
+let archiveCreatures = [];
+
+async function loadCreaturesFromSupabase() {
+
+    const creatureGrid =
+        document.getElementById(
+            "archiveCreatureGrid"
+        );
+
+    const noResult =
+        document.getElementById(
+            "archiveNoResult"
+        );
+
+
+    if (!creatureGrid) {
+        return;
+    }
+
+
+    creatureGrid.innerHTML = `
+        <div class="archive-loading">
+            Đang kết nối cơ sở dữ liệu MCA...
+        </div>
+    `;
+
+
+    try {
+
+        const {
+            data,
+            error
+        } = await mcaSupabase
+            .from("creatures")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        archiveCreatures =
+            data || [];
+
+
+        renderCreatureCards(
+            archiveCreatures
+        );
+
+
+        if (noResult) {
+
+            noResult.style.display =
+                archiveCreatures.length === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Không thể tải dữ liệu sinh vật:",
+            error
+        );
+
+
+        creatureGrid.innerHTML = `
+            <div class="archive-loading archive-loading-error">
+                Không thể kết nối cơ sở dữ liệu MCA.
+            </div>
+        `;
+
+    }
+
+}
+
+function renderCreatureCards(creatures) {
+
+    const creatureGrid =
+        document.getElementById(
+            "archiveCreatureGrid"
+        );
+
+
+    if (!creatureGrid) {
+        return;
+    }
+
+
+    creatureGrid.innerHTML = "";
+
+
+    if (!creatures.length) {
+
+        const noResult =
+            document.getElementById(
+                "archiveNoResult"
+            );
+
+        if (noResult) {
+            noResult.style.display = "block";
+        }
+
+        updateArchiveResultCount(0);
+
+        return;
+    }
+
+
+    creatures.forEach(creature => {
+
+        const card =
+            createCreatureCard(
+                creature
+            );
+
+
+        creatureGrid.appendChild(
+            card
+        );
+
+    });
+
+
+    const noResult =
+        document.getElementById(
+            "archiveNoResult"
+        );
+
+
+    if (noResult) {
+        noResult.style.display = "none";
+    }
+
+
+    updateArchiveResultCount(
+        creatures.length
+    );
+
+}
+
+function createCreatureCard(creature) {
+
+    const card =
+        document.createElement("article");
+
+
+    card.className =
+        "archive-creature-card";
+
+
+    card.dataset.id =
+        creature.id;
+
+    card.dataset.name =
+        creature.name || "";
+
+    card.dataset.code =
+        creature.creature_code || "";
+
+    card.dataset.species =
+        creature.species || "";
+
+    card.dataset.threat =
+        creature.verified_threat_level ||
+        creature.proposed_threat_level ||
+        "";
+
+    card.dataset.status =
+        creature.status || "";
+
+    card.dataset.element =
+        creature.element || "";
+
+    card.dataset.origin =
+        creature.galaxy || "";
+
+    card.dataset.likes =
+        creature.likes || 0;
+
+    card.dataset.date =
+        creature.created_at || "";
+
+
+    const threat =
+        creature.verified_threat_level ||
+        creature.proposed_threat_level ||
+        "?";
+
+
+    const image =
+        creature.image_url ||
+        "assets/mca-background.png";
+
+
+    card.innerHTML = `
+
+        <div class="archive-creature-image">
+
+            <img
+                src="${escapeArchiveHTML(image)}"
+                alt="${escapeArchiveHTML(
+                    creature.name || "Sinh vật"
+                )}"
+                loading="lazy"
+            >
+
+            <span class="
+                archive-status
+                ${getStatusClass(
+                    creature.status
+                )}
+            ">
+                ${getStatusName(
+                    creature.status
+                )}
+            </span>
+
+            <span class="
+                archive-threat
+                ${getThreatClass(threat)}
+            ">
+                ${escapeArchiveHTML(threat)}
+            </span>
+
+        </div>
+
+
+        <div class="archive-card-content">
+
+            <span class="archive-creature-code">
+
+                ${escapeArchiveHTML(
+                    creature.creature_code ||
+                    `MCA-${creature.id}`
+                )}
+
+            </span>
+
+
+            <h3>
+
+                ${escapeArchiveHTML(
+                    creature.name ||
+                    "Chưa đặt tên"
+                )}
+
+            </h3>
+
+
+            <p class="archive-creature-type">
+
+                ${escapeArchiveHTML(
+                    getSpeciesName(
+                        creature.species
+                    )
+                )}
+
+            </p>
+
+
+            <div class="archive-tags">
+
+                ${
+                    creature.element
+                        ? `
+                            <span>
+                                ${escapeArchiveHTML(
+                                    getElementName(
+                                        creature.element
+                                    )
+                                )}
+                            </span>
+                        `
+                        : ""
+                }
+
+                ${
+                    creature.planet
+                        ? `
+                            <span>
+                                ${escapeArchiveHTML(
+                                    creature.planet
+                                )}
+                            </span>
+                        `
+                        : ""
+                }
+
+            </div>
+
+
+            <div class="archive-card-footer">
+
+                <span>
+                    ◇ ${escapeArchiveHTML(
+                        creature.universe || "?"
+                    )}
+                </span>
+
+                <span>
+                    ♡ ${creature.likes || 0}
+                </span>
+
+            </div>
+
+        </div>
+    `;
+
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                `chi-tiet-sinh-vat.html?id=${creature.id}`;
+
+        }
+    );
+
+
+    return card;
+}
+
+function getStatusName(status) {
+
+    const statuses = {
+
+        verified:
+            "Đã xác minh",
+
+        pending:
+            "Chờ xác minh",
+
+        investigation:
+            "Cần điều tra thêm",
+
+        conflicting:
+            "Thông tin mâu thuẫn",
+
+        canon:
+            "Chính sử"
+
+    };
+
+
+    return (
+        statuses[status] ||
+        "Chưa xác định"
+    );
+
+}
+
+
+function getStatusClass(status) {
+
+    switch (status) {
+
+        case "verified":
+            return "verified";
+
+        case "pending":
+            return "pending";
+
+        case "investigation":
+            return "review";
+
+        case "conflicting":
+            return "review";
+
+        case "canon":
+            return "verified";
+
+        default:
+            return "pending";
+
+    }
+
+}
+
+function getSpeciesName(species) {
+
+    const speciesNames = {
+
+        dragon:
+            "Rồng",
+
+        beast:
+            "Thú",
+
+        entity:
+            "Thực thể",
+
+        insect:
+            "Côn trùng",
+
+        mythical:
+            "Sinh vật thần thoại",
+
+        humanoid:
+            "Dạng người",
+
+        machine:
+            "Sinh vật cơ giới",
+
+        plant:
+            "Thực vật",
+
+        unknown:
+            "Chưa xác định"
+
+    };
+
+
+    return (
+        speciesNames[species] ||
+        species ||
+        "Chưa xác định"
+    );
+
+}
+
+
+function getElementName(element) {
+
+    const elements = {
+
+        fire: "Lửa",
+        ice: "Băng",
+        water: "Nước",
+        earth: "Đất",
+        wind: "Gió",
+
+        light: "Ánh sáng",
+        dark: "Bóng tối",
+
+        void: "Hư không",
+        space: "Không gian",
+
+        crystal: "Tinh thể",
+        electric: "Điện",
+
+        multi: "Đa thuộc tính",
+
+        unknown:
+            "Chưa xác định"
+
+    };
+
+
+    return (
+        elements[element] ||
+        element
+    );
+
+}
+
+function getThreatClass(threat) {
+
+    const highThreats =
+        [
+            "A",
+            "S",
+            "SS",
+            "X"
+        ];
+
+
+    if (
+        highThreats.includes(threat)
+    ) {
+        return "high";
+    }
+
+
+    return "";
+
+}
+
+function escapeArchiveHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+function updateArchiveResultCount(count) {
+
+    const resultCount =
+        document.getElementById(
+            "archiveResultCount"
+        );
+
+
+    if (!resultCount) {
+        return;
+    }
+
+
+    resultCount.textContent =
+        `${count} hồ sơ`;
+
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -35,6 +551,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSort();
 
     setupViewButtons();
+
+    loadCreaturesFromSupabase();
 
     filterArchiveCreatures();
 

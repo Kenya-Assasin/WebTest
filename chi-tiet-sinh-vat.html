@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Hồ sơ sinh vật | MCA</title>
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/chi-tiet-sinh-vat.css"
+    >
+</head>
+
+
+<body data-page="archive">
+
+    <!-- HEADER -->
+    <div id="site-header"></div>
+
+
+    <main class="creature-detail-main">
+
+        <!-- ==============================
+             LOADING
+        =============================== -->
+
+        <section
+            class="creature-loading"
+            id="creatureLoading"
+        >
+            <div class="loading-symbol">
+                ◇
+            </div>
+
+            <p>
+                ĐANG TRUY XUẤT HỒ SƠ MCA...
+            </p>
+        </section>
+
+
+        <!-- ==============================
+             ERROR
+        =============================== -->
+
+        <section
+            class="creature-error"
+            id="creatureError"
+            hidden
+        >
+
+            <div class="error-code">
+                ERROR / RECORD NOT FOUND
+            </div>
+
+            <h1>
+                KHÔNG TÌM THẤY HỒ SƠ
+            </h1>
+
+            <p id="creatureErrorMessage">
+                Hồ sơ không tồn tại hoặc đã bị xóa.
+            </p>
+
+            <a
+                href="kho-du-lieu.html"
+                class="detail-button"
+            >
+                ← QUAY LẠI KHO DỮ LIỆU
+            </a>
+
+        </section>
+
+
+        <!-- ==============================
+             CONTENT
+        =============================== -->
+
+        <div
+            class="creature-detail-content"
+            id="creatureDetailContent"
+            hidden
+        >
+
+            <!-- BREADCRUMB -->
+
+            <nav class="detail-breadcrumb">
+
+                <a href="index.html">
+                    MCA
+                </a>
+
+                <span>/</span>
+
+                <a href="kho-du-lieu.html">
+                    KHO DỮ LIỆU
+                </a>
+
+                <span>/</span>
+
+                <span id="breadcrumbCode">
+                    RECORD
+                </span>
+
+            </nav>
+
+
+            <!-- ==============================
+                 HERO
+            =============================== -->
+
+            <section class="creature-profile">
+
+                <!-- IMAGE -->
+
+                <div class="creature-profile-image">
+
+                    <img
+                        id="detailCreatureImage"
+                        src="assets/mca-background.png"
+                        alt="Sinh vật"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                    <div class="image-code">
+
+                        <span>
+                            MCA DATABASE
+                        </span>
+
+                        <strong id="imageCreatureCode">
+                            VX-0000
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="creature-profile-information">
+
+                    <div class="profile-top-line">
+
+                        <span
+                            class="detail-status"
+                            id="detailStatus"
+                        >
+                            CHƯA XÁC ĐỊNH
+                        </span>
+
+                        <span class="record-database-label">
+                            MULTIVERSE CREATURE ARCHIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="creature-code">
+                        <span id="detailCreatureCode">
+                            VX-0000
+                        </span>
+                    </div>
+
+
+                    <h1
+                        class="creature-name"
+                        id="detailCreatureName"
+                    >
+                        UNKNOWN CREATURE
+                    </h1>
+
+
+                    <div class="creature-species">
+
+                        <span>
+                            PHÂN LOẠI
+                        </span>
+
+                        <strong id="detailCreatureSpecies">
+                            Chưa xác định
+                        </strong>
+
+                    </div>
+
+
+                    <p
+                        class="creature-description"
+                        id="detailCreatureDescription"
+                    >
+                    </p>
+
+
+                    <div class="profile-meta">
+
+                        <div>
+
+                            <span>
+                                VŨ TRỤ
+                            </span>
+
+                            <strong id="detailUniverse">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                HÀNH TINH
+                            </span>
+
+                            <strong id="detailPlanet">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                NGUYÊN TỐ
+                            </span>
+
+                            <strong id="detailElement">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                ĐỘ HIẾM
+                            </span>
+
+                            <strong id="detailRarity">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- THREAT -->
+
+                <aside class="creature-threat-panel">
+
+                    <span class="threat-label">
+                        THREAT LEVEL
+                    </span>
+
+                    <div
+                        class="threat-value"
+                        id="detailThreat"
+                    >
+                        ?
+                    </div>
+
+                    <span
+                        class="threat-verification"
+                        id="threatVerification"
+                    >
+                        ĐỀ XUẤT
+                    </span>
+
+                </aside>
+
+            </section>
+
+
+            <!-- ==============================
+                 MAIN GRID
+            =============================== -->
+
+            <section class="detail-grid">
+
+                <!-- LEFT -->
+
+                <div class="detail-primary">
+
+
+                    <!-- ORIGIN -->
+
+                    <article class="detail-panel">
+
+                        <div class="panel-heading">
+
+                            <span class="panel-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    ORIGIN DATA
+                                </small>
+
+                                <h2>
+                                    NGUỒN GỐC
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="information-grid">
+
+                            <div class="information-item">
+
+                                <span>Vũ trụ</span>
+
+                                <strong id="originUniverse">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="information-item">
+
+                                <span>Thiên hà</span>
+
+                                <strong id="originGalaxy">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="information-item">
+
+                                <span>Hành tinh</span>
+
+                                <strong id="originPlanet">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="information-item">
+
+                                <span>Thế giới / Khu vực</span>
+
+                                <strong id="originWorld">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- APPEARANCE -->
+
+                    <article class="detail-panel">
+
+                        <div class="panel-heading">
+
+                            <span class="panel-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    VISUAL ANALYSIS
+                                </small>
+
+                                <h2>
+                                    ĐẶC ĐIỂM NGOẠI HÌNH
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <p
+                            class="detail-text"
+                            id="detailAppearance"
+                        >
+                            Chưa có dữ liệu.
+                        </p>
+
+
+                        <div class="information-grid compact">
+
+                            <div class="information-item">
+
+                                <span>Tuổi</span>
+
+                                <strong id="detailAge">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="information-item">
+
+                                <span>Kích thước</span>
+
+                                <strong id="detailSize">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ABILITIES -->
+
+                    <article class="detail-panel">
+
+                        <div class="panel-heading">
+
+                            <span class="panel-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    ABILITY DATABASE
+                                </small>
+
+                                <h2>
+                                    KỸ NĂNG
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="ability-detail-list"
+                            id="detailAbilityList"
+                        >
+                        </div>
+
+                    </article>
+
+
+                    <!-- WEAKNESSES -->
+
+                    <article class="detail-panel weakness-panel">
+
+                        <div class="panel-heading">
+
+                            <span class="panel-number">
+                                04
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    WEAKNESS ANALYSIS
+                                </small>
+
+                                <h2>
+                                    ĐIỂM YẾU & GIỚI HẠN
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="weakness-section">
+
+                            <h3>
+                                ĐIỂM YẾU
+                            </h3>
+
+                            <p
+                                class="detail-text"
+                                id="detailWeaknesses"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="weakness-section">
+
+                            <h3>
+                                GIỚI HẠN
+                            </h3>
+
+                            <p
+                                class="detail-text"
+                                id="detailLimitations"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="weakness-section">
+
+                            <h3>
+                                ĐIỀU KIỆN KÍCH HOẠT
+                                NĂNG LỰC MẠNH NHẤT
+                            </h3>
+
+                            <p
+                                class="detail-text"
+                                id="detailStrongestCondition"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- RIGHT SIDEBAR -->
+
+                <aside class="detail-sidebar">
+
+
+                    <!-- CLASSIFICATION -->
+
+                    <section class="sidebar-panel">
+
+                        <div class="sidebar-heading">
+                            CLASSIFICATION
+                        </div>
+
+
+                        <div class="classification-list">
+
+                            <div>
+
+                                <span>Loài</span>
+
+                                <strong id="sidebarSpecies">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>Nguồn sức mạnh</span>
+
+                                <strong id="sidebarPowerSource">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>Nguyên tố</span>
+
+                                <strong id="sidebarElement">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>Độ hiếm</span>
+
+                                <strong id="sidebarRarity">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- VERIFICATION -->
+
+                    <section class="sidebar-panel">
+
+                        <div class="sidebar-heading">
+                            VERIFICATION STATUS
+                        </div>
+
+
+                        <div class="verification-display">
+
+                            <span
+                                class="verification-dot"
+                                id="verificationDot"
+                            >
+                            </span>
+
+                            <div>
+
+                                <strong id="sidebarStatus">
+                                    —
+                                </strong>
+
+                                <small>
+                                    Trạng thái hồ sơ MCA
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="verification-levels">
+
+                            <div>
+
+                                <span>
+                                    Cấp đề xuất
+                                </span>
+
+                                <strong id="proposedThreat">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Cấp xác minh
+                                </span>
+
+                                <strong id="verifiedThreat">
+                                    Chưa có
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- RECORD -->
+
+                    <section class="sidebar-panel">
+
+                        <div class="sidebar-heading">
+                            RECORD INFORMATION
+                        </div>
+
+
+                        <div class="classification-list">
+
+                            <div>
+
+                                <span>
+                                    Database ID
+                                </span>
+
+                                <strong id="databaseId">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Mã hồ sơ
+                                </span>
+
+                                <strong id="sidebarCreatureCode">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Ngày ghi nhận
+                                </span>
+
+                                <strong id="recordCreatedAt">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Cập nhật cuối
+                                </span>
+
+                                <strong id="recordUpdatedAt">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <a
+                        href="kho-du-lieu.html"
+                        class="back-archive-button"
+                    >
+                        ← QUAY LẠI KHO DỮ LIỆU
+                    </a>
+
+                </aside>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <div id="site-footer"></div>
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/chi-tiet-sinh-vat.js"></script>
+
+</body>
+
+</html>

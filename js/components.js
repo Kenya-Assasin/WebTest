@@ -1,68 +1,155 @@
 /* =========================================================
-   MCA - COMPONENTS.JS
-
-   Chức năng:
-   1. Load Header
-   2. Load Footer
-   3. Đánh dấu menu đang mở
-   4. Cập nhật thông tin người dùng
+   MCA - SHARED COMPONENTS
+   File: js/components.js
 ========================================================= */
 
 
 /* =========================================================
-   1. LOAD COMPONENT
+   GLOBAL CURRENT USER
 ========================================================= */
 
-async function loadComponent(elementId, filePath) {
+/*
+    Các file JS khác có thể đọc:
 
-    // Tìm vị trí cần chèn component
-    const element = document.getElementById(elementId);
+    window.mcaCurrentUser
+    window.mcaCurrentProfile
 
-    // Nếu không tìm thấy thì dừng
-    if (!element) {
-        console.warn(
-            `Không tìm thấy phần tử #${elementId}`
+    Ví dụ:
+
+    window.mcaCurrentUser.id
+    window.mcaCurrentProfile.role
+*/
+
+window.mcaCurrentUser = null;
+window.mcaCurrentProfile = null;
+
+
+/* =========================================================
+   KHỞI ĐỘNG
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        try {
+
+            /*
+                Load Header + Footer
+            */
+
+            await Promise.all([
+                loadHeader(),
+                loadFooter()
+            ]);
+
+
+            /*
+                Sau khi header đã tồn tại
+                mới kiểm tra tài khoản.
+            */
+
+            await loadCurrentMCAUser();
+
+
+            /*
+                Theo dõi đăng nhập / đăng xuất.
+            */
+
+            setupAuthStateListener();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Lỗi khởi tạo MCA Components:",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOAD HEADER
+========================================================= */
+
+async function loadHeader() {
+
+    const container =
+        document.getElementById(
+            "site-header"
         );
 
+
+    /*
+        Trang nào không có site-header
+        thì bỏ qua.
+    */
+
+    if (!container) {
         return;
     }
 
 
     try {
 
-        // Đọc file HTML
-        const response = await fetch(filePath);
+        const response =
+            await fetch(
+                "components/header.html"
+            );
 
 
-        // Kiểm tra lỗi
         if (!response.ok) {
 
             throw new Error(
-                `Không thể tải ${filePath}`
+                `Không tải được header: ${response.status}`
             );
 
         }
 
 
-        // Chuyển dữ liệu thành HTML
-        const html = await response.text();
+        const html =
+            await response.text();
 
 
-        // Chèn vào trang
-        element.innerHTML = html;
+        container.innerHTML =
+            html;
+
+
+        /*
+            Sau khi HTML Header xuất hiện
+            mới active menu.
+        */
+
+        setupActiveNavigation();
+
+
+        /*
+            Setup notification tạm thời.
+        */
+
+        setupNotificationButton();
 
     }
     catch (error) {
 
         console.error(
-            "Lỗi khi tải component:",
+            "Lỗi load Header:",
             error
         );
 
 
-        element.innerHTML = `
-            <div class="component-error">
-                Không thể tải giao diện.
+        container.innerHTML = `
+            <div style="
+                padding:15px;
+                color:#ff6b7a;
+                background:#071522;
+                border-bottom:1px solid rgba(255,107,122,.2);
+            ">
+                Không thể tải Header MCA.
             </div>
         `;
 
@@ -72,92 +159,107 @@ async function loadComponent(elementId, filePath) {
 
 
 /* =========================================================
-   2. LOAD HEADER
-========================================================= */
-
-async function loadHeader() {
-
-    await loadComponent(
-        "site-header",
-        "components/header.html"
-    );
-
-}
-
-
-/* =========================================================
-   3. LOAD FOOTER
+   LOAD FOOTER
 ========================================================= */
 
 async function loadFooter() {
 
-    await loadComponent(
-        "site-footer",
-        "components/footer.html"
-    );
+    const container =
+        document.getElementById(
+            "site-footer"
+        );
+
+
+    /*
+        Trang nào không có footer
+        thì bỏ qua.
+    */
+
+    if (!container) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "components/footer.html"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Không tải được footer: ${response.status}`
+            );
+
+        }
+
+
+        const html =
+            await response.text();
+
+
+        container.innerHTML =
+            html;
+
+
+        /*
+            Nếu footer có năm hiện tại.
+        */
+
+        setupFooterYear();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Lỗi load Footer:",
+            error
+        );
+
+    }
 
 }
 
 
 /* =========================================================
-   4. ACTIVE MENU
+   ACTIVE NAVIGATION
 ========================================================= */
 
-function setActiveNavigation() {
+function setupActiveNavigation() {
 
-    /*
-        Trong mỗi trang chúng ta đặt:
-
-        Trang chủ:
-        <body data-page="home">
-
-        Kho dữ liệu:
-        <body data-page="archive">
-
-        Khám phá:
-        <body data-page="explore">
-    */
-
-
-    // Lấy tên trang hiện tại
-    const currentPage =
+    const bodyPage =
         document.body.dataset.page;
 
 
-    // Nếu body không có data-page
-    if (!currentPage) {
-
-        console.warn(
-            "Trang hiện tại chưa có data-page."
-        );
-
-        return;
-
-    }
-
-
-    // Tìm tất cả menu
-    const navigationLinks =
+    const links =
         document.querySelectorAll(
             ".nav-link"
         );
 
 
-    // Kiểm tra từng menu
-    navigationLinks.forEach(link => {
+    links.forEach(link => {
 
-        const page =
-            link.dataset.page;
-
-
-        // Xóa active cũ
         link.classList.remove(
             "active"
         );
 
 
-        // Nếu đúng trang hiện tại
-        if (page === currentPage) {
+        const linkPage =
+            link.dataset.page;
+
+
+        /*
+            Cách 1:
+            dùng data-page trên body.
+        */
+
+        if (
+            bodyPage &&
+            linkPage === bodyPage
+        ) {
 
             link.classList.add(
                 "active"
@@ -167,171 +269,482 @@ function setActiveNavigation() {
 
     });
 
+
+    /*
+        Nếu trang chưa có data-page,
+        xác định bằng tên file.
+    */
+
+    if (!bodyPage) {
+
+        setupActiveNavigationByURL();
+
+    }
+
 }
 
 
 /* =========================================================
-   5. THÔNG TIN NGƯỜI DÙNG
+   ACTIVE NAVIGATION THEO URL
 ========================================================= */
 
-function updateHeaderUser(userData) {
+function setupActiveNavigationByURL() {
+
+    const fileName =
+        window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase();
+
+
+    const pageMap = {
+
+        "":
+            "home",
+
+        "index.html":
+            "home",
+
+        "kho-du-lieu.html":
+            "archive",
+
+        "chi-tiet-sinh-vat.html":
+            "archive",
+
+        "tao-ho-so.html":
+            "create",
+
+        "dieu-tra-vien.html":
+            "profile",
+
+        "bang-xep-hang.html":
+            "ranking",
+
+        "cong-dong.html":
+            "community"
+
+    };
+
+
+    const currentPage =
+        pageMap[fileName];
+
+
+    if (!currentPage) {
+        return;
+    }
+
+
+    document
+        .querySelectorAll(
+            ".nav-link"
+        )
+        .forEach(link => {
+
+            if (
+                link.dataset.page ===
+                currentPage
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   LOAD CURRENT MCA USER
+========================================================= */
+
+async function loadCurrentMCAUser() {
+
+    const guest =
+        document.getElementById(
+            "headerGuest"
+        );
+
+
+    const account =
+        document.getElementById(
+            "headerAccount"
+        );
+
 
     /*
-        Sau này dữ liệu này có thể lấy
-        trực tiếp từ Supabase.
-
-        Ví dụ:
-
-        {
-            username: "Kenya",
-            level: "Cấp III",
-            reputation: 4820,
-            verified: 128,
-            notifications: 3,
-            avatar: "..."
-        }
+        Kiểm tra Supabase đã được load chưa.
     */
 
+    if (
+        typeof mcaSupabase ===
+        "undefined"
+    ) {
 
-    /* =========================
-       USERNAME
-    ========================== */
-
-    const username =
-        document.getElementById(
-            "headerUsername"
+        console.warn(
+            "mcaSupabase chưa được load."
         );
 
 
-    if (
-        username &&
-        userData.username
-    ) {
+        showGuestHeader(
+            guest,
+            account
+        );
 
-        username.textContent =
-            userData.username;
 
+        return null;
     }
 
 
-    /* =========================
-       LEVEL
-    ========================== */
+    try {
 
-    const level =
-        document.getElementById(
-            "headerLevel"
-        );
+        /* =================================================
+           LẤY USER TỪ SUPABASE AUTH
+        ================================================= */
 
-
-    if (
-        level &&
-        userData.level
-    ) {
-
-        level.textContent =
-            userData.level;
-
-    }
+        const {
+            data,
+            error
+        } = await mcaSupabase
+            .auth
+            .getUser();
 
 
-    /* =========================
-       REPUTATION
-    ========================== */
+        if (error) {
 
-    const reputation =
-        document.getElementById(
-            "headerReputation"
-        );
-
-
-    if (
-        reputation &&
-        userData.reputation !== undefined
-    ) {
-
-        reputation.textContent =
-            Number(
-                userData.reputation
-            ).toLocaleString(
-                "vi-VN"
+            console.warn(
+                "Supabase getUser:",
+                error.message
             );
 
-    }
+        }
 
 
-    /* =========================
-       VERIFIED REPORTS
-    ========================== */
-
-    const verified =
-        document.getElementById(
-            "headerVerified"
-        );
+        const user =
+            data?.user;
 
 
-    if (
-        verified &&
-        userData.verified !== undefined
-    ) {
+        /* =================================================
+           CHƯA ĐĂNG NHẬP
+        ================================================= */
 
-        verified.textContent =
-            Number(
-                userData.verified
-            ).toLocaleString(
-                "vi-VN"
+        if (!user) {
+
+            window.mcaCurrentUser =
+                null;
+
+
+            window.mcaCurrentProfile =
+                null;
+
+
+            showGuestHeader(
+                guest,
+                account
             );
 
-    }
+
+            return null;
+        }
 
 
-    /* =========================
-       NOTIFICATIONS
-    ========================== */
+        /* =================================================
+           ĐÃ ĐĂNG NHẬP
+        ================================================= */
 
-    const notification =
-        document.getElementById(
-            "notificationCount"
+        window.mcaCurrentUser =
+            user;
+
+
+        showAccountHeader(
+            guest,
+            account
         );
 
 
-    if (
-        notification &&
-        userData.notifications !== undefined
-    ) {
+        /* =================================================
+           LOAD PROFILE
+        ================================================= */
 
-        notification.textContent =
-            userData.notifications;
+        const profile =
+            await loadUserProfile(
+                user
+            );
+
+
+        window.mcaCurrentProfile =
+            profile;
+
+
+        /* =================================================
+           HIỂN THỊ PROFILE
+        ================================================= */
+
+        renderHeaderProfile(
+            user,
+            profile
+        );
+
+
+        /* =================================================
+           ĐẾM VERIFIED CREATURES
+        ================================================= */
+
+        await loadVerifiedCreatureCount(
+            user.id
+        );
+
+
+        /* =================================================
+           LOGOUT
+        ================================================= */
+
+        setupLogoutButton();
+
+
+        /* =================================================
+           ADMIN
+        ================================================= */
+
+        setupAdminAccess(
+            profile
+        );
 
 
         /*
-            Nếu không có thông báo
-            thì ẩn số đi.
+            Cho file khác biết
+            Auth đã load xong.
         */
 
-        if (
-            Number(
-                userData.notifications
-            ) === 0
-        ) {
+        document.dispatchEvent(
+            new CustomEvent(
+                "mcaAuthReady",
+                {
+                    detail: {
+                        user:
+                            user,
 
-            notification.style.display =
-                "none";
+                        profile:
+                            profile
+                    }
+                }
+            )
+        );
 
-        }
-        else {
 
-            notification.style.display =
-                "flex";
+        return {
+            user,
+            profile
+        };
 
-        }
+    }
+    catch (error) {
 
+        console.error(
+            "Lỗi loadCurrentMCAUser:",
+            error
+        );
+
+
+        showGuestHeader(
+            guest,
+            account
+        );
+
+
+        return null;
+    }
+
+}
+
+
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
+
+async function loadUserProfile(user) {
+
+    if (!user) {
+        return null;
     }
 
 
-    /* =========================
+    try {
+
+        const {
+            data: profile,
+            error
+        } = await mcaSupabase
+            .from("profiles")
+            .select(`
+                id,
+                username,
+                avatar_url,
+                role,
+                investigator_level,
+                reputation,
+                created_at,
+                updated_at
+            `)
+            .eq(
+                "id",
+                user.id
+            )
+            .single();
+
+
+        if (error) {
+
+            console.error(
+                "Không tải được profile:",
+                error
+            );
+
+
+            /*
+                Nếu profile lỗi,
+                vẫn trả profile tạm từ Auth
+                để Header không bị hỏng.
+            */
+
+            return {
+
+                id:
+                    user.id,
+
+                username:
+                    user.user_metadata
+                        ?.username ||
+                    getEmailUsername(
+                        user.email
+                    ),
+
+                avatar_url:
+                    null,
+
+                role:
+                    "user",
+
+                investigator_level:
+                    "Cấp I",
+
+                reputation:
+                    0
+
+            };
+
+        }
+
+
+        return profile;
+
+    }
+    catch (error) {
+
+        console.error(
+            "loadUserProfile error:",
+            error
+        );
+
+
+        return null;
+    }
+
+}
+
+
+/* =========================================================
+   RENDER HEADER PROFILE
+========================================================= */
+
+function renderHeaderProfile(
+    user,
+    profile
+) {
+
+    const username =
+
+        profile?.username ||
+
+        user?.user_metadata
+            ?.username ||
+
+        getEmailUsername(
+            user?.email
+        ) ||
+
+        "Investigator";
+
+
+    const level =
+
+        profile
+            ?.investigator_level ||
+
+        "Cấp I";
+
+
+    const reputation =
+
+        profile
+            ?.reputation ??
+
+        0;
+
+
+    /* =====================================================
+       USERNAME
+    ===================================================== */
+
+    setHeaderText(
+        "headerUsername",
+        username
+    );
+
+
+    /* =====================================================
+       LEVEL
+    ===================================================== */
+
+    setHeaderText(
+        "headerLevel",
+        level
+    );
+
+
+    /* =====================================================
+       REPUTATION
+    ===================================================== */
+
+    setHeaderText(
+        "headerReputation",
+        reputation
+    );
+
+
+    /* =====================================================
        AVATAR
-    ========================== */
+    ===================================================== */
+
+    renderHeaderAvatar(
+        username,
+        profile?.avatar_url
+    );
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+function renderHeaderAvatar(
+    username,
+    avatarUrl
+) {
 
     const avatar =
         document.getElementById(
@@ -339,36 +752,171 @@ function updateHeaderUser(userData) {
         );
 
 
-    if (
-        avatar &&
-        userData.avatar
-    ) {
-
-        avatar.src =
-            userData.avatar;
-
+    if (!avatar) {
+        return;
     }
 
 
-    /* =========================
-       AVATAR FALLBACK
-    ========================== */
+    /*
+        Nếu sau này người dùng
+        đã có avatar_url.
+    */
 
-    const avatarFallback =
-        document.querySelector(
-            ".avatar-fallback"
+    if (
+        avatarUrl &&
+        typeof avatarUrl === "string"
+    ) {
+
+        avatar.innerHTML = "";
+
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            avatarUrl;
+
+
+        image.alt =
+            username;
+
+
+        image.style.width =
+            "100%";
+
+
+        image.style.height =
+            "100%";
+
+
+        image.style.objectFit =
+            "cover";
+
+
+        image.style.borderRadius =
+            "50%";
+
+
+        image.onerror =
+            function () {
+
+                avatar.innerHTML = "";
+
+                avatar.textContent =
+                    getFirstCharacter(
+                        username
+                    );
+
+            };
+
+
+        avatar.appendChild(
+            image
         );
 
 
-    if (
-        avatarFallback &&
-        userData.username
-    ) {
+        return;
+    }
 
-        avatarFallback.textContent =
-            userData.username
-                .charAt(0)
-                .toUpperCase();
+
+    /*
+        Chưa có avatar:
+        dùng chữ cái đầu username.
+    */
+
+    avatar.textContent =
+        getFirstCharacter(
+            username
+        );
+
+}
+
+
+/* =========================================================
+   VERIFIED CREATURE COUNT
+========================================================= */
+
+async function loadVerifiedCreatureCount(
+    userId
+) {
+
+    if (!userId) {
+
+        setHeaderText(
+            "headerVerified",
+            0
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const {
+            count,
+            error
+        } = await mcaSupabase
+            .from("creatures")
+            .select(
+                "id",
+                {
+                    count:
+                        "exact",
+
+                    head:
+                        true
+                }
+            )
+            .eq(
+                "creator_id",
+                userId
+            )
+            .eq(
+                "status",
+                "verified"
+            );
+
+
+        if (error) {
+
+            console.warn(
+                "Không đếm được hồ sơ verified:",
+                error
+            );
+
+
+            setHeaderText(
+                "headerVerified",
+                0
+            );
+
+
+            return;
+        }
+
+
+        setHeaderText(
+            "headerVerified",
+            count ?? 0
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "loadVerifiedCreatureCount:",
+            error
+        );
+
+
+        setHeaderText(
+            "headerVerified",
+            0
+        );
 
     }
 
@@ -376,45 +924,381 @@ function updateHeaderUser(userData) {
 
 
 /* =========================================================
-   6. DỮ LIỆU USER TẠM THỜI
+   GUEST HEADER
 ========================================================= */
 
-function loadTemporaryUser() {
+function showGuestHeader(
+    guest,
+    account
+) {
+
+    if (guest) {
+
+        guest.hidden =
+            false;
+
+    }
+
+
+    if (account) {
+
+        account.hidden =
+            true;
+
+    }
+
+}
+
+
+/* =========================================================
+   ACCOUNT HEADER
+========================================================= */
+
+function showAccountHeader(
+    guest,
+    account
+) {
+
+    if (guest) {
+
+        guest.hidden =
+            true;
+
+    }
+
+
+    if (account) {
+
+        account.hidden =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+function setupLogoutButton() {
+
+    const button =
+        document.getElementById(
+            "headerLogoutButton"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
 
     /*
-        Đây chỉ là dữ liệu DEMO.
-
-        Khi kết nối Supabase
-        chúng ta sẽ xóa phần này
-        và lấy dữ liệu thật.
+        Tránh addEventListener
+        nhiều lần.
     */
 
-
-    const temporaryUser = {
-
-        username: "Kenya",
-
-        level: "Cấp III",
-
-        reputation: 4820,
-
-        verified: 128,
-
-        notifications: 3,
-
-        avatar: ""
-    };
+    if (
+        button.dataset.ready ===
+        "true"
+    ) {
+        return;
+    }
 
 
-    updateHeaderUser(
-        temporaryUser
+    button.dataset.ready =
+        "true";
+
+
+    button.addEventListener(
+        "click",
+        async () => {
+
+            button.disabled =
+                true;
+
+
+            const oldText =
+                button.textContent;
+
+
+            button.textContent =
+                "...";
+
+
+            try {
+
+                const {
+                    error
+                } = await mcaSupabase
+                    .auth
+                    .signOut();
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                window.mcaCurrentUser =
+                    null;
+
+
+                window.mcaCurrentProfile =
+                    null;
+
+
+                window.location.href =
+                    "index.html";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Đăng xuất thất bại:",
+                    error
+                );
+
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    oldText;
+
+            }
+
+        }
     );
 
 }
 
 
 /* =========================================================
-   7. XỬ LÝ NÚT THÔNG BÁO
+   AUTH STATE LISTENER
+========================================================= */
+
+function setupAuthStateListener() {
+
+    if (
+        typeof mcaSupabase ===
+        "undefined"
+    ) {
+        return;
+    }
+
+
+    /*
+        Khi đăng nhập / đăng xuất
+        Supabase sẽ báo cho website.
+    */
+
+    mcaSupabase
+        .auth
+        .onAuthStateChange(
+            async (
+                event,
+                session
+            ) => {
+
+                console.log(
+                    "MCA Auth:",
+                    event
+                );
+
+
+                /*
+                    Tránh reload profile
+                    không cần thiết lúc khởi tạo.
+                */
+
+                if (
+                    event ===
+                    "INITIAL_SESSION"
+                ) {
+                    return;
+                }
+
+
+                if (
+                    event ===
+                    "SIGNED_OUT"
+                ) {
+
+                    window.mcaCurrentUser =
+                        null;
+
+
+                    window.mcaCurrentProfile =
+                        null;
+
+
+                    showGuestHeader(
+                        document.getElementById(
+                            "headerGuest"
+                        ),
+
+                        document.getElementById(
+                            "headerAccount"
+                        )
+                    );
+
+
+                    return;
+                }
+
+
+                if (
+                    event ===
+                    "SIGNED_IN"
+                ) {
+
+                    await loadCurrentMCAUser();
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ADMIN ACCESS
+========================================================= */
+
+function setupAdminAccess(
+    profile
+) {
+
+    /*
+        Header hiện tại chưa bắt buộc
+        phải có nút Admin.
+
+        Nhưng ta chuẩn bị sẵn logic.
+    */
+
+    const adminLink =
+        document.getElementById(
+            "headerAdminLink"
+        );
+
+
+    if (!adminLink) {
+        return;
+    }
+
+
+    if (
+        profile?.role ===
+        "admin"
+    ) {
+
+        adminLink.hidden =
+            false;
+
+    }
+    else {
+
+        adminLink.hidden =
+            true;
+
+    }
+
+}
+
+
+/* =========================================================
+   KIỂM TRA USER ĐÃ LOGIN
+========================================================= */
+
+/*
+    Có thể dùng ở file khác:
+
+    const user =
+        await getCurrentMCAUser();
+
+    if (!user) {
+        ...
+    }
+*/
+
+async function getCurrentMCAUser() {
+
+    if (
+        window.mcaCurrentUser
+    ) {
+
+        return window
+            .mcaCurrentUser;
+
+    }
+
+
+    if (
+        typeof mcaSupabase ===
+        "undefined"
+    ) {
+
+        return null;
+
+    }
+
+
+    const {
+        data,
+        error
+    } = await mcaSupabase
+        .auth
+        .getUser();
+
+
+    if (error) {
+
+        console.warn(
+            error
+        );
+
+        return null;
+    }
+
+
+    return (
+        data?.user ||
+        null
+    );
+
+}
+
+
+/* =========================================================
+   KIỂM TRA ADMIN
+========================================================= */
+
+/*
+    Sau này admin.js có thể dùng:
+
+    if (isCurrentUserAdmin()) {
+        ...
+    }
+*/
+
+function isCurrentUserAdmin() {
+
+    return (
+        window
+            .mcaCurrentProfile
+            ?.role ===
+        "admin"
+    );
+
+}
+
+
+/* =========================================================
+   NOTIFICATION BUTTON
 ========================================================= */
 
 function setupNotificationButton() {
@@ -430,20 +1314,35 @@ function setupNotificationButton() {
     }
 
 
+    if (
+        button.dataset.ready ===
+        "true"
+    ) {
+        return;
+    }
+
+
+    button.dataset.ready =
+        "true";
+
+
     button.addEventListener(
         "click",
-        () => {
+        event => {
+
+            event.stopPropagation();
+
 
             /*
-                Sau này có thể đổi thành
-                notification panel.
+                Chức năng thông báo
+                sẽ làm sau.
 
-                Hiện tại chuyển sang
-                trang notifications.
+                Hiện tại chỉ log.
             */
 
-            window.location.href =
-                "notifications.html";
+            console.log(
+                "Notification system chưa được triển khai."
+            );
 
         }
     );
@@ -452,47 +1351,105 @@ function setupNotificationButton() {
 
 
 /* =========================================================
-   8. KHỞI TẠO COMPONENT
+   FOOTER YEAR
 ========================================================= */
 
-async function initializeComponents() {
+function setupFooterYear() {
 
     /*
-        Header và Footer có thể
-        tải cùng lúc.
+        Nếu footer.html có:
+
+        <span id="footerYear"></span>
+
+        thì tự động hiện năm.
     */
 
-    await Promise.all([
-
-        loadHeader(),
-
-        loadFooter()
-
-    ]);
+    const year =
+        document.getElementById(
+            "footerYear"
+        );
 
 
-    /*
-        Header phải load xong
-        thì mới chạy những phần sau.
-    */
+    if (!year) {
+        return;
+    }
 
 
-    setActiveNavigation();
-
-
-    loadTemporaryUser();
-
-
-    setupNotificationButton();
+    year.textContent =
+        new Date()
+            .getFullYear();
 
 }
 
 
 /* =========================================================
-   9. CHẠY KHI HTML LOAD XONG
+   SET HEADER TEXT
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeComponents
-);
+function setHeaderText(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    element.textContent =
+        value ?? "";
+
+}
+
+
+/* =========================================================
+   GET FIRST CHARACTER
+========================================================= */
+
+function getFirstCharacter(
+    value
+) {
+
+    const text =
+        String(
+            value || "?"
+        )
+        .trim();
+
+
+    if (!text) {
+        return "?";
+    }
+
+
+    return text
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   GET USERNAME FROM EMAIL
+========================================================= */
+
+function getEmailUsername(
+    email
+) {
+
+    if (!email) {
+        return "Investigator";
+    }
+
+
+    return String(email)
+        .split("@")[0] ||
+        "Investigator";
+
+}

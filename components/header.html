@@ -75,7 +75,7 @@
 
 
         <!-- Tạo hồ sơ -->
-        <a href="create.html"
+        <a href="tao-ho-so.html"
            class="nav-link"
            data-page="create">
 
@@ -124,122 +124,111 @@
     <div class="top-actions">
 
 
-        <!-- Thông báo -->
-        <button
-            class="header-button notification-button"
-            id="notificationButton"
-            type="button"
-            title="Thông báo">
-
-            <span class="header-icon">
-                ♧
-            </span>
-
-            <!-- Số thông báo -->
-            <span
-                class="notification-count"
-                id="notificationCount">
-
-                3
-
-            </span>
-
-        </button>
-
-
         <!-- =========================
              THÔNG TIN NGƯỜI DÙNG
         ========================== -->
-        <a href="profile.html"
-           class="user-profile">
 
-            <!-- Avatar -->
-            <div class="user-avatar">
+        <div class="header-user-area">
 
-                <img
-                    src="assets/images/default-avatar.png"
-                    alt="Avatar"
-                    id="headerAvatar"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-                >
+    <!-- CHƯA ĐĂNG NHẬP -->
+    <div
+        class="header-guest"
+        id="headerGuest"
+    >
+        <a
+            href="dang-nhap.html"
+            class="header-login-button"
+        >
+            ĐĂNG NHẬP
+        </a>
 
-                <!-- Avatar dự phòng -->
-                <span class="avatar-fallback">
-                    K
+        <a
+            href="dang-ky.html"
+            class="header-register-button"
+        >
+            ĐĂNG KÝ
+        </a>
+    </div>
+
+
+    <!-- ĐÃ ĐĂNG NHẬP -->
+    <div
+        class="header-account"
+        id="headerAccount"
+        hidden
+    >
+
+        <button
+            class="notification-button"
+            id="notificationButton"
+            type="button"
+        >
+            ◇
+
+            <span
+                class="notification-count"
+                id="notificationCount"
+            >
+                0
+            </span>
+        </button>
+
+
+        <div class="header-user-profile">
+
+            <div
+                class="header-avatar"
+                id="headerAvatar"
+            >
+                ?
+            </div>
+
+
+            <div class="header-user-info">
+
+                <strong id="headerUsername">
+                    Investigator
+                </strong>
+
+                <span id="headerLevel">
+                    Cấp I
                 </span>
 
             </div>
 
-
-            <!-- Tên + cấp -->
-            <div class="user-info">
-
-                <strong id="headerUsername">
-                    Kenya
-                </strong>
-
-                <small>
-                    Điều tra viên •
-                    <span id="headerLevel">
-                        Cấp III
-                    </span>
-                </small>
-
-            </div>
-
-        </a>
+        </div>
 
 
-        <!-- =========================
-             DANH TIẾNG
-        ========================== -->
-        <div
-            class="header-stat"
-            title="Danh tiếng">
+        <div class="header-user-stats">
 
-            <span class="stat-icon">
-                ✧
-            </span>
-
-            <div>
-
-                <small>
-                    Danh tiếng
-                </small>
-
+            <span>
+                REP
                 <strong id="headerReputation">
-                    4.820
+                    0
                 </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             HỒ SƠ ĐÃ XÁC MINH
-        ========================== -->
-        <div
-            class="header-stat"
-            title="Hồ sơ đã xác minh">
-
-            <span class="stat-icon">
-                ▣
             </span>
 
-            <div>
-
-                <small>
-                    Hồ sơ xác minh
-                </small>
-
+            <span>
+                VERIFIED
                 <strong id="headerVerified">
-                    128
+                    0
                 </strong>
-
-            </div>
+            </span>
 
         </div>
+
+
+        <button
+            type="button"
+            class="header-logout-button"
+            id="headerLogoutButton"
+        >
+            ĐĂNG XUẤT
+        </button>
+
+    </div>
+
+</div>
 
 
         <!-- =========================

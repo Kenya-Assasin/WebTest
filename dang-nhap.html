@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Đăng nhập | MCA</title>
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/auth.css"
+    >
+</head>
+
+<body>
+
+    <div id="site-header"></div>
+
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-label">
+                MCA / SECURE ACCESS
+            </div>
+
+            <h1>
+                ĐĂNG NHẬP
+            </h1>
+
+            <p class="auth-description">
+                Truy cập tài khoản Điều tra viên MCA.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="auth-group">
+
+                    <label for="loginEmail">
+                        EMAIL
+                    </label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="example@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-group">
+
+                    <label for="loginPassword">
+                        MẬT KHẨU
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Nhập mật khẩu"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                    id="loginButton"
+                >
+                    ĐĂNG NHẬP
+                </button>
+
+            </form>
+
+
+            <div
+                class="auth-message"
+                id="authMessage"
+            ></div>
+
+
+            <div class="auth-switch">
+
+                Chưa có tài khoản?
+
+                <a href="dang-ky.html">
+                    Tạo tài khoản
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <div id="site-footer"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

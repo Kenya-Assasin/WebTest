@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | MCA</title>
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+</head>
+
+
+<body data-page="admin">
+
+    <!-- HEADER -->
+    <div id="site-header"></div>
+
+
+    <main class="admin-main">
+
+        <!-- =================================================
+             KIỂM TRA QUYỀN
+        ================================================== -->
+
+        <section
+            class="admin-access-loading"
+            id="adminLoading"
+        >
+
+            <div class="admin-loading-symbol">
+                ◇
+            </div>
+
+            <p>
+                ĐANG XÁC MINH QUYỀN TRUY CẬP MCA...
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             ACCESS DENIED
+        ================================================== -->
+
+        <section
+            class="admin-access-denied"
+            id="adminAccessDenied"
+            hidden
+        >
+
+            <span class="access-code">
+                MCA / ACCESS DENIED
+            </span>
+
+            <h1>
+                KHÔNG CÓ QUYỀN TRUY CẬP
+            </h1>
+
+            <p id="adminDeniedMessage">
+                Khu vực này chỉ dành cho quản trị viên MCA.
+            </p>
+
+            <a
+                href="index.html"
+                class="admin-back-button"
+            >
+                ← TRỞ VỀ TRANG CHỦ
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <div
+            class="admin-dashboard"
+            id="adminDashboard"
+            hidden
+        >
+
+            <!-- PAGE HEADER -->
+
+            <section class="admin-page-header">
+
+                <div>
+
+                    <span class="admin-page-code">
+                        MCA / CONTROL CENTER
+                    </span>
+
+                    <h1>
+                        TRUNG TÂM KIỂM DUYỆT
+                    </h1>
+
+                    <p>
+                        Quản lý và xác minh hồ sơ sinh vật
+                        trong Multiverse Creature Archive.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-identity">
+
+                    <span>
+                        AUTHORIZED ADMIN
+                    </span>
+
+                    <strong id="adminUsername">
+                        ADMIN
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <section class="admin-stat-grid">
+
+                <article class="admin-stat-card pending">
+
+                    <span class="stat-label">
+                        CHỜ XÁC MINH
+                    </span>
+
+                    <strong
+                        class="stat-value"
+                        id="statPending"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Pending records
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card verified">
+
+                    <span class="stat-label">
+                        ĐÃ XÁC MINH
+                    </span>
+
+                    <strong
+                        class="stat-value"
+                        id="statVerified"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Verified records
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card investigation">
+
+                    <span class="stat-label">
+                        CẦN ĐIỀU TRA
+                    </span>
+
+                    <strong
+                        class="stat-value"
+                        id="statInvestigation"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Investigation required
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card conflicting">
+
+                    <span class="stat-label">
+                        MÂU THUẪN
+                    </span>
+
+                    <strong
+                        class="stat-value"
+                        id="statConflicting"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Conflicting records
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card total">
+
+                    <span class="stat-label">
+                        TỔNG HỒ SƠ
+                    </span>
+
+                    <strong
+                        class="stat-value"
+                        id="statTotal"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Database records
+                    </small>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONTROL BAR
+            ================================================== -->
+
+            <section class="admin-control-panel">
+
+                <div class="admin-search-box">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="search"
+                        id="adminSearchInput"
+                        placeholder="Tìm tên, mã hồ sơ, loài..."
+                    >
+
+                </div>
+
+
+                <div class="admin-filter-buttons">
+
+                    <button
+                        type="button"
+                        class="admin-filter active"
+                        data-status="pending"
+                    >
+                        CHỜ XÁC MINH
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="admin-filter"
+                        data-status="all"
+                    >
+                        TẤT CẢ
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="admin-filter"
+                        data-status="verified"
+                    >
+                        ĐÃ XÁC MINH
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="admin-filter"
+                        data-status="investigation"
+                    >
+                        CẦN ĐIỀU TRA
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="admin-filter"
+                        data-status="conflicting"
+                    >
+                        MÂU THUẪN
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="admin-filter"
+                        data-status="canon"
+                    >
+                        CHÍNH SỬ
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 QUEUE HEADER
+            ================================================== -->
+
+            <section class="admin-queue-header">
+
+                <div>
+
+                    <span class="queue-code">
+                        REVIEW QUEUE
+                    </span>
+
+                    <h2 id="queueTitle">
+                        HÀNG CHỜ XÁC MINH
+                    </h2>
+
+                </div>
+
+
+                <span
+                    class="queue-count"
+                    id="queueCount"
+                >
+                    0 HỒ SƠ
+                </span>
+
+            </section>
+
+
+            <!-- =================================================
+                 CREATURE LIST
+            ================================================== -->
+
+            <section
+                class="admin-creature-list"
+                id="adminCreatureList"
+            >
+            </section>
+
+
+            <!-- EMPTY -->
+
+            <section
+                class="admin-empty"
+                id="adminEmpty"
+                hidden
+            >
+
+                <div>
+                    ◇
+                </div>
+
+                <h3>
+                    KHÔNG CÓ HỒ SƠ
+                </h3>
+
+                <p>
+                    Không tìm thấy hồ sơ phù hợp
+                    với bộ lọc hiện tại.
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <div id="site-footer"></div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/admin.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1869 @@
+/* =========================================================
+   MCA - DIEU-TRA-VIEN.CSS
+   Multiverse Creature Archive
+   Trang hồ sơ Điều tra viên
+========================================================= */
+
+
+/* =========================================================
+   1. PAGE
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(43, 220, 255, 0.06),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 35%,
+            rgba(155, 85, 255, 0.05),
+            transparent 30%
+        ),
+        var(--bg-main);
+
+    color: var(--text-main);
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: -1;
+
+    background-image:
+        linear-gradient(
+            rgba(43, 220, 255, 0.015) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(43, 220, 255, 0.015) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+}
+
+.investigator-main {
+    min-height: 100vh;
+    padding-top: var(--header-height);
+}
+
+
+/* =========================================================
+   2. PROFILE HERO
+========================================================= */
+
+.investigator-hero {
+    position: relative;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding:
+        45px
+        45px
+        0;
+}
+
+.investigator-cover {
+    position: absolute;
+
+    top: 0;
+    left: 45px;
+    right: 45px;
+
+    height: 230px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.15);
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 7, 13, 0.94),
+            rgba(3, 7, 13, 0.55),
+            rgba(3, 7, 13, 0.8)
+        ),
+        url("../assets/mca-background.png")
+        center / cover
+        no-repeat;
+}
+
+.investigator-cover::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(43, 220, 255, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(43, 220, 255, 0.04) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+}
+
+.investigator-cover::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100px;
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--bg-main)
+        );
+}
+
+
+/* =========================================================
+   3. PROFILE INFORMATION
+========================================================= */
+
+.investigator-profile {
+    position: relative;
+    z-index: 2;
+
+    min-height: 310px;
+
+    padding:
+        145px
+        35px
+        30px;
+
+    display: grid;
+
+    grid-template-columns:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+    gap: 28px;
+
+    align-items: end;
+}
+
+
+/* =========================================================
+   4. AVATAR
+========================================================= */
+
+.investigator-avatar {
+    position: relative;
+
+    width: 145px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    border:
+        2px solid
+        rgba(43, 220, 255, 0.65);
+
+    border-radius: 8px;
+
+    padding: 5px;
+
+    background:
+        rgba(4, 13, 21, 0.95);
+
+    box-shadow:
+        0 0 25px
+        rgba(43, 220, 255, 0.15);
+}
+
+.investigator-avatar::before,
+.investigator-avatar::after {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    pointer-events: none;
+}
+
+.investigator-avatar::before {
+    top: -5px;
+    left: -5px;
+
+    border-top:
+        2px solid
+        var(--cyan);
+
+    border-left:
+        2px solid
+        var(--cyan);
+}
+
+.investigator-avatar::after {
+    right: -5px;
+    bottom: -5px;
+
+    border-right:
+        2px solid
+        var(--cyan);
+
+    border-bottom:
+        2px solid
+        var(--cyan);
+}
+
+.investigator-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 4px;
+
+    object-fit: cover;
+
+    background: var(--bg-secondary);
+}
+
+.investigator-online {
+    position: absolute;
+
+    right: -5px;
+    bottom: 12px;
+
+    width: 15px;
+    height: 15px;
+
+    border:
+        3px solid
+        var(--bg-main);
+
+    border-radius: 50%;
+
+    background: #46e6ae;
+
+    box-shadow:
+        0 0 12px
+        rgba(70, 230, 174, 0.8);
+}
+
+
+/* =========================================================
+   5. INVESTIGATOR INFO
+========================================================= */
+
+.investigator-information {
+    min-width: 0;
+}
+
+.investigator-code {
+    margin-bottom: 7px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.investigator-name-row {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+.investigator-name-row h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            48px
+        );
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 22px
+        rgba(43, 220, 255, 0.12);
+}
+
+.investigator-verified {
+    padding:
+        5px 9px;
+
+    border:
+        1px solid
+        rgba(70, 230, 174, 0.35);
+
+    border-radius: 3px;
+
+    background:
+        rgba(70, 230, 174, 0.07);
+
+    color: #46e6ae;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.investigator-rank {
+    margin:
+        6px
+        0
+        12px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.investigator-rank strong {
+    margin-left: 5px;
+
+    color: var(--cyan);
+}
+
+.investigator-bio {
+    max-width: 720px;
+
+    margin:
+        0
+        0
+        13px;
+
+    color: #8199a9;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+.investigator-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap:
+        10px
+        24px;
+
+    color: #597384;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   6. PROFILE ACTION BUTTONS
+========================================================= */
+
+.investigator-actions {
+    display: flex;
+
+    gap: 8px;
+
+    align-self: end;
+
+    padding-bottom: 3px;
+}
+
+.investigator-primary-button,
+.investigator-secondary-button {
+    min-height: 39px;
+
+    padding:
+        0
+        17px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    transition:
+        0.2s ease;
+}
+
+.investigator-primary-button {
+    border:
+        1px solid
+        var(--cyan);
+
+    background:
+        rgba(43, 220, 255, 0.12);
+
+    color: var(--cyan);
+}
+
+.investigator-primary-button:hover {
+    background:
+        rgba(43, 220, 255, 0.2);
+
+    box-shadow:
+        0 0 20px
+        rgba(43, 220, 255, 0.12);
+
+    transform:
+        translateY(-1px);
+}
+
+.investigator-secondary-button {
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #8199a9;
+}
+
+.investigator-secondary-button:hover {
+    border-color:
+        rgba(43, 220, 255, 0.3);
+
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   7. PROFILE STATISTICS
+========================================================= */
+
+.investigator-statistics {
+    max-width: 1510px;
+
+    margin:
+        5px
+        auto
+        28px;
+
+    padding:
+        0
+        35px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 10px;
+}
+
+.investigator-stat {
+    min-height: 90px;
+
+    padding:
+        17px
+        18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7, 21, 34, 0.85),
+            rgba(4, 12, 20, 0.82)
+        );
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.investigator-stat:hover {
+    border-color:
+        rgba(43, 220, 255, 0.28);
+
+    transform:
+        translateY(-2px);
+}
+
+.investigator-stat-icon {
+    width: 39px;
+    height: 39px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.18);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.04);
+
+    color: var(--cyan);
+
+    font-size: 17px;
+}
+
+.investigator-stat div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.investigator-stat strong {
+    color: #ffffff;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 18px;
+
+    letter-spacing: 1px;
+}
+
+.investigator-stat span:not(.investigator-stat-icon) {
+    color: #607b8c;
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+/* =========================================================
+   8. MAIN CONTENT
+========================================================= */
+
+.investigator-content {
+    max-width: 1510px;
+
+    margin:
+        0
+        auto;
+
+    padding:
+        0
+        35px
+        70px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        310px;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+.investigator-content-main {
+    min-width: 0;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 5px;
+
+    background:
+        rgba(5, 15, 24, 0.72);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   9. TABS
+========================================================= */
+
+.investigator-tabs {
+    display: flex;
+
+    align-items: center;
+
+    overflow-x: auto;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    background:
+        rgba(4, 12, 20, 0.82);
+}
+
+.investigator-tab {
+    position: relative;
+
+    min-height: 52px;
+
+    padding:
+        0
+        21px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #587486;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.investigator-tab:hover {
+    color: #a7c2d1;
+
+    background:
+        rgba(43, 220, 255, 0.025);
+}
+
+.investigator-tab.active {
+    color: var(--cyan);
+
+    background:
+        rgba(43, 220, 255, 0.04);
+}
+
+.investigator-tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+    bottom: 0;
+
+    height: 2px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px
+        rgba(43, 220, 255, 0.8);
+}
+
+
+/* =========================================================
+   10. TAB CONTENT
+========================================================= */
+
+.investigator-tab-content {
+    display: none;
+
+    padding: 23px;
+}
+
+.investigator-tab-content.active {
+    display: block;
+}
+
+.investigator-section-header {
+    margin-bottom: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 15px;
+}
+
+.investigator-section-header > div > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+}
+
+.investigator-section-header h2 {
+    margin: 0;
+
+    color: #dbeaf1;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 15px;
+
+    letter-spacing: 0.8px;
+}
+
+.investigator-select {
+    min-width: 150px;
+    height: 36px;
+
+    padding:
+        0
+        11px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.15);
+
+    border-radius: 3px;
+
+    outline: none;
+
+    background:
+        #06111b;
+
+    color: #8ba3b1;
+
+    font-size: 9px;
+}
+
+.investigator-select:focus {
+    border-color:
+        rgba(43, 220, 255, 0.55);
+}
+
+
+/* =========================================================
+   11. CREATURE GRID
+========================================================= */
+
+.investigator-creature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.investigator-creature-card {
+    position: relative;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 4px;
+
+    background:
+        rgba(4, 13, 21, 0.92);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.investigator-creature-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(43, 220, 255, 0.4);
+
+    box-shadow:
+        0 12px 28px
+        rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   12. CREATURE IMAGE
+========================================================= */
+
+.investigator-creature-image {
+    position: relative;
+
+    height: 170px;
+
+    background-position: center;
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+}
+
+.investigator-creature-image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 40%,
+            rgba(3, 7, 13, 0.9)
+        );
+}
+
+.profile-creature-status {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 10px;
+    left: 10px;
+
+    padding:
+        5px
+        7px;
+
+    border-radius: 2px;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 6px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+}
+
+.profile-creature-status.verified {
+    border:
+        1px solid
+        rgba(70, 230, 174, 0.35);
+
+    background:
+        rgba(5, 20, 18, 0.88);
+
+    color: #46e6ae;
+}
+
+.profile-creature-status.pending {
+    border:
+        1px solid
+        rgba(246, 202, 99, 0.4);
+
+    background:
+        rgba(25, 19, 6, 0.9);
+
+    color: #f6ca63;
+}
+
+.profile-creature-status.investigation {
+    border:
+        1px solid
+        rgba(155, 85, 255, 0.4);
+
+    background:
+        rgba(20, 9, 30, 0.9);
+
+    color: #b783ff;
+}
+
+.profile-threat {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 10px;
+    right: 10px;
+
+    min-width: 30px;
+    height: 30px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.35);
+
+    border-radius: 3px;
+
+    background:
+        rgba(3, 10, 16, 0.88);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.profile-threat.high {
+    border-color:
+        rgba(155, 85, 255, 0.45);
+
+    color: #bd8cff;
+
+    box-shadow:
+        0 0 12px
+        rgba(155, 85, 255, 0.12);
+}
+
+
+/* =========================================================
+   13. CREATURE CONTENT
+========================================================= */
+
+.investigator-creature-content {
+    padding:
+        13px
+        14px
+        15px;
+}
+
+.profile-creature-code {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+.investigator-creature-content h3 {
+    margin:
+        0
+        0
+        5px;
+
+    color: #e6f2f7;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 12px;
+}
+
+.investigator-creature-content p {
+    margin: 0;
+
+    color: #617c8d;
+
+    font-size: 9px;
+}
+
+.profile-creature-meta {
+    margin-top: 13px;
+
+    padding-top: 10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+
+    color: #587486;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   14. EMPTY
+========================================================= */
+
+.investigator-empty {
+    display: none;
+
+    padding:
+        55px
+        20px;
+
+    border:
+        1px dashed
+        rgba(43, 220, 255, 0.12);
+
+    border-radius: 4px;
+
+    background:
+        rgba(43, 220, 255, 0.015);
+
+    color: #5d7888;
+
+    text-align: center;
+
+    font-size: 10px;
+}
+
+#favoritesTab .investigator-empty {
+    display: block;
+}
+
+
+/* =========================================================
+   15. ACTIVITY TIMELINE
+========================================================= */
+
+.activity-timeline {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.activity-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+    bottom: 20px;
+    left: 18px;
+
+    width: 1px;
+
+    background:
+        rgba(43, 220, 255, 0.12);
+}
+
+.activity-item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        38px
+        minmax(0, 1fr);
+
+    gap: 14px;
+
+    padding:
+        15px
+        0;
+}
+
+.activity-dot {
+    position: relative;
+    z-index: 2;
+
+    width: 37px;
+    height: 37px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.25);
+
+    border-radius: 50%;
+
+    background:
+        #06111b;
+
+    color: var(--cyan);
+
+    font-size: 11px;
+}
+
+.activity-dot.verified {
+    border-color:
+        rgba(70, 230, 174, 0.35);
+
+    color: #46e6ae;
+}
+
+.activity-information {
+    padding:
+        4px
+        0;
+}
+
+.activity-information strong {
+    color: #c9dce5;
+
+    font-size: 10px;
+}
+
+.activity-information p {
+    margin:
+        5px
+        0;
+
+    color: #617c8d;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+.activity-information small {
+    color: #415d6d;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   16. ACHIEVEMENTS
+========================================================= */
+
+.achievement-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.achievement-card {
+    min-height: 95px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 4px;
+
+    background:
+        rgba(4, 13, 21, 0.75);
+}
+
+.achievement-card.unlocked {
+    border-color:
+        rgba(43, 220, 255, 0.2);
+}
+
+.achievement-card.locked {
+    opacity: 0.4;
+
+    filter: grayscale(0.8);
+}
+
+.achievement-icon {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.22);
+
+    border-radius: 4px;
+
+    background:
+        rgba(43, 220, 255, 0.04);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 17px;
+}
+
+.achievement-card h3 {
+    margin:
+        0
+        0
+        5px;
+
+    color: #cce0e9;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+}
+
+.achievement-card p {
+    margin: 0;
+
+    color: #587486;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   17. SIDEBAR
+========================================================= */
+
+.investigator-sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.investigator-panel {
+    position: relative;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 21, 34, 0.85),
+            rgba(4, 12, 20, 0.85)
+        );
+}
+
+.investigator-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 32px;
+    height: 1px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px
+        rgba(43, 220, 255, 0.6);
+}
+
+.investigator-panel-title {
+    margin-bottom: 16px;
+}
+
+.investigator-panel-title span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 6px;
+
+    letter-spacing: 1.3px;
+}
+
+.investigator-panel-title h3 {
+    margin: 0;
+
+    color: #cfe0e8;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   18. RANK
+========================================================= */
+
+.rank-display {
+    text-align: center;
+}
+
+.rank-symbol {
+    width: 70px;
+    height: 70px;
+
+    margin:
+        5px
+        auto
+        12px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.4);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(43, 220, 255, 0.12),
+            transparent 68%
+        );
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    box-shadow:
+        0 0 25px
+        rgba(43, 220, 255, 0.08);
+}
+
+.rank-display strong {
+    display: block;
+
+    color: #d3e5ed;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+}
+
+.rank-display p {
+    margin:
+        7px
+        0
+        14px;
+
+    color: #587486;
+
+    font-size: 8px;
+}
+
+.rank-progress {
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+}
+
+.rank-progress-bar {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(43, 220, 255, 0.4);
+}
+
+.rank-next {
+    margin-top: 8px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #4e6979;
+
+    font-size: 7px;
+}
+
+.rank-next strong {
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   19. SPECIALIZATION
+========================================================= */
+
+.specialization-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.specialization-list span {
+    padding:
+        6px
+        8px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.035);
+
+    color: #7c98a8;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   20. PROFILE STATUS
+========================================================= */
+
+.profile-status-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.profile-status-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: #668192;
+
+    font-size: 8px;
+}
+
+.profile-status-item strong {
+    color: #c9dce5;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+}
+
+.profile-status-bar {
+    height: 4px;
+
+    margin-bottom: 4px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+}
+
+.profile-status-bar > div {
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.profile-status-bar .verified {
+    background: #46e6ae;
+}
+
+.profile-status-bar .investigation {
+    background: #9b55ff;
+}
+
+.profile-status-bar .pending {
+    background: #f6ca63;
+}
+
+
+/* =========================================================
+   21. QUICK ACTION
+========================================================= */
+
+.investigator-quick-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.investigator-quick-actions a {
+    min-height: 38px;
+
+    padding:
+        0
+        11px;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.025);
+
+    color: #718d9d;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 0.5px;
+
+    text-decoration: none;
+
+    transition:
+        0.2s ease;
+}
+
+.investigator-quick-actions a:hover {
+    padding-left: 15px;
+
+    border-color:
+        rgba(43, 220, 255, 0.35);
+
+    background:
+        rgba(43, 220, 255, 0.07);
+
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   22. RESPONSIVE - 1300px
+========================================================= */
+
+@media (max-width: 1300px) {
+
+    .investigator-statistics {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .investigator-creature-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   23. RESPONSIVE - 1050px
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .investigator-profile {
+        grid-template-columns:
+            auto
+            1fr;
+    }
+
+    .investigator-actions {
+        grid-column:
+            1 / -1;
+
+        padding-left: 173px;
+    }
+
+    .investigator-content {
+        grid-template-columns: 1fr;
+    }
+
+    .investigator-sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   24. RESPONSIVE - 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .investigator-hero {
+        padding:
+            25px
+            20px
+            0;
+    }
+
+    .investigator-cover {
+        left: 20px;
+        right: 20px;
+
+        height: 190px;
+    }
+
+    .investigator-profile {
+        padding:
+            115px
+            15px
+            20px;
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+    }
+
+    .investigator-avatar {
+        width: 120px;
+        height: 120px;
+
+        margin:
+            0
+            auto;
+    }
+
+    .investigator-name-row {
+        justify-content: center;
+    }
+
+    .investigator-bio {
+        margin:
+            0
+            auto
+            13px;
+    }
+
+    .investigator-meta {
+        justify-content: center;
+    }
+
+    .investigator-actions {
+        grid-column: auto;
+
+        padding-left: 0;
+
+        justify-content: center;
+    }
+
+    .investigator-statistics {
+        padding:
+            0
+            20px;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .investigator-content {
+        padding:
+            0
+            20px
+            50px;
+    }
+
+    .investigator-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   25. RESPONSIVE - 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .investigator-main {
+        padding-top:
+            var(--header-height);
+    }
+
+    .investigator-name-row h1 {
+        font-size: 27px;
+    }
+
+    .investigator-actions {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .investigator-primary-button,
+    .investigator-secondary-button {
+        width: 100%;
+    }
+
+    .investigator-statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .investigator-stat {
+        min-height: 75px;
+    }
+
+    .investigator-section-header {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .investigator-select {
+        width: 100%;
+    }
+
+    .investigator-creature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .investigator-creature-image {
+        height: 210px;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .investigator-tab-content {
+        padding: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   26. RESPONSIVE - 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .investigator-hero {
+        padding:
+            15px
+            12px
+            0;
+    }
+
+    .investigator-cover {
+        left: 12px;
+        right: 12px;
+    }
+
+    .investigator-statistics {
+        padding:
+            0
+            12px;
+    }
+
+    .investigator-content {
+        padding:
+            0
+            12px
+            40px;
+    }
+
+    .investigator-tabs {
+        justify-content: flex-start;
+    }
+
+    .investigator-tab {
+        padding:
+            0
+            15px;
+    }
+
+}

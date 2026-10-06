@@ -1,102 +1,1535 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<title>Multiverse Creature Archive — Tạo hồ sơ</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Tạo hồ sơ sinh vật mới - Multiverse Creature Archive"
+    >
+
+    <title>Tạo hồ sơ | MCA</title>
+
+    <!-- CSS dùng chung -->
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <!-- CSS riêng -->
+    <link
+        rel="stylesheet"
+        href="css/tao-ho-so.css"
+    >
 </head>
-<body>
 
-<div class="field"></div>
 
-<header>
-  <div class="brand">
-    <div class="logo">MCA</div>
-    <div class="brand-sub">Multiverse Creature Archive</div>
-  </div>
+<body data-page="create">
 
-  <nav>
-    <a href="index.html">Trang chủ</a>
-    <a href="kho-du-lieu.html">Kho dữ liệu</a>
-    <a href="tao-ho-so.html" class="active">Tạo hồ sơ</a>
-    <a href="dieu-tra-vien.html">Điều tra viên</a>
-  </nav>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-  <div class="investigator">
-    <div class="avatar"></div>
-    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
-  </div>
-</header>
+    <div id="site-header"></div>
 
-<section class="form-section" style="padding-top:60px;">
-  <div class="section-head">
-    <h2>Gửi hồ sơ sinh vật</h2>
-    <span class="tag">Trạng thái: Chờ xác minh sau khi gửi</span>
-  </div>
 
-  <div class="form-shell">
-    <p class="lede">Điền đầy đủ thông tin bên dưới. Hồ sơ sẽ được một Điều tra viên cấp cao xác minh trước khi công khai.</p>
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-    <form id="creatureForm">
-      <div class="grid">
-        <div>
-          <label for="f-name">Tên sinh vật</label>
-          <input id="f-name" type="text" required>
-        </div>
-        <div>
-          <label for="f-race">Chủng tộc</label>
-          <input id="f-race" type="text" required>
-        </div>
-        <div>
-          <label for="f-source">Nguồn sức mạnh</label>
-          <select id="f-source">
-            <option>Sinh học</option>
-            <option>Ma thuật</option>
-            <option>Công nghệ</option>
-            <option>Tâm linh</option>
-            <option>Dị thường</option>
-          </select>
-        </div>
-        <div>
-          <label for="f-tier">Cấp đề xuất</label>
-          <select id="f-tier">
-            <option>F</option><option>E</option><option>D</option>
-            <option>C</option><option>B</option><option>A</option><option>S</option>
-          </select>
-        </div>
-      </div>
+    <main class="create-main">
 
-      <label for="f-desc">Mô tả</label>
-      <textarea id="f-desc" rows="5"></textarea>
 
-      <div class="field-danger">
-        <label class="danger" for="f-weak">Điểm yếu (Bắt buộc)</label>
-        <textarea id="f-weak" rows="3" required></textarea>
-      </div>
+        <!-- =================================================
+             1. HERO
+        ================================================== -->
 
-      <div class="field-warning">
-        <label class="warning" for="f-trigger">Điều kiện kích hoạt sức mạnh mạnh nhất</label>
-        <textarea id="f-trigger" rows="3"></textarea>
-      </div>
+        <section class="create-hero">
 
-      <button class="submit-btn" type="submit">Gửi báo cáo</button>
-    </form>
-  </div>
-</section>
+            <div class="create-hero-content">
 
-<footer>
-  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
-</footer>
+                <span class="create-label">
+                    MCA / NEW INVESTIGATION RECORD
+                </span>
 
-<div class="toast" id="toast">
-  <b>Hồ sơ đã được gửi.</b><br>Trạng thái: Chờ xác minh.
-</div>
+                <h1 class="create-title">
+                    TẠO HỒ SƠ
+                    <span>SINH VẬT</span>
+                </h1>
 
-<script src="Tao-ho-so.js"></script>
+                <p class="create-description">
+                    Gửi thông tin về một sinh vật mà bạn đã phát hiện
+                    trong đa vũ trụ. Hồ sơ sẽ được đưa vào hệ thống
+                    kiểm duyệt của MCA trước khi xuất hiện chính thức
+                    trong Kho dữ liệu.
+                </p>
+
+
+                <div class="create-notice">
+
+                    <span class="create-notice-icon">
+                        ⚠
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            QUY TRÌNH KIỂM DUYỆT MCA
+                        </strong>
+
+                        <p>
+                            Hồ sơ mới sẽ có trạng thái
+                            <b>Chờ xác minh</b>. MCA có thể xác minh,
+                            yêu cầu điều tra thêm hoặc đánh dấu thông tin
+                            mâu thuẫn tùy theo chất lượng dữ liệu.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             2. CONTENT
+        ================================================== -->
+
+        <section class="create-content">
+
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <form
+                class="create-form"
+                id="creatureForm"
+                autocomplete="off"
+            >
+
+
+                <!-- =============================================
+                     SECTION 01
+                     THÔNG TIN CƠ BẢN
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                BASIC IDENTIFICATION
+                            </span>
+
+                            <h2>
+                                THÔNG TIN CƠ BẢN
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            01
+                        </div>
+
+                    </div>
+
+
+                    <div class="create-form-grid">
+
+
+                        <!-- TÊN -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureName"
+                            >
+                                <span>
+                                    Tên sinh vật
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureName"
+                                maxlength="100"
+                                placeholder="Ví dụ: Astral Leviathan"
+                            >
+
+                        </div>
+
+
+                        <!-- LOÀI -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureSpecies"
+                            >
+                                <span>
+                                    Loài
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <select id="creatureSpecies">
+
+                                <option value="">
+                                    -- Chọn loài --
+                                </option>
+
+                                <option value="dragon">
+                                    Rồng
+                                </option>
+
+                                <option value="beast">
+                                    Thú
+                                </option>
+
+                                <option value="entity">
+                                    Thực thể
+                                </option>
+
+                                <option value="insect">
+                                    Côn trùng
+                                </option>
+
+                                <option value="mythical">
+                                    Sinh vật thần thoại
+                                </option>
+
+                                <option value="humanoid">
+                                    Dạng người
+                                </option>
+
+                                <option value="machine">
+                                    Sinh vật cơ giới
+                                </option>
+
+                                <option value="plant">
+                                    Thực vật
+                                </option>
+
+                                <option value="unknown">
+                                    Chưa xác định
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TUỔI -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureAge"
+                            >
+                                <span>
+                                    Tuổi
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureAge"
+                                maxlength="50"
+                                placeholder="Ví dụ: Khoảng 2.000 năm"
+                            >
+
+                        </div>
+
+
+                        <!-- KÍCH THƯỚC -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureSize"
+                            >
+                                <span>
+                                    Kích thước
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureSize"
+                                maxlength="100"
+                                placeholder="Ví dụ: Dài khoảng 120 mét"
+                            >
+
+                        </div>
+
+
+                        <!-- NGUYÊN TỐ -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureElement"
+                            >
+                                <span>
+                                    Thuộc tính / Nguyên tố
+                                </span>
+                            </label>
+
+                            <select id="creatureElement">
+
+                                <option value="">
+                                    -- Chọn thuộc tính --
+                                </option>
+
+                                <option value="fire">
+                                    Lửa
+                                </option>
+
+                                <option value="ice">
+                                    Băng
+                                </option>
+
+                                <option value="water">
+                                    Nước
+                                </option>
+
+                                <option value="earth">
+                                    Đất
+                                </option>
+
+                                <option value="wind">
+                                    Gió
+                                </option>
+
+                                <option value="light">
+                                    Ánh sáng
+                                </option>
+
+                                <option value="dark">
+                                    Bóng tối
+                                </option>
+
+                                <option value="void">
+                                    Hư không
+                                </option>
+
+                                <option value="space">
+                                    Không gian
+                                </option>
+
+                                <option value="crystal">
+                                    Tinh thể
+                                </option>
+
+                                <option value="electric">
+                                    Điện
+                                </option>
+
+                                <option value="multi">
+                                    Đa thuộc tính
+                                </option>
+
+                                <option value="unknown">
+                                    Chưa xác định
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- ĐỘ HIẾM -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureRarity"
+                            >
+                                <span>
+                                    Độ hiếm
+                                </span>
+                            </label>
+
+                            <select id="creatureRarity">
+
+                                <option value="">
+                                    -- Chọn độ hiếm --
+                                </option>
+
+                                <option value="common">
+                                    Phổ biến
+                                </option>
+
+                                <option value="uncommon">
+                                    Không phổ biến
+                                </option>
+
+                                <option value="rare">
+                                    Hiếm
+                                </option>
+
+                                <option value="epic">
+                                    Cực hiếm
+                                </option>
+
+                                <option value="legendary">
+                                    Huyền thoại
+                                </option>
+
+                                <option value="unique">
+                                    Độc nhất
+                                </option>
+
+                                <option value="unknown">
+                                    Chưa xác định
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 02
+                     NGUỒN GỐC
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                ORIGIN DATABASE
+                            </span>
+
+                            <h2>
+                                NGUỒN GỐC
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            02
+                        </div>
+
+                    </div>
+
+
+                    <div class="create-form-grid">
+
+
+                        <!-- VŨ TRỤ -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureUniverse"
+                            >
+                                <span>
+                                    Vũ trụ
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureUniverse"
+                                maxlength="100"
+                                placeholder="Ví dụ: U07"
+                            >
+
+                            <span class="form-help">
+                                Mã hoặc tên vũ trụ nơi sinh vật được phát hiện.
+                            </span>
+
+                        </div>
+
+
+                        <!-- THIÊN HÀ -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureGalaxy"
+                            >
+                                <span>
+                                    Thiên hà
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureGalaxy"
+                                maxlength="100"
+                                placeholder="Ví dụ: G142 / Andromeda"
+                            >
+
+                        </div>
+
+
+                        <!-- HÀNH TINH -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creaturePlanet"
+                            >
+                                <span>
+                                    Hành tinh / Nguồn gốc
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creaturePlanet"
+                                maxlength="100"
+                                placeholder="Ví dụ: P003 / Aetherion"
+                            >
+
+                        </div>
+
+
+                        <!-- KHU VỰC -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureWorld"
+                            >
+                                <span>
+                                    Khu vực / Thế giới
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creatureWorld"
+                                maxlength="150"
+                                placeholder="Ví dụ: Vực Sao Bắc"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-help" style="margin-top: 15px;">
+
+                        Mã định danh đa vũ trụ có thể được MCA tạo theo cấu trúc:
+                        <strong>
+                            [Vũ trụ]-[Thiên hà]-[Hành tinh]-[Loài]-[Cá thể]
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 03
+                     PHÂN LOẠI NGUY HIỂM
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                THREAT ASSESSMENT
+                            </span>
+
+                            <h2>
+                                PHÂN LOẠI ĐE DỌA
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            03
+                        </div>
+
+                    </div>
+
+
+                    <div class="create-form-grid">
+
+
+                        <!-- THREAT -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creatureThreat"
+                            >
+                                <span>
+                                    Cấp đe dọa đề xuất
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <select id="creatureThreat">
+
+                                <option value="">
+                                    -- Chọn cấp --
+                                </option>
+
+                                <option value="F">
+                                    F - Gần như vô hại
+                                </option>
+
+                                <option value="E">
+                                    E - Đe dọa rất thấp
+                                </option>
+
+                                <option value="D">
+                                    D - Đe dọa thấp
+                                </option>
+
+                                <option value="C">
+                                    C - Đe dọa trung bình
+                                </option>
+
+                                <option value="B">
+                                    B - Nguy hiểm
+                                </option>
+
+                                <option value="A">
+                                    A - Nguy hiểm cao
+                                </option>
+
+                                <option value="S">
+                                    S - Cực kỳ nguy hiểm
+                                </option>
+
+                                <option value="SS">
+                                    SS - Thảm họa quy mô lớn
+                                </option>
+
+                                <option value="X">
+                                    X - Dị thường chưa thể đánh giá
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- POWER SOURCE -->
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="creaturePowerSource"
+                            >
+                                <span>
+                                    Nguồn sức mạnh
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="creaturePowerSource"
+                                maxlength="150"
+                                placeholder="Ví dụ: Năng lượng hư không"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="threat-information">
+
+                        <strong>
+                            Lưu ý:
+                        </strong>
+
+                        Cấp đe dọa bạn chọn chỉ là
+                        <strong>đề xuất ban đầu</strong>.
+                        Sau quá trình kiểm duyệt, MCA có thể thay đổi
+                        cấp này dựa trên dữ liệu và bằng chứng trong hồ sơ.
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 04
+                     HÌNH ẢNH
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                VISUAL RECORD
+                            </span>
+
+                            <h2>
+                                HÌNH ẢNH SINH VẬT
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            04
+                        </div>
+
+                    </div>
+
+
+                    <div class="image-upload-area">
+
+                        <input
+                            type="file"
+                            id="creatureImage"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+
+                        <img
+                            id="creatureImagePreview"
+                            alt="Xem trước sinh vật"
+                        >
+
+
+                        <div id="imagePlaceholder">
+
+                            <div class="image-placeholder-icon">
+                                ◇
+                            </div>
+
+                            <strong>
+                                TẢI HÌNH ẢNH
+                            </strong>
+
+                            <span>
+                                Nhấn vào khu vực này để chọn ảnh
+                                <br>
+                                JPG, PNG hoặc WEBP • Tối đa 5 MB
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 05
+                     MÔ TẢ
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                OBSERVATION DATA
+                            </span>
+
+                            <h2>
+                                MÔ TẢ & NGOẠI HÌNH
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            05
+                        </div>
+
+                    </div>
+
+
+                    <div class="create-form-grid">
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                class="form-label"
+                                for="creatureDescription"
+                            >
+                                <span>
+                                    Mô tả tổng quan
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="creatureDescription"
+                                rows="6"
+                                maxlength="3000"
+                                placeholder="Mô tả hành vi, đặc điểm, môi trường sống, tính cách và những thông tin quan trọng về sinh vật..."
+                            ></textarea>
+
+                            <span class="form-help">
+                                Nên viết ít nhất 30 ký tự để MCA có đủ dữ liệu phân tích.
+                            </span>
+
+                        </div>
+
+
+                        <!-- APPEARANCE -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                class="form-label"
+                                for="creatureAppearance"
+                            >
+                                <span>
+                                    Đặc điểm ngoại hình
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="creatureAppearance"
+                                rows="5"
+                                maxlength="2000"
+                                placeholder="Mô tả hình dạng, màu sắc, cấu tạo cơ thể, dấu hiệu nhận biết..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 06
+                     KỸ NĂNG
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header ability-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                ABILITY ANALYSIS
+                            </span>
+
+                            <h2>
+                                KHẢ NĂNG & KỸ NĂNG
+                            </h2>
+
+                        </div>
+
+
+                        <div id="abilityCounter">
+                            1 / 5
+                        </div>
+
+                    </div>
+
+
+                    <div id="abilityList">
+
+
+                        <!-- KỸ NĂNG ĐẦU TIÊN -->
+
+                        <div class="ability-item">
+
+                            <div class="ability-number">
+                                1
+                            </div>
+
+
+                            <div class="ability-fields">
+
+                                <input
+                                    type="text"
+                                    class="ability-name"
+                                    maxlength="100"
+                                    placeholder="Tên kỹ năng"
+                                >
+
+                                <textarea
+                                    class="ability-description"
+                                    maxlength="1000"
+                                    rows="3"
+                                    placeholder="Mô tả cách hoạt động, phạm vi và tác dụng của kỹ năng..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="remove-ability"
+                                title="Xóa kỹ năng"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="addAbilityButton"
+                    >
+                        + THÊM KỸ NĂNG
+                    </button>
+
+
+                    <div class="form-help" style="margin-top: 10px;">
+
+                        Mỗi hồ sơ có thể khai báo tối đa
+                        <strong>5 kỹ năng</strong>.
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 07
+                     ĐIỂM YẾU & GIỚI HẠN
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                LIMITATION ANALYSIS
+                            </span>
+
+                            <h2>
+                                ĐIỂM YẾU & GIỚI HẠN
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            07
+                        </div>
+
+                    </div>
+
+
+                    <div class="weakness-warning">
+
+                        <strong>
+                            Điểm yếu là thông tin bắt buộc.
+                        </strong>
+
+                        Một sinh vật mạnh vẫn cần có điều kiện,
+                        giới hạn hoặc yếu tố có thể ảnh hưởng đến
+                        khả năng của nó.
+
+                    </div>
+
+
+                    <div class="create-form-grid">
+
+
+                        <!-- WEAKNESS -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                class="form-label"
+                                for="creatureWeaknesses"
+                            >
+                                <span>
+                                    Điểm yếu
+                                    <span class="form-required">*</span>
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="creatureWeaknesses"
+                                rows="5"
+                                maxlength="2000"
+                                placeholder="Sinh vật yếu trước điều gì? Có thể bị khắc chế bằng cách nào?"
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- LIMITATION -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                class="form-label"
+                                for="creatureLimitations"
+                            >
+                                <span>
+                                    Giới hạn sức mạnh
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="creatureLimitations"
+                                rows="5"
+                                maxlength="2000"
+                                placeholder="Ví dụ: chỉ sử dụng kỹ năng trong 30 giây, cần thời gian hồi phục..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- STRONGEST CONDITION -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                class="form-label"
+                                for="strongestAbilityCondition"
+                            >
+                                <span>
+                                    Điều kiện kích hoạt khả năng mạnh nhất
+                                </span>
+
+                                <span class="form-optional">
+                                    Không bắt buộc
+                                </span>
+                            </label>
+
+                            <textarea
+                                id="strongestAbilityCondition"
+                                rows="4"
+                                maxlength="1500"
+                                placeholder="Mô tả điều kiện cần thiết để sinh vật sử dụng khả năng mạnh nhất..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SECTION 08
+                     CONFIRMATION
+                ============================================== -->
+
+                <section class="create-section">
+
+                    <div class="create-section-header">
+
+                        <div class="create-section-title">
+
+                            <span>
+                                FINAL REVIEW
+                            </span>
+
+                            <h2>
+                                XÁC NHẬN HỒ SƠ
+                            </h2>
+
+                        </div>
+
+                        <div class="create-section-number">
+                            08
+                        </div>
+
+                    </div>
+
+
+                    <div class="create-notice">
+
+                        <span class="create-notice-icon">
+                            ◈
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                TRƯỚC KHI GỬI
+                            </strong>
+
+                            <p>
+                                Hãy kiểm tra lại tên, nguồn gốc,
+                                cấp đe dọa, khả năng và điểm yếu.
+                                Sau khi gửi, hồ sơ sẽ chuyển sang
+                                trạng thái Chờ xác minh.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     FORM ACTIONS
+                ============================================== -->
+
+                <div class="create-form-actions">
+
+
+                    <button
+                        type="button"
+                        class="create-reset-button"
+                        id="resetCreatureButton"
+                    >
+                        XÓA DỮ LIỆU
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="create-draft-button"
+                        id="saveDraftButton"
+                    >
+                        LƯU BẢN NHÁP
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="create-submit-button"
+                    >
+                        GỬI HỒ SƠ ĐIỀU TRA
+                    </button>
+
+
+                </div>
+
+            </form>
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+
+            <aside class="create-sidebar">
+
+
+                <!-- =============================================
+                     QUY TRÌNH
+                ============================================== -->
+
+                <section class="create-sidebar-panel">
+
+                    <div class="create-sidebar-title">
+
+                        <span>
+                            MCA PROCEDURE
+                        </span>
+
+                        <h3>
+                            QUY TRÌNH HỒ SƠ
+                        </h3>
+
+                    </div>
+
+
+                    <div class="submission-flow">
+
+
+                        <div class="submission-flow-item">
+
+                            <div class="submission-flow-number">
+                                1
+                            </div>
+
+                            <strong>
+                                Tạo hồ sơ
+                            </strong>
+
+                            <p>
+                                Điều tra viên nhập dữ liệu
+                                về sinh vật đã phát hiện.
+                            </p>
+
+                        </div>
+
+
+                        <div class="submission-flow-item">
+
+                            <div class="submission-flow-number">
+                                2
+                            </div>
+
+                            <strong>
+                                Chờ xác minh
+                            </strong>
+
+                            <p>
+                                Hồ sơ được đưa vào hàng chờ
+                                kiểm duyệt của MCA.
+                            </p>
+
+                        </div>
+
+
+                        <div class="submission-flow-item">
+
+                            <div class="submission-flow-number">
+                                3
+                            </div>
+
+                            <strong>
+                                Kiểm duyệt
+                            </strong>
+
+                            <p>
+                                Dữ liệu, nguồn gốc và cấp
+                                đe dọa được kiểm tra.
+                            </p>
+
+                        </div>
+
+
+                        <div class="submission-flow-item">
+
+                            <div class="submission-flow-number">
+                                4
+                            </div>
+
+                            <strong>
+                                Công bố
+                            </strong>
+
+                            <p>
+                                Hồ sơ đạt yêu cầu được đưa
+                                vào Kho dữ liệu MCA.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     TRẠNG THÁI
+                ============================================== -->
+
+                <section class="create-sidebar-panel">
+
+                    <div class="create-sidebar-title">
+
+                        <span>
+                            RECORD STATUS
+                        </span>
+
+                        <h3>
+                            TRẠNG THÁI HỒ SƠ
+                        </h3>
+
+                    </div>
+
+
+                    <div class="create-status-list">
+
+
+                        <div class="create-status-item pending">
+
+                            <span>
+                                Chờ xác minh
+                            </span>
+
+                            <strong>
+                                PENDING
+                            </strong>
+
+                        </div>
+
+
+                        <div class="create-status-item verified">
+
+                            <span>
+                                Đã xác minh
+                            </span>
+
+                            <strong>
+                                VERIFIED
+                            </strong>
+
+                        </div>
+
+
+                        <div class="create-status-item investigation">
+
+                            <span>
+                                Cần điều tra thêm
+                            </span>
+
+                            <strong>
+                                INVESTIGATION
+                            </strong>
+
+                        </div>
+
+
+                        <div class="create-status-item conflicting">
+
+                            <span>
+                                Thông tin mâu thuẫn
+                            </span>
+
+                            <strong>
+                                CONFLICT
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     THREAT LEVEL
+                ============================================== -->
+
+                <section class="create-sidebar-panel">
+
+                    <div class="create-sidebar-title">
+
+                        <span>
+                            THREAT INDEX
+                        </span>
+
+                        <h3>
+                            CẤP ĐE DỌA
+                        </h3>
+
+                    </div>
+
+
+                    <div class="create-threat-grid">
+
+                        <div class="create-threat-item">
+                            <strong>F</strong>
+                            Thấp nhất
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>E</strong>
+                            Rất thấp
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>D</strong>
+                            Thấp
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>C</strong>
+                            Trung bình
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>B</strong>
+                            Nguy hiểm
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>A</strong>
+                            Nguy hiểm cao
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>S</strong>
+                            Cực cao
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>SS</strong>
+                            Thảm họa
+                        </div>
+
+                        <div class="create-threat-item">
+                            <strong>X</strong>
+                            Dị thường
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     QUY TẮC
+                ============================================== -->
+
+                <section class="create-sidebar-panel">
+
+                    <div class="create-sidebar-title">
+
+                        <span>
+                            DATABASE RULES
+                        </span>
+
+                        <h3>
+                            QUY TẮC GỬI HỒ SƠ
+                        </h3>
+
+                    </div>
+
+
+                    <ul class="create-rule-list">
+
+                        <li>
+                            Không cố tình gửi thông tin sai lệch.
+                        </li>
+
+                        <li>
+                            Mỗi sinh vật phải có ít nhất một
+                            điểm yếu hoặc giới hạn hợp lý.
+                        </li>
+
+                        <li>
+                            Không tạo nhiều hồ sơ trùng lặp
+                            cho cùng một sinh vật.
+                        </li>
+
+                        <li>
+                            Cấp đe dọa chỉ là đề xuất và có
+                            thể được MCA thay đổi.
+                        </li>
+
+                        <li>
+                            Hồ sơ thiếu thông tin nhưng vẫn có
+                            giá trị có thể được chuyển sang
+                            Cần điều tra thêm.
+                        </li>
+
+                    </ul>
+
+                </section>
+
+
+                <!-- =============================================
+                     AUTOSAVE
+                ============================================== -->
+
+                <section class="create-sidebar-panel">
+
+                    <div class="create-sidebar-title">
+
+                        <span>
+                            LOCAL SYSTEM
+                        </span>
+
+                        <h3>
+                            BẢN NHÁP
+                        </h3>
+
+                    </div>
+
+
+                    <div class="autosave-status">
+
+                        <span class="autosave-dot"></span>
+
+                        Tự động lưu dữ liệu đang nhập
+                        trên trình duyệt.
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div id="site-footer"></div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/tao-ho-so.js"></script>
 
 </body>
+
 </html>

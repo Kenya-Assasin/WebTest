@@ -1635,3 +1635,210 @@ textarea:focus-visible {
     }
 
 }
+
+/* =========================================================
+   MCA ACCOUNT
+========================================================= */
+
+.header-user-area {
+    display: flex;
+    align-items: center;
+}
+
+
+.header-guest {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.header-login-button,
+.header-register-button,
+.header-logout-button {
+    padding: 9px 13px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.3);
+
+    background:
+        rgba(43, 220, 255, 0.03);
+
+    color: #9eb7c5;
+
+    text-decoration: none;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.header-register-button {
+    color: #001018;
+
+    background: #2bdcff;
+
+    border-color: #2bdcff;
+}
+
+
+.header-login-button:hover,
+.header-logout-button:hover {
+    color: #2bdcff;
+
+    border-color: #2bdcff;
+
+    background:
+        rgba(43, 220, 255, 0.08);
+}
+
+
+.header-account {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.header-account[hidden],
+.header-guest[hidden] {
+    display: none !important;
+}
+
+
+.header-user-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.header-avatar {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.35);
+
+    border-radius: 50%;
+
+    color: #2bdcff;
+
+    background:
+        rgba(43, 220, 255, 0.05);
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.header-user-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.header-user-info strong {
+    color: #dff7ff;
+
+    font-size: 11px;
+}
+
+
+.header-user-info span {
+    color: #647e8d;
+
+    font-size: 8px;
+}
+
+
+.header-user-stats {
+    display: flex;
+
+    gap: 10px;
+
+    color: #526d7c;
+
+    font-size: 7px;
+}
+
+
+.header-user-stats span {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.header-user-stats strong {
+    color: #2bdcff;
+
+    font-size: 9px;
+}
+
+
+.header-logout-button {
+    color: #ff7788;
+
+    border-color:
+        rgba(255, 119, 136, 0.2);
+}
+
+
+.header-logout-button:hover {
+    color: #ff7788;
+
+    border-color: #ff7788;
+
+    background:
+        rgba(255, 119, 136, 0.06);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 1000px) {
+
+    .header-user-stats {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .header-user-info {
+        display: none;
+    }
+
+}

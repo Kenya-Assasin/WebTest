@@ -1,0 +1,1767 @@
+/* =========================================================
+   MCA - TAO-HO-SO.CSS
+   Multiverse Creature Archive
+   Trang tạo hồ sơ sinh vật
+========================================================= */
+
+
+/* =========================================================
+   1. PAGE
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(43, 220, 255, 0.06),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 40%,
+            rgba(155, 85, 255, 0.05),
+            transparent 30%
+        ),
+        var(--bg-main);
+
+    color: var(--text-main);
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(43, 220, 255, 0.015) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(43, 220, 255, 0.015) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+}
+
+.create-main {
+    min-height: 100vh;
+
+    padding-top: var(--header-height);
+}
+
+
+/* =========================================================
+   2. HERO
+========================================================= */
+
+.create-hero {
+    position: relative;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding:
+        65px
+        45px
+        45px;
+
+    overflow: hidden;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 7, 13, 0.97),
+            rgba(3, 7, 13, 0.76),
+            rgba(3, 7, 13, 0.9)
+        ),
+        url("../assets/mca-background.png")
+        center / cover
+        no-repeat;
+}
+
+.create-hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(43, 220, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(43, 220, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+
+    pointer-events: none;
+}
+
+.create-hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 850px;
+}
+
+.create-label {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    padding:
+        6px
+        9px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.25);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.04);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.create-title {
+    margin:
+        0
+        0
+        15px;
+
+    color: #ffffff;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            54px
+        );
+
+    font-weight: 800;
+
+    line-height: 1.12;
+
+    letter-spacing: 1px;
+}
+
+.create-title span {
+    color: var(--cyan);
+
+    text-shadow:
+        0 0 25px
+        rgba(43, 220, 255, 0.18);
+}
+
+.create-description {
+    max-width: 720px;
+
+    margin: 0;
+
+    color: #7993a3;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   3. HERO WARNING / INFORMATION
+========================================================= */
+
+.create-notice {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 850px;
+
+    margin-top: 25px;
+
+    padding:
+        14px
+        16px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border:
+        1px solid
+        rgba(246, 202, 99, 0.18);
+
+    border-left:
+        2px solid
+        #f6ca63;
+
+    border-radius: 3px;
+
+    background:
+        rgba(246, 202, 99, 0.035);
+}
+
+.create-notice-icon {
+    color: #f6ca63;
+
+    font-size: 16px;
+}
+
+.create-notice strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #e7d9a8;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 0.7px;
+}
+
+.create-notice p {
+    margin: 0;
+
+    color: #887e62;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   4. FORM AREA
+========================================================= */
+
+.create-content {
+    max-width: 1510px;
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        35px
+        80px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        310px;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+.create-form {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   5. FORM SECTION
+========================================================= */
+
+.create-section {
+    position: relative;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 21, 34, 0.82),
+            rgba(4, 12, 20, 0.88)
+        );
+}
+
+.create-section::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 45px;
+    height: 1px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 10px
+        rgba(43, 220, 255, 0.6);
+}
+
+.create-section-header {
+    margin-bottom: 22px;
+
+    padding-bottom: 14px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.create-section-title span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+}
+
+.create-section-title h2 {
+    margin: 0;
+
+    color: #dceaf0;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 14px;
+
+    letter-spacing: 0.7px;
+}
+
+.create-section-number {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.2);
+
+    border-radius: 50%;
+
+    background:
+        rgba(43, 220, 255, 0.035);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   6. FORM GRID
+========================================================= */
+
+.create-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        17px
+        15px;
+}
+
+.create-form-grid.three-columns {
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+}
+
+.form-group {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group.full-width {
+    grid-column:
+        1 / -1;
+}
+
+
+/* =========================================================
+   7. LABEL
+========================================================= */
+
+.form-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #7892a1;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    text-transform: uppercase;
+}
+
+.form-required {
+    color: #ff6b7a;
+}
+
+.form-optional {
+    color: #405c6c;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 7px;
+
+    text-transform: none;
+}
+
+
+/* =========================================================
+   8. INPUT / SELECT / TEXTAREA
+========================================================= */
+
+.create-form input,
+.create-form select,
+.create-form textarea {
+    width: 100%;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    border-radius: 3px;
+
+    outline: none;
+
+    background:
+        rgba(2, 10, 17, 0.78);
+
+    color: #c9dce5;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.create-form input,
+.create-form select {
+    height: 43px;
+
+    padding:
+        0
+        12px;
+}
+
+.create-form textarea {
+    min-height: 115px;
+
+    padding: 12px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+.create-form input::placeholder,
+.create-form textarea::placeholder {
+    color: #365261;
+}
+
+.create-form input:hover,
+.create-form select:hover,
+.create-form textarea:hover {
+    border-color:
+        rgba(43, 220, 255, 0.23);
+}
+
+.create-form input:focus,
+.create-form select:focus,
+.create-form textarea:focus {
+    border-color:
+        rgba(43, 220, 255, 0.55);
+
+    background:
+        rgba(3, 14, 23, 0.95);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(43, 220, 255, 0.035);
+}
+
+.create-form select {
+    cursor: pointer;
+}
+
+.create-form select option {
+    background: #06111b;
+
+    color: #c4d8e1;
+}
+
+
+/* =========================================================
+   9. INPUT ERROR
+   JS sử dụng .input-error
+========================================================= */
+
+.create-form .input-error {
+    border-color:
+        rgba(255, 107, 122, 0.8) !important;
+
+    background:
+        rgba(255, 107, 122, 0.035);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(255, 107, 122, 0.04);
+}
+
+
+/* =========================================================
+   10. FIELD HELP
+========================================================= */
+
+.form-help {
+    color: #435f6f;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+.form-help strong {
+    color: #678494;
+}
+
+
+/* =========================================================
+   11. THREAT LEVEL
+========================================================= */
+
+.threat-information {
+    margin-top: 10px;
+
+    padding:
+        12px
+        14px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.02);
+
+    color: #567181;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+}
+
+.threat-information strong {
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   12. IMAGE UPLOAD
+========================================================= */
+
+.image-upload-area {
+    position: relative;
+
+    min-height: 300px;
+
+    overflow: hidden;
+
+    border:
+        1px dashed
+        rgba(43, 220, 255, 0.22);
+
+    border-radius: 5px;
+
+    background:
+        rgba(2, 10, 17, 0.6);
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.image-upload-area:hover {
+    border-color:
+        rgba(43, 220, 255, 0.5);
+
+    background:
+        rgba(43, 220, 255, 0.025);
+}
+
+.image-upload-area input[type="file"] {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+#imagePlaceholder {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+.image-placeholder-icon {
+    width: 65px;
+    height: 65px;
+
+    margin-bottom: 15px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.2);
+
+    border-radius: 50%;
+
+    background:
+        rgba(43, 220, 255, 0.035);
+
+    color: var(--cyan);
+
+    font-size: 22px;
+}
+
+#imagePlaceholder strong {
+    margin-bottom: 7px;
+
+    color: #a9c0cb;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+}
+
+#imagePlaceholder span {
+    color: #496676;
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+#creatureImagePreview {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   13. ABILITY HEADER
+========================================================= */
+
+.ability-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+#abilityCounter {
+    padding:
+        5px
+        8px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.03);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   14. ABILITY LIST
+========================================================= */
+
+#abilityList {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.ability-item {
+    position: relative;
+
+    padding: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+        35px
+        minmax(0, 1fr)
+        32px;
+
+    gap: 12px;
+
+    align-items: start;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.09);
+
+    border-radius: 4px;
+
+    background:
+        rgba(2, 10, 17, 0.55);
+}
+
+.ability-number {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.2);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.035);
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.ability-fields {
+    display: grid;
+
+    grid-template-columns:
+        minmax(160px, 0.35fr)
+        minmax(0, 1fr);
+
+    gap: 10px;
+}
+
+.ability-fields textarea {
+    min-height: 70px;
+}
+
+.remove-ability {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(255, 107, 122, 0.18);
+
+    border-radius: 3px;
+
+    background:
+        rgba(255, 107, 122, 0.025);
+
+    color: #9c5963;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        0.2s ease;
+}
+
+.remove-ability:hover {
+    border-color:
+        rgba(255, 107, 122, 0.55);
+
+    background:
+        rgba(255, 107, 122, 0.08);
+
+    color: #ff6b7a;
+}
+
+
+/* =========================================================
+   15. ADD ABILITY
+========================================================= */
+
+#addAbilityButton {
+    min-height: 39px;
+
+    margin-top: 11px;
+
+    padding:
+        0
+        15px;
+
+    border:
+        1px dashed
+        rgba(43, 220, 255, 0.22);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.025);
+
+    color: #6c8998;
+
+    cursor: pointer;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 0.6px;
+
+    transition:
+        0.2s ease;
+}
+
+#addAbilityButton:hover {
+    border-color:
+        rgba(43, 220, 255, 0.5);
+
+    background:
+        rgba(43, 220, 255, 0.06);
+
+    color: var(--cyan);
+}
+
+#addAbilityButton:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   16. FORM ACTIONS
+========================================================= */
+
+.create-form-actions {
+    padding: 18px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 5px;
+
+    background:
+        rgba(5, 15, 24, 0.82);
+}
+
+.create-submit-button,
+.create-draft-button,
+.create-reset-button {
+    min-height: 42px;
+
+    padding:
+        0
+        18px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    transition:
+        0.2s ease;
+}
+
+.create-submit-button {
+    border:
+        1px solid
+        var(--cyan);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(43, 220, 255, 0.17),
+            rgba(22, 140, 255, 0.08)
+        );
+
+    color: var(--cyan);
+}
+
+.create-submit-button:hover {
+    transform:
+        translateY(-1px);
+
+    background:
+        rgba(43, 220, 255, 0.2);
+
+    box-shadow:
+        0 0 20px
+        rgba(43, 220, 255, 0.12);
+}
+
+.create-draft-button {
+    border:
+        1px solid
+        rgba(155, 85, 255, 0.3);
+
+    background:
+        rgba(155, 85, 255, 0.045);
+
+    color: #b98bff;
+}
+
+.create-draft-button:hover {
+    border-color:
+        rgba(155, 85, 255, 0.6);
+
+    background:
+        rgba(155, 85, 255, 0.1);
+}
+
+.create-reset-button {
+    margin-right: auto;
+
+    border:
+        1px solid
+        rgba(255, 107, 122, 0.18);
+
+    background:
+        rgba(255, 107, 122, 0.025);
+
+    color: #a7656d;
+}
+
+.create-reset-button:hover {
+    border-color:
+        rgba(255, 107, 122, 0.45);
+
+    color: #ff7d8a;
+}
+
+
+/* =========================================================
+   17. SIDEBAR
+========================================================= */
+
+.create-sidebar {
+    position: sticky;
+
+    top:
+        calc(
+            var(--header-height) + 20px
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.create-sidebar-panel {
+    position: relative;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 21, 34, 0.85),
+            rgba(4, 12, 20, 0.9)
+        );
+}
+
+.create-sidebar-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 35px;
+    height: 1px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px
+        rgba(43, 220, 255, 0.5);
+}
+
+.create-sidebar-title {
+    margin-bottom: 14px;
+}
+
+.create-sidebar-title span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 6px;
+
+    letter-spacing: 1.4px;
+}
+
+.create-sidebar-title h3 {
+    margin: 0;
+
+    color: #c9dce5;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   18. STATUS FLOW
+========================================================= */
+
+.submission-flow {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+}
+
+.submission-flow-item {
+    position: relative;
+
+    min-height: 65px;
+
+    padding-left: 43px;
+}
+
+.submission-flow-item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 30px;
+    bottom: 0;
+    left: 15px;
+
+    width: 1px;
+
+    background:
+        rgba(43, 220, 255, 0.12);
+}
+
+.submission-flow-number {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 31px;
+    height: 31px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.2);
+
+    border-radius: 50%;
+
+    background: #06111b;
+
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+
+    z-index: 2;
+}
+
+.submission-flow-item strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #9fb6c1;
+
+    font-size: 9px;
+}
+
+.submission-flow-item p {
+    margin: 0;
+
+    color: #4e6978;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   19. STATUS LEGEND
+========================================================= */
+
+.create-status-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.create-status-item {
+    padding:
+        9px
+        10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.045);
+
+    border-radius: 3px;
+
+    background:
+        rgba(255, 255, 255, 0.012);
+
+    color: #688494;
+
+    font-size: 8px;
+}
+
+.create-status-item strong {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 7px;
+}
+
+.create-status-item.verified strong {
+    color: #46e6ae;
+}
+
+.create-status-item.pending strong {
+    color: #f6ca63;
+}
+
+.create-status-item.investigation strong {
+    color: #b783ff;
+}
+
+.create-status-item.conflicting strong {
+    color: #ff7d8a;
+}
+
+
+/* =========================================================
+   20. RULE LIST
+========================================================= */
+
+.create-rule-list {
+    margin: 0;
+
+    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    list-style: none;
+}
+
+.create-rule-list li {
+    position: relative;
+
+    padding-left: 17px;
+
+    color: #587483;
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+.create-rule-list li::before {
+    content: "◇";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    color: var(--cyan);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   21. THREAT MINI GRID
+========================================================= */
+
+.create-threat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 5px;
+}
+
+.create-threat-item {
+    min-height: 37px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    border-radius: 3px;
+
+    background:
+        rgba(43, 220, 255, 0.018);
+
+    color: #587382;
+
+    font-size: 7px;
+}
+
+.create-threat-item strong {
+    color: var(--cyan);
+
+    font-family: "Orbitron", sans-serif;
+}
+
+
+/* =========================================================
+   22. FORM PROGRESS
+========================================================= */
+
+.create-progress {
+    margin-bottom: 10px;
+}
+
+.create-progress-header {
+    margin-bottom: 7px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #587382;
+
+    font-size: 7px;
+}
+
+.create-progress-header strong {
+    color: var(--cyan);
+}
+
+.create-progress-track {
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+}
+
+.create-progress-bar {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(43, 220, 255, 0.3);
+
+    transition:
+        width 0.25s ease;
+}
+
+
+/* =========================================================
+   23. CHARACTER COUNTER
+========================================================= */
+
+.character-counter {
+    margin-top: -2px;
+
+    text-align: right;
+
+    color: #405d6d;
+
+    font-size: 7px;
+}
+
+.character-counter.warning {
+    color: #f6ca63;
+}
+
+.character-counter.limit {
+    color: #ff6b7a;
+}
+
+
+/* =========================================================
+   24. SPECIAL SECTION - WEAKNESS
+========================================================= */
+
+.weakness-warning {
+    margin-bottom: 14px;
+
+    padding:
+        11px
+        13px;
+
+    border:
+        1px solid
+        rgba(255, 107, 122, 0.12);
+
+    border-left:
+        2px solid
+        rgba(255, 107, 122, 0.7);
+
+    border-radius: 3px;
+
+    background:
+        rgba(255, 107, 122, 0.025);
+
+    color: #8c6269;
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+.weakness-warning strong {
+    color: #e98691;
+}
+
+
+/* =========================================================
+   25. AUTOSAVE STATUS
+========================================================= */
+
+.autosave-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #486574;
+
+    font-size: 7px;
+}
+
+.autosave-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #46e6ae;
+
+    box-shadow:
+        0 0 6px
+        rgba(70, 230, 174, 0.6);
+}
+
+
+/* =========================================================
+   26. SCROLLBAR
+========================================================= */
+
+.create-main ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.create-main ::-webkit-scrollbar-track {
+    background: #03090f;
+}
+
+.create-main ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+
+    background:
+        rgba(43, 220, 255, 0.15);
+}
+
+.create-main ::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(43, 220, 255, 0.3);
+}
+
+
+/* =========================================================
+   27. RESPONSIVE - 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .create-content {
+        grid-template-columns:
+            minmax(0, 1fr)
+            280px;
+    }
+
+    .create-form-grid.three-columns {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   28. RESPONSIVE - 950px
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .create-content {
+        grid-template-columns: 1fr;
+    }
+
+    .create-sidebar {
+        position: static;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   29. RESPONSIVE - 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .create-hero {
+        padding:
+            45px
+            20px
+            35px;
+    }
+
+    .create-content {
+        padding:
+            20px
+            20px
+            55px;
+    }
+
+    .create-form-grid,
+    .create-form-grid.three-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .ability-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .create-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .create-section {
+        padding: 19px;
+    }
+
+}
+
+
+/* =========================================================
+   30. RESPONSIVE - 550px
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .create-title {
+        font-size: 29px;
+    }
+
+    .create-notice {
+        flex-direction: column;
+    }
+
+    .ability-item {
+        grid-template-columns:
+            30px
+            minmax(0, 1fr)
+            30px;
+
+        gap: 8px;
+
+        padding: 10px;
+    }
+
+    .ability-number {
+        width: 30px;
+        height: 30px;
+    }
+
+    .remove-ability {
+        width: 30px;
+        height: 30px;
+    }
+
+    .create-form-actions {
+        flex-direction: column;
+    }
+
+    .create-submit-button,
+    .create-draft-button,
+    .create-reset-button {
+        width: 100%;
+    }
+
+    .create-reset-button {
+        margin-right: 0;
+    }
+
+    .image-upload-area {
+        min-height: 230px;
+    }
+
+}
+
+
+/* =========================================================
+   31. RESPONSIVE - 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .create-hero {
+        padding:
+            35px
+            12px
+            28px;
+    }
+
+    .create-content {
+        padding:
+            15px
+            12px
+            45px;
+    }
+
+    .create-section {
+        padding: 15px;
+    }
+
+    .create-section-header {
+        align-items: flex-start;
+    }
+
+    .create-threat-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}

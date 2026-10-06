@@ -1,0 +1,904 @@
+/* =========================================================
+   MCA ADMIN DASHBOARD
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(43, 220, 255, 0.07),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(155, 85, 255, 0.05),
+            transparent 30%
+        ),
+        #03070d;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.admin-main {
+    min-height: 100vh;
+
+    padding:
+        45px
+        clamp(20px, 4vw, 70px)
+        80px;
+}
+
+
+.admin-dashboard {
+    max-width: 1500px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-access-loading {
+    min-height: 65vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.admin-loading-symbol {
+    font-size: 50px;
+
+    animation:
+        adminSpin
+        1.8s
+        linear
+        infinite;
+}
+
+
+@keyframes adminSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   DENIED
+========================================================= */
+
+.admin-access-denied {
+    max-width: 700px;
+
+    margin:
+        100px
+        auto;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(255, 90, 110, 0.25);
+
+    background:
+        rgba(255, 90, 110, 0.03);
+}
+
+
+.access-code {
+    color: #ff6c7e;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.admin-access-denied h1 {
+    margin:
+        15px
+        0;
+
+    color: #f2fbff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+.admin-access-denied p {
+    margin-bottom: 30px;
+
+    color: #7e96a4;
+}
+
+
+.admin-back-button {
+    display: inline-flex;
+
+    padding:
+        13px
+        18px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.3);
+
+    color: #2bdcff;
+
+    text-decoration: none;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.admin-page-header {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.13);
+}
+
+
+.admin-page-code {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.admin-page-header h1 {
+    margin:
+        9px
+        0;
+
+    color: #eafaff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size:
+        clamp(26px, 4vw, 45px);
+}
+
+
+.admin-page-header p {
+    margin: 0;
+
+    color: #708996;
+}
+
+
+.admin-identity {
+    min-width: 190px;
+
+    padding:
+        15px
+        18px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.15);
+
+    background:
+        rgba(43, 220, 255, 0.03);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.admin-identity span {
+    color: #5c7685;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.admin-identity strong {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.admin-stat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 14px;
+
+    margin-bottom: 30px;
+}
+
+
+.admin-stat-card {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 130px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    background:
+        rgba(5, 17, 27, 0.8);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.admin-stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #2bdcff;
+}
+
+
+.admin-stat-card.pending::before {
+    background: #ffd45c;
+}
+
+
+.admin-stat-card.verified::before {
+    background: #48e5a5;
+}
+
+
+.admin-stat-card.investigation::before {
+    background: #9b7cff;
+}
+
+
+.admin-stat-card.conflicting::before {
+    background: #ff7185;
+}
+
+
+.stat-label {
+    color: #6b8492;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.stat-value {
+    margin:
+        7px
+        0;
+
+    color: #effbff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 32px;
+}
+
+
+.admin-stat-card small {
+    color: #4e6573;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.admin-control-panel {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+
+.admin-search-box {
+    width: min(350px, 100%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        0
+        15px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.15);
+
+    background:
+        rgba(5, 17, 27, 0.8);
+}
+
+
+.admin-search-box span {
+    color: #2bdcff;
+}
+
+
+.admin-search-box input {
+    width: 100%;
+
+    padding:
+        13px
+        0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #dff5ff;
+}
+
+
+.admin-filter-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    justify-content: flex-end;
+}
+
+
+.admin-filter {
+    padding:
+        10px
+        12px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    background:
+        rgba(43, 220, 255, 0.02);
+
+    color: #708995;
+
+    cursor: pointer;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 0.7px;
+}
+
+
+.admin-filter:hover,
+.admin-filter.active {
+    border-color: #2bdcff;
+
+    color: #2bdcff;
+
+    background:
+        rgba(43, 220, 255, 0.07);
+}
+
+
+/* =========================================================
+   QUEUE
+========================================================= */
+
+.admin-queue-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 18px;
+}
+
+
+.queue-code {
+    color: #566f7d;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.admin-queue-header h2 {
+    margin:
+        5px
+        0
+        0;
+
+    color: #dff6ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 16px;
+}
+
+
+.queue-count {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   CREATURE LIST
+========================================================= */
+
+.admin-creature-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.admin-creature-card {
+    display: grid;
+
+    grid-template-columns:
+        115px
+        minmax(200px, 1.3fr)
+        minmax(150px, 0.7fr)
+        110px
+        140px;
+
+    min-height: 115px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    background:
+        rgba(5, 17, 27, 0.75);
+
+    transition:
+        0.2s;
+}
+
+
+.admin-creature-card:hover {
+    border-color:
+        rgba(43, 220, 255, 0.35);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.admin-creature-image {
+    overflow: hidden;
+
+    background: #02070b;
+}
+
+
+.admin-creature-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.admin-creature-main,
+.admin-creature-origin,
+.admin-creature-threat,
+.admin-creature-action {
+    padding:
+        18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    border-left:
+        1px solid
+        rgba(43, 220, 255, 0.07);
+}
+
+
+.admin-creature-code {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.admin-creature-main h3 {
+    margin:
+        7px
+        0
+        4px;
+
+    color: #e4f7ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 14px;
+}
+
+
+.admin-creature-main p {
+    margin: 0;
+
+    color: #657f8d;
+
+    font-size: 11px;
+}
+
+
+.admin-data-label {
+    color: #526b78;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+
+.admin-data-value {
+    color: #bcd2dc;
+
+    font-size: 11px;
+}
+
+
+.admin-threat-value {
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 26px;
+}
+
+
+.admin-status-badge {
+    margin-top: 8px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+.admin-status-badge.pending {
+    color: #ffd45c;
+}
+
+
+.admin-status-badge.verified {
+    color: #48e5a5;
+}
+
+
+.admin-status-badge.investigation {
+    color: #a98cff;
+}
+
+
+.admin-status-badge.conflicting {
+    color: #ff7185;
+}
+
+
+.admin-status-badge.canon {
+    color: #2bdcff;
+}
+
+
+.admin-review-button {
+    padding:
+        11px
+        12px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.3);
+
+    background:
+        rgba(43, 220, 255, 0.04);
+
+    color: #2bdcff;
+
+    text-decoration: none;
+
+    text-align: center;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    cursor: pointer;
+}
+
+
+.admin-review-button:hover {
+    border-color: #2bdcff;
+
+    background:
+        rgba(43, 220, 255, 0.1);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.admin-empty {
+    padding:
+        80px
+        20px;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        rgba(43, 220, 255, 0.12);
+
+    color: #607987;
+}
+
+
+.admin-empty div {
+    color: #2bdcff;
+
+    font-size: 35px;
+}
+
+
+.admin-empty h3 {
+    color: #bcd4df;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .admin-stat-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    .admin-creature-card {
+        grid-template-columns:
+            100px
+            1fr
+            130px
+            130px;
+    }
+
+
+    .admin-creature-origin {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .admin-page-header,
+    .admin-control-panel {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .admin-filter-buttons {
+        justify-content: flex-start;
+    }
+
+
+    .admin-search-box {
+        width: auto;
+    }
+
+
+    .admin-stat-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .admin-creature-card {
+        grid-template-columns:
+            90px
+            1fr
+            100px;
+    }
+
+
+    .admin-creature-threat {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .admin-main {
+        padding:
+            25px
+            15px
+            60px;
+    }
+
+
+    .admin-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .admin-creature-card {
+        grid-template-columns:
+            85px
+            1fr;
+    }
+
+
+    .admin-creature-action {
+        grid-column:
+            1 / -1;
+
+        border-top:
+            1px solid
+            rgba(43, 220, 255, 0.07);
+
+        border-left: none;
+    }
+
+}

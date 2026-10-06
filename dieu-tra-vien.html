@@ -1,91 +1,1155 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<title>Multiverse Creature Archive — Điều tra viên</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Hồ sơ Điều tra viên - Multiverse Creature Archive"
+    >
+
+    <title>Điều tra viên | MCA</title>
+
+    <!-- CSS dùng chung -->
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <!-- CSS riêng -->
+    <link
+        rel="stylesheet"
+        href="css/dieu-tra-vien.css"
+    >
 </head>
-<body>
 
-<div class="field"></div>
 
-<header>
-  <div class="brand">
-    <div class="logo">MCA</div>
-    <div class="brand-sub">Multiverse Creature Archive</div>
-  </div>
+<body data-page="investigator">
 
-  <nav>
-    <a href="index.html">Trang chủ</a>
-    <a href="kho-du-lieu.html">Kho dữ liệu</a>
-    <a href="tao-ho-so.html">Tạo hồ sơ</a>
-    <a href="dieu-tra-vien.html" class="active">Điều tra viên</a>
-  </nav>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-  <div class="investigator">
-    <div class="avatar"></div>
-    <span class="rank-text">Điều tra viên <b>Kenya</b> · Cấp III</span>
-  </div>
-</header>
+    <div id="site-header"></div>
 
-<section class="detail-view" style="padding-top:60px;">
 
-  <div class="dossier-top">
-    <span class="code">Hồ sơ điều tra viên — Kenya</span>
-    <div class="tags">
-      <span class="pill verified">Cấp III</span>
-      <span class="pill">Danh tiếng: 3.240</span>
-    </div>
-  </div>
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-  <div class="dossier-body">
-    <div class="dossier-name" style="display:flex; align-items:center; gap:20px; padding-top:26px;">
-      <div class="avatar" style="width:64px; height:64px;"></div>
-      <div>
-        <h2 style="font-size:24px;">Kenya</h2>
-        <span class="race">Tham gia từ 03/2024 · Khu vực: Thiên hà Nebula</span>
-      </div>
-    </div>
+    <main class="investigator-main">
 
-    <div class="attr-table">
-      <div class="attr-row"><span class="k">Hồ sơ đã gửi</span><span class="v">312</span></div>
-      <div class="attr-row"><span class="k">Hồ sơ được xác minh</span><span class="v">278</span></div>
-      <div class="attr-row"><span class="k">Danh tiếng</span><span class="v">3.240 điểm</span></div>
-      <div class="attr-row"><span class="k">Cấp hiện tại</span><span class="v">Điều tra viên III</span></div>
-      <div class="attr-row"><span class="k">Cấp tiếp theo</span><span class="v">Chuyên gia (còn 188 hồ sơ)</span></div>
-    </div>
 
-    <div class="skills-block">
-      <h4>Thành tích</h4>
-      <div class="skill-grid">
-        <div class="skill-card"><div class="sname">Người Khai Phá</div><ul><li>Phát hiện 50+ sinh vật đầu tiên</li></ul></div>
-        <div class="skill-card"><div class="sname">Chuyên Gia Rồng</div><ul><li>Xác minh 20+ hồ sơ loài Rồng</li></ul></div>
-        <div class="skill-card"><div class="sname">Bậc Thầy Hư Không</div><ul><li>Xác minh 15+ hồ sơ nguyên tố Hư Không</li></ul></div>
-      </div>
-    </div>
+        <!-- =================================================
+             1. PROFILE HERO
+        ================================================== -->
 
-    <div class="log-block">
-      <h4>Hệ thống cấp bậc</h4>
-      <div class="attr-table" style="margin:0;">
-        <div class="attr-row"><span class="k">Thực tập</span><span class="v">Mới gia nhập</span></div>
-        <div class="attr-row"><span class="k">Điều tra viên I</span><span class="v">10 hồ sơ được xác minh</span></div>
-        <div class="attr-row"><span class="k">Điều tra viên II</span><span class="v">50 hồ sơ</span></div>
-        <div class="attr-row"><span class="k">Điều tra viên III</span><span class="v">200 hồ sơ ← đang ở cấp này</span></div>
-        <div class="attr-row"><span class="k">Chuyên gia</span><span class="v">500 hồ sơ</span></div>
-        <div class="attr-row"><span class="k">Chỉ huy</span><span class="v">Chỉ định bởi quản trị viên</span></div>
-      </div>
-    </div>
-  </div>
+        <section class="investigator-hero">
 
-</section>
+            <div class="investigator-cover"></div>
 
-<footer>
-  Multiverse Creature Archive · Hệ thống nội bộ của Tổ chức Quan sát Đa Thiên Hà
-</footer>
+
+            <div class="investigator-profile">
+
+                <!-- AVATAR -->
+
+                <div class="investigator-avatar">
+
+                    <img
+                        src="assets/images/default-avatar.png"
+                        alt="Avatar Điều tra viên"
+                        id="investigatorAvatar"
+                        onerror="this.style.display='none';"
+                    >
+
+                    <span class="investigator-online"></span>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="investigator-information">
+
+                    <div class="investigator-code">
+                        MCA INVESTIGATOR / ID-08241
+                    </div>
+
+
+                    <div class="investigator-name-row">
+
+                        <h1 id="investigatorUsername">
+                            Kenya
+                        </h1>
+
+                        <span class="investigator-verified">
+                            ✓ VERIFIED
+                        </span>
+
+                    </div>
+
+
+                    <p class="investigator-rank">
+
+                        Điều tra viên
+
+                        <strong id="investigatorLevel">
+                            Cấp III
+                        </strong>
+
+                    </p>
+
+
+                    <p class="investigator-bio" id="investigatorBio">
+
+                        Điều tra viên chuyên nghiên cứu
+                        các sinh vật bất thường và thực thể
+                        đến từ những khu vực chưa được xác định
+                        trong đa vũ trụ.
+
+                    </p>
+
+
+                    <div class="investigator-meta">
+
+                        <span>
+                            ◉ Tham gia: 18/05/2026
+                        </span>
+
+                        <span>
+                            ◎ Trạng thái: Hoạt động
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE ACTION -->
+
+                <div class="investigator-actions">
+
+                    <button
+                        type="button"
+                        class="investigator-primary-button"
+                        id="editProfileButton"
+                    >
+                        CHỈNH SỬA HỒ SƠ
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="investigator-secondary-button"
+                        id="shareProfileButton"
+                    >
+                        CHIA SẺ
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             2. PROFILE STATISTICS
+        ================================================== -->
+
+        <section class="investigator-statistics">
+
+
+            <div class="investigator-stat">
+
+                <span class="investigator-stat-icon">
+                    ✧
+                </span>
+
+                <div>
+                    <strong id="profileReputation">
+                        4.820
+                    </strong>
+
+                    <span>
+                        Danh tiếng
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="investigator-stat">
+
+                <span class="investigator-stat-icon">
+                    ▣
+                </span>
+
+                <div>
+                    <strong id="profileReports">
+                        156
+                    </strong>
+
+                    <span>
+                        Hồ sơ đã gửi
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="investigator-stat">
+
+                <span class="investigator-stat-icon">
+                    ✓
+                </span>
+
+                <div>
+                    <strong id="profileVerified">
+                        128
+                    </strong>
+
+                    <span>
+                        Đã xác minh
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="investigator-stat">
+
+                <span class="investigator-stat-icon">
+                    ◎
+                </span>
+
+                <div>
+                    <strong id="profileInvestigating">
+                        21
+                    </strong>
+
+                    <span>
+                        Cần điều tra thêm
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="investigator-stat">
+
+                <span class="investigator-stat-icon">
+                    ♡
+                </span>
+
+                <div>
+                    <strong id="profileLikes">
+                        12.841
+                    </strong>
+
+                    <span>
+                        Lượt thích nhận được
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             3. PROFILE CONTENT
+        ================================================== -->
+
+        <section class="investigator-content">
+
+
+            <!-- =================================================
+                 LEFT
+            ================================================== -->
+
+            <div class="investigator-content-main">
+
+
+                <!-- =============================================
+                     NAVIGATION TABS
+                ============================================== -->
+
+                <div class="investigator-tabs">
+
+                    <button
+                        type="button"
+                        class="investigator-tab active"
+                        data-tab="reports"
+                    >
+                        HỒ SƠ SINH VẬT
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="investigator-tab"
+                        data-tab="activity"
+                    >
+                        HOẠT ĐỘNG
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="investigator-tab"
+                        data-tab="favorites"
+                    >
+                        YÊU THÍCH
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="investigator-tab"
+                        data-tab="achievements"
+                    >
+                        THÀNH TỰU
+                    </button>
+
+                </div>
+
+
+                <!-- =============================================
+                     TAB: REPORTS
+                ============================================== -->
+
+                <div
+                    class="investigator-tab-content active"
+                    id="reportsTab"
+                >
+
+                    <div class="investigator-section-header">
+
+                        <div>
+                            <span>
+                                INVESTIGATION RECORDS
+                            </span>
+
+                            <h2>
+                                HỒ SƠ ĐÃ TẠO
+                            </h2>
+                        </div>
+
+
+                        <select
+                            id="profileReportFilter"
+                            class="investigator-select"
+                        >
+                            <option value="all">
+                                Tất cả hồ sơ
+                            </option>
+
+                            <option value="verified">
+                                Đã xác minh
+                            </option>
+
+                            <option value="pending">
+                                Chờ xác minh
+                            </option>
+
+                            <option value="investigation">
+                                Cần điều tra thêm
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- CREATURE GRID -->
+
+                    <div
+                        class="investigator-creature-grid"
+                        id="investigatorCreatureGrid"
+                    >
+
+
+                        <!-- CREATURE 1 -->
+
+                        <article
+                            class="investigator-creature-card"
+                            data-status="verified"
+                            onclick="openInvestigatorCreature('VX-2047')"
+                        >
+
+                            <div
+                                class="investigator-creature-image"
+                                style="
+                                    background-image:
+                                    url('assets/creatures/astral-leviathan.jpg');
+                                "
+                            >
+
+                                <span class="profile-creature-status verified">
+                                    ĐÃ XÁC MINH
+                                </span>
+
+                                <span class="profile-threat">
+                                    A
+                                </span>
+
+                            </div>
+
+
+                            <div class="investigator-creature-content">
+
+                                <span class="profile-creature-code">
+                                    VX-2047
+                                </span>
+
+                                <h3>
+                                    Astral Leviathan
+                                </h3>
+
+                                <p>
+                                    Rồng vũ trụ
+                                </p>
+
+
+                                <div class="profile-creature-meta">
+
+                                    <span>
+                                        ♡ 1.842
+                                    </span>
+
+                                    <span>
+                                        ◉ 24.7K
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- CREATURE 2 -->
+
+                        <article
+                            class="investigator-creature-card"
+                            data-status="verified"
+                            onclick="openInvestigatorCreature('VX-1982')"
+                        >
+
+                            <div
+                                class="investigator-creature-image"
+                                style="
+                                    background-image:
+                                    url('assets/creatures/void-wolf.jpg');
+                                "
+                            >
+
+                                <span class="profile-creature-status verified">
+                                    ĐÃ XÁC MINH
+                                </span>
+
+                                <span class="profile-threat">
+                                    B
+                                </span>
+
+                            </div>
+
+
+                            <div class="investigator-creature-content">
+
+                                <span class="profile-creature-code">
+                                    VX-1982
+                                </span>
+
+                                <h3>
+                                    Void Wolf
+                                </h3>
+
+                                <p>
+                                    Thú hư không
+                                </p>
+
+
+                                <div class="profile-creature-meta">
+
+                                    <span>
+                                        ♡ 1.429
+                                    </span>
+
+                                    <span>
+                                        ◉ 18.2K
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- CREATURE 3 -->
+
+                        <article
+                            class="investigator-creature-card"
+                            data-status="pending"
+                            onclick="openInvestigatorCreature('VX-1765')"
+                        >
+
+                            <div
+                                class="investigator-creature-image"
+                                style="
+                                    background-image:
+                                    url('assets/creatures/crystal-mantis.jpg');
+                                "
+                            >
+
+                                <span class="profile-creature-status pending">
+                                    CHỜ XÁC MINH
+                                </span>
+
+                                <span class="profile-threat">
+                                    C
+                                </span>
+
+                            </div>
+
+
+                            <div class="investigator-creature-content">
+
+                                <span class="profile-creature-code">
+                                    VX-1765
+                                </span>
+
+                                <h3>
+                                    Crystal Mantis
+                                </h3>
+
+                                <p>
+                                    Côn trùng tinh thể
+                                </p>
+
+
+                                <div class="profile-creature-meta">
+
+                                    <span>
+                                        ♡ 987
+                                    </span>
+
+                                    <span>
+                                        ◉ 12.5K
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- CREATURE 4 -->
+
+                        <article
+                            class="investigator-creature-card"
+                            data-status="investigation"
+                            onclick="openInvestigatorCreature('VX-0976')"
+                        >
+
+                            <div
+                                class="investigator-creature-image"
+                                style="
+                                    background-image:
+                                    url('assets/creatures/ethereal-nomad.jpg');
+                                "
+                            >
+
+                                <span class="profile-creature-status investigation">
+                                    CẦN ĐIỀU TRA THÊM
+                                </span>
+
+                                <span class="profile-threat high">
+                                    S
+                                </span>
+
+                            </div>
+
+
+                            <div class="investigator-creature-content">
+
+                                <span class="profile-creature-code">
+                                    VX-0976
+                                </span>
+
+                                <h3>
+                                    Ethereal Nomad
+                                </h3>
+
+                                <p>
+                                    Thực thể thần thoại
+                                </p>
+
+
+                                <div class="profile-creature-meta">
+
+                                    <span>
+                                        ♡ 2.410
+                                    </span>
+
+                                    <span>
+                                        ◉ 31.8K
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div
+                        class="investigator-empty"
+                        id="investigatorCreatureEmpty"
+                    >
+                        Không có hồ sơ phù hợp.
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     TAB: ACTIVITY
+                ============================================== -->
+
+                <div
+                    class="investigator-tab-content"
+                    id="activityTab"
+                >
+
+                    <div class="investigator-section-header">
+
+                        <div>
+                            <span>
+                                INVESTIGATION LOG
+                            </span>
+
+                            <h2>
+                                HOẠT ĐỘNG GẦN ĐÂY
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-timeline">
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-dot verified">
+                                ✓
+                            </div>
+
+                            <div class="activity-information">
+
+                                <strong>
+                                    Hồ sơ Astral Leviathan
+                                    đã được xác minh.
+                                </strong>
+
+                                <p>
+                                    Hồ sơ VX-2047 đã hoàn thành
+                                    quá trình kiểm duyệt của MCA.
+                                </p>
+
+                                <small>
+                                    05/10/2026 • 06:42
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-dot">
+                                +
+                            </div>
+
+                            <div class="activity-information">
+
+                                <strong>
+                                    Đã cập nhật hồ sơ
+                                    Ethereal Nomad.
+                                </strong>
+
+                                <p>
+                                    Bổ sung thông tin về khả năng,
+                                    giới hạn và nguồn gốc.
+                                </p>
+
+                                <small>
+                                    03/10/2026 • 21:18
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-dot">
+                                ◈
+                            </div>
+
+                            <div class="activity-information">
+
+                                <strong>
+                                    Tạo hồ sơ Crystal Mantis.
+                                </strong>
+
+                                <p>
+                                    Hồ sơ VX-1765 đã được gửi
+                                    vào hệ thống kiểm duyệt.
+                                </p>
+
+                                <small>
+                                    02/10/2026 • 15:27
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     TAB: FAVORITES
+                ============================================== -->
+
+                <div
+                    class="investigator-tab-content"
+                    id="favoritesTab"
+                >
+
+                    <div class="investigator-section-header">
+
+                        <div>
+                            <span>
+                                SAVED RECORDS
+                            </span>
+
+                            <h2>
+                                SINH VẬT YÊU THÍCH
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="investigator-empty">
+
+                        Các hồ sơ sinh vật đã yêu thích
+                        sẽ xuất hiện tại đây.
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     TAB: ACHIEVEMENTS
+                ============================================== -->
+
+                <div
+                    class="investigator-tab-content"
+                    id="achievementsTab"
+                >
+
+                    <div class="investigator-section-header">
+
+                        <div>
+                            <span>
+                                MCA ACHIEVEMENTS
+                            </span>
+
+                            <h2>
+                                THÀNH TỰU
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="achievement-grid">
+
+
+                        <div class="achievement-card unlocked">
+
+                            <div class="achievement-icon">
+                                ◈
+                            </div>
+
+                            <div>
+                                <h3>
+                                    PHÁT HIỆN ĐẦU TIÊN
+                                </h3>
+
+                                <p>
+                                    Tạo hồ sơ sinh vật đầu tiên.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-card unlocked">
+
+                            <div class="achievement-icon">
+                                ✓
+                            </div>
+
+                            <div>
+                                <h3>
+                                    NHÀ NGHIÊN CỨU
+                                </h3>
+
+                                <p>
+                                    Có 10 hồ sơ được xác minh.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-card unlocked">
+
+                            <div class="achievement-icon">
+                                ✧
+                            </div>
+
+                            <div>
+                                <h3>
+                                    DANH TIẾNG 1.000
+                                </h3>
+
+                                <p>
+                                    Đạt 1.000 điểm danh tiếng.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-card locked">
+
+                            <div class="achievement-icon">
+                                S
+                            </div>
+
+                            <div>
+                                <h3>
+                                    THỢ SĂN CẤP S
+                                </h3>
+
+                                <p>
+                                    Xác minh thành công
+                                    10 sinh vật cấp S.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT SIDEBAR
+            ================================================== -->
+
+            <aside class="investigator-sidebar">
+
+
+                <!-- =============================================
+                     INVESTIGATOR LEVEL
+                ============================================== -->
+
+                <section class="investigator-panel">
+
+                    <div class="investigator-panel-title">
+
+                        <span>
+                            INVESTIGATOR RANK
+                        </span>
+
+                        <h3>
+                            CẤP ĐIỀU TRA VIÊN
+                        </h3>
+
+                    </div>
+
+
+                    <div class="rank-display">
+
+                        <div class="rank-symbol">
+                            III
+                        </div>
+
+                        <strong>
+                            ĐIỀU TRA VIÊN CẤP III
+                        </strong>
+
+                        <p>
+                            4.820 / 7.500 danh tiếng
+                        </p>
+
+                    </div>
+
+
+                    <div class="rank-progress">
+
+                        <div
+                            class="rank-progress-bar"
+                            style="width: 64.2%;"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="rank-next">
+
+                        <span>
+                            Cấp tiếp theo
+                        </span>
+
+                        <strong>
+                            CẤP IV
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     SPECIALIZATION
+                ============================================== -->
+
+                <section class="investigator-panel">
+
+                    <div class="investigator-panel-title">
+
+                        <span>
+                            RESEARCH PROFILE
+                        </span>
+
+                        <h3>
+                            CHUYÊN MÔN
+                        </h3>
+
+                    </div>
+
+
+                    <div class="specialization-list">
+
+                        <span>
+                            Hư không
+                        </span>
+
+                        <span>
+                            Sinh vật vũ trụ
+                        </span>
+
+                        <span>
+                            Thực thể bất thường
+                        </span>
+
+                        <span>
+                            Đa vũ trụ
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     REPORT STATUS
+                ============================================== -->
+
+                <section class="investigator-panel">
+
+                    <div class="investigator-panel-title">
+
+                        <span>
+                            RECORD ANALYSIS
+                        </span>
+
+                        <h3>
+                            TỶ LỆ HỒ SƠ
+                        </h3>
+
+                    </div>
+
+
+                    <div class="profile-status-list">
+
+
+                        <div class="profile-status-item">
+
+                            <span>
+                                Đã xác minh
+                            </span>
+
+                            <strong>
+                                128
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-status-bar">
+
+                            <div
+                                class="verified"
+                                style="width:82%;"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="profile-status-item">
+
+                            <span>
+                                Cần điều tra thêm
+                            </span>
+
+                            <strong>
+                                21
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-status-bar">
+
+                            <div
+                                class="investigation"
+                                style="width:13%;"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="profile-status-item">
+
+                            <span>
+                                Chờ xác minh
+                            </span>
+
+                            <strong>
+                                7
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-status-bar">
+
+                            <div
+                                class="pending"
+                                style="width:5%;"
+                            ></div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     QUICK ACTION
+                ============================================== -->
+
+                <section class="investigator-panel">
+
+                    <div class="investigator-panel-title">
+
+                        <span>
+                            QUICK ACCESS
+                        </span>
+
+                        <h3>
+                            THAO TÁC NHANH
+                        </h3>
+
+                    </div>
+
+
+                    <div class="investigator-quick-actions">
+
+                        <a href="create.html">
+                            + TẠO HỒ SƠ MỚI
+                        </a>
+
+                        <a href="kho-du-lieu.html">
+                            ▣ KHO DỮ LIỆU
+                        </a>
+
+                        <a href="notifications.html">
+                            ◇ THÔNG BÁO
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div id="site-footer"></div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/components.js"></script>
+
+    <script src="js/dieu-tra-vien.js"></script>
 
 </body>
+
 </html>
+```

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Đăng ký | MCA</title>
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/auth.css"
+    >
+</head>
+
+<body>
+
+    <div id="site-header"></div>
+
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-label">
+                MCA / INVESTIGATOR REGISTRATION
+            </div>
+
+            <h1>
+                TẠO TÀI KHOẢN
+            </h1>
+
+            <p class="auth-description">
+                Đăng ký để trở thành Điều tra viên
+                của Multiverse Creature Archive.
+            </p>
+
+
+            <form id="registerForm">
+
+                <div class="auth-group">
+
+                    <label for="registerUsername">
+                        TÊN ĐIỀU TRA VIÊN
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerUsername"
+                        maxlength="40"
+                        placeholder="Ví dụ: Kenya"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-group">
+
+                    <label for="registerEmail">
+                        EMAIL
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="example@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-group">
+
+                    <label for="registerPassword">
+                        MẬT KHẨU
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        minlength="6"
+                        placeholder="Tối thiểu 6 ký tự"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-group">
+
+                    <label for="registerPasswordConfirm">
+                        XÁC NHẬN MẬT KHẨU
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPasswordConfirm"
+                        minlength="6"
+                        placeholder="Nhập lại mật khẩu"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                    id="registerButton"
+                >
+                    TẠO TÀI KHOẢN
+                </button>
+
+            </form>
+
+
+            <div
+                class="auth-message"
+                id="authMessage"
+            ></div>
+
+
+            <div class="auth-switch">
+
+                Đã có tài khoản?
+
+                <a href="dang-nhap.html">
+                    Đăng nhập
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <div id="site-footer"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

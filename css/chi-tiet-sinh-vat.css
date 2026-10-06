@@ -1,0 +1,1252 @@
+/* =========================================================
+   MCA - CHI TIẾT SINH VẬT
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(43, 220, 255, 0.07),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 30%,
+            rgba(155, 85, 255, 0.06),
+            transparent 30%
+        ),
+        #03070d;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.creature-detail-main {
+    min-height: 100vh;
+    padding:
+        40px
+        clamp(20px, 4vw, 70px)
+        80px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.creature-loading {
+    min-height: 65vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 18px;
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+.loading-symbol {
+    font-size: 50px;
+
+    animation:
+        mcaLoading
+        1.8s
+        linear
+        infinite;
+}
+
+
+@keyframes mcaLoading {
+
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.creature-error {
+    max-width: 800px;
+
+    margin:
+        100px
+        auto;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(255, 95, 114, 0.3);
+
+    background:
+        rgba(255, 95, 114, 0.03);
+}
+
+
+.error-code {
+    color: #ff5f72;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.creature-error h1 {
+    margin:
+        15px
+        0;
+
+    color: #f2fbff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+.creature-error p {
+    color: #849cab;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.creature-detail-content {
+    max-width: 1500px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.detail-breadcrumb {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #567180;
+}
+
+
+.detail-breadcrumb a {
+    color: #2bdcff;
+
+    text-decoration: none;
+}
+
+
+.detail-breadcrumb a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   PROFILE HERO
+========================================================= */
+
+.creature-profile {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 500px)
+        1fr
+        180px;
+
+    min-height: 480px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.25);
+
+    background:
+        rgba(5, 17, 27, 0.92);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+/* IMAGE */
+
+.creature-profile-image {
+    position: relative;
+
+    min-height: 480px;
+
+    overflow: hidden;
+
+    background: #02070b;
+}
+
+
+.creature-profile-image img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    object-fit: cover;
+}
+
+
+.image-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent 50%,
+            #05111b
+        ),
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.8),
+            transparent 50%
+        );
+}
+
+
+.image-code {
+    position: absolute;
+
+    left: 25px;
+    bottom: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.image-code span {
+    color: #738b99;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.image-code strong {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+/* PROFILE INFORMATION */
+
+.creature-profile-information {
+    padding:
+        55px
+        45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.profile-top-line {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 28px;
+}
+
+
+.detail-status {
+    padding:
+        7px
+        11px;
+
+    border:
+        1px solid
+        #2bdcff;
+
+    color: #2bdcff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.detail-status.pending {
+    color: #ffd45c;
+
+    border-color:
+        rgba(255, 212, 92, 0.5);
+
+    background:
+        rgba(255, 212, 92, 0.06);
+}
+
+
+.detail-status.verified {
+    color: #48e5a5;
+
+    border-color:
+        rgba(72, 229, 165, 0.5);
+
+    background:
+        rgba(72, 229, 165, 0.06);
+}
+
+
+.detail-status.investigation {
+    color: #9b7cff;
+
+    border-color:
+        rgba(155, 124, 255, 0.5);
+}
+
+
+.detail-status.conflicting {
+    color: #ff7c8d;
+
+    border-color:
+        rgba(255, 124, 141, 0.5);
+}
+
+
+.record-database-label {
+    color: #526b7a;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.creature-code {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+.creature-name {
+    margin:
+        10px
+        0
+        18px;
+
+    color: #effbff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size:
+        clamp(32px, 4vw, 60px);
+
+    line-height: 1.08;
+}
+
+
+.creature-species {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+
+.creature-species span {
+    color: #607887;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+.creature-species strong {
+    color: #c8dce6;
+
+    font-size: 12px;
+}
+
+
+.creature-description {
+    max-width: 750px;
+
+    margin:
+        0
+        0
+        30px;
+
+    color: #8fa6b4;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+
+.profile-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border-top:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    padding-top: 20px;
+}
+
+
+.profile-meta div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding-right: 15px;
+}
+
+
+.profile-meta span {
+    color: #4f6979;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.profile-meta strong {
+    color: #d8eaf2;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   THREAT
+========================================================= */
+
+.creature-threat-panel {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-left:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    background:
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.threat-label {
+    color: #657e8c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+.threat-value {
+    width: 100px;
+    height: 100px;
+
+    margin:
+        20px
+        0;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        #ffd45c;
+
+    color: #ffd45c;
+
+    background:
+        rgba(255, 212, 92, 0.05);
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(255, 212, 92, 0.05);
+}
+
+
+.threat-verification {
+    color: #718795;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   DETAIL GRID
+========================================================= */
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        330px;
+
+    gap: 25px;
+
+    margin-top: 25px;
+}
+
+
+.detail-primary {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.detail-panel,
+.sidebar-panel {
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.16);
+
+    background:
+        rgba(5, 17, 27, 0.82);
+}
+
+
+.detail-panel {
+    padding: 30px;
+}
+
+
+.panel-heading {
+    display: flex;
+
+    gap: 15px;
+
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+}
+
+
+.panel-number {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.3);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 10px;
+}
+
+
+.panel-heading small {
+    color: #2bdcff;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.panel-heading h2 {
+    margin:
+        4px
+        0
+        0;
+
+    color: #dff7ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 15px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.information-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.information-grid.compact {
+    margin-top: 25px;
+}
+
+
+.information-item {
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    background:
+        rgba(43, 220, 255, 0.02);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.information-item span {
+    color: #587180;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+.information-item strong {
+    color: #d6e9f2;
+
+    font-size: 13px;
+}
+
+
+.detail-text {
+    color: #91a7b5;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   ABILITIES
+========================================================= */
+
+.ability-detail-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.ability-detail-item {
+    display: grid;
+
+    grid-template-columns:
+        55px
+        1fr;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    background:
+        rgba(43, 220, 255, 0.02);
+}
+
+
+.ability-detail-number {
+    display: grid;
+
+    place-items: center;
+
+    border-right:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+.ability-detail-content {
+    padding:
+        18px
+        20px;
+}
+
+
+.ability-detail-content h3 {
+    margin:
+        0
+        0
+        8px;
+
+    color: #dff7ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+.ability-detail-content p {
+    margin: 0;
+
+    color: #7f98a7;
+
+    line-height: 1.7;
+
+    font-size: 13px;
+}
+
+
+.no-abilities {
+    padding: 25px;
+
+    color: #657d8b;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        rgba(43, 220, 255, 0.12);
+}
+
+
+/* =========================================================
+   WEAKNESS
+========================================================= */
+
+.weakness-panel {
+    border-color:
+        rgba(255, 95, 114, 0.15);
+}
+
+
+.weakness-section + .weakness-section {
+    margin-top: 25px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+
+.weakness-section h3 {
+    color: #ff8494;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.detail-sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+.sidebar-panel {
+    padding: 22px;
+}
+
+
+.sidebar-heading {
+    margin-bottom: 20px;
+
+    padding-bottom: 13px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+.classification-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.classification-list > div {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        12px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.04);
+}
+
+
+.classification-list span {
+    color: #627b8a;
+
+    font-size: 11px;
+}
+
+
+.classification-list strong {
+    color: #d3e7f0;
+
+    font-size: 11px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   VERIFICATION
+========================================================= */
+
+.verification-display {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+
+.verification-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ffd45c;
+
+    box-shadow:
+        0 0 12px
+        currentColor;
+}
+
+
+.verification-display div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.verification-display strong {
+    color: #dceef6;
+
+    font-size: 11px;
+}
+
+
+.verification-display small {
+    color: #5d7482;
+
+    font-size: 9px;
+}
+
+
+.verification-levels {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 10px;
+}
+
+
+.verification-levels div {
+    padding: 13px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.verification-levels span {
+    color: #607987;
+
+    font-size: 8px;
+}
+
+
+.verification-levels strong {
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.detail-button,
+.back-archive-button {
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding:
+        14px
+        18px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.35);
+
+    background:
+        rgba(43, 220, 255, 0.04);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.detail-button:hover,
+.back-archive-button:hover {
+    background:
+        rgba(43, 220, 255, 0.1);
+
+    border-color: #2bdcff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .creature-profile {
+        grid-template-columns:
+            360px
+            1fr;
+    }
+
+
+    .creature-threat-panel {
+        grid-column:
+            1 / -1;
+
+        flex-direction: row;
+
+        gap: 25px;
+
+        padding: 20px;
+
+        border-left: none;
+
+        border-top:
+            1px solid
+            rgba(43, 220, 255, 0.12);
+    }
+
+
+    .threat-value {
+        width: 65px;
+        height: 65px;
+
+        margin: 0;
+
+        font-size: 28px;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .back-archive-button {
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .creature-detail-main {
+        padding:
+            25px
+            15px
+            60px;
+    }
+
+
+    .creature-profile {
+        grid-template-columns: 1fr;
+    }
+
+
+    .creature-profile-image {
+        min-height: 400px;
+    }
+
+
+    .creature-profile-information {
+        padding:
+            35px
+            25px;
+    }
+
+
+    .image-overlay {
+        background:
+            linear-gradient(
+                to top,
+                #05111b,
+                transparent 60%
+            );
+    }
+
+
+    .profile-meta {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+
+    .information-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .creature-profile-image {
+        min-height: 320px;
+    }
+
+
+    .creature-name {
+        font-size: 30px;
+    }
+
+
+    .detail-panel {
+        padding: 20px;
+    }
+
+
+    .profile-meta {
+        grid-template-columns: 1fr;
+    }
+
+}
