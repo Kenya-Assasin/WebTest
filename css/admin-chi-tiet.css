@@ -1,0 +1,1036 @@
+/* =========================================================
+   MCA ADMIN REVIEW
+========================================================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(43, 220, 255, 0.07),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 25%,
+            rgba(155, 85, 255, 0.05),
+            transparent 30%
+        ),
+        #03070d;
+}
+
+
+.review-main {
+    min-height: 100vh;
+
+    padding:
+        40px
+        clamp(20px, 4vw, 70px)
+        80px;
+}
+
+
+.review-content {
+    max-width: 1500px;
+
+    margin: auto;
+}
+
+
+/* LOADING */
+
+.review-loading {
+    min-height: 65vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.review-loading-icon {
+    font-size: 50px;
+
+    animation:
+        reviewSpin
+        1.8s
+        linear
+        infinite;
+}
+
+
+@keyframes reviewSpin {
+
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ERROR */
+
+.review-error {
+    max-width: 700px;
+
+    margin:
+        100px
+        auto;
+
+    padding: 45px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(255, 100, 120, 0.25);
+
+    background:
+        rgba(255, 100, 120, 0.03);
+}
+
+
+.review-error span {
+    color: #ff7185;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+.review-error h1 {
+    color: #effaff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+.review-error p {
+    color: #718996;
+
+    line-height: 1.7;
+}
+
+
+.review-error a {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 16px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.3);
+
+    color: #2bdcff;
+
+    text-decoration: none;
+}
+
+
+/* BREADCRUMB */
+
+.review-breadcrumb {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+
+    color: #506b79;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+}
+
+
+.review-breadcrumb a,
+.review-breadcrumb strong {
+    color: #2bdcff;
+
+    text-decoration: none;
+}
+
+
+/* HEADER */
+
+.review-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+.review-header-code {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.review-header h1 {
+    margin:
+        8px
+        0;
+
+    color: #effaff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size:
+        clamp(27px, 4vw, 43px);
+}
+
+
+.review-header p {
+    margin: 0;
+
+    color: #708996;
+}
+
+
+.review-current-status {
+    padding:
+        12px
+        15px;
+
+    border:
+        1px solid
+        #ffd45c;
+
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+/* SUMMARY */
+
+.review-creature-summary {
+    display: grid;
+
+    grid-template-columns:
+        270px
+        1fr
+        180px;
+
+    min-height: 270px;
+
+    margin-bottom: 25px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.18);
+
+    background:
+        rgba(5, 17, 27, 0.85);
+}
+
+
+.review-image {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #02070b;
+}
+
+
+.review-image img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    object-fit: cover;
+}
+
+
+.review-image span {
+    position: absolute;
+
+    left: 18px;
+    bottom: 18px;
+
+    padding:
+        6px
+        9px;
+
+    background:
+        rgba(0, 0, 0, 0.7);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+.review-summary-info {
+    padding:
+        40px
+        35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.review-creature-code {
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+.review-summary-info h2 {
+    margin:
+        8px
+        0;
+
+    color: #e9faff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 28px;
+}
+
+
+.review-summary-info > p {
+    margin:
+        0
+        0
+        25px;
+
+    color: #8098a5;
+}
+
+
+.review-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.review-summary-grid div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.review-summary-grid span {
+    color: #506b79;
+
+    font-size: 8px;
+}
+
+
+.review-summary-grid strong {
+    color: #cce1e9;
+
+    font-size: 11px;
+}
+
+
+.review-proposed-threat {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-left:
+        1px solid
+        rgba(43, 220, 255, 0.1);
+}
+
+
+.review-proposed-threat span {
+    color: #657e8c;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.review-proposed-threat strong {
+    margin-top: 12px;
+
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 55px;
+}
+
+
+/* LAYOUT */
+
+.review-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        360px;
+
+    gap: 25px;
+}
+
+
+.review-data {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* PANEL */
+
+.review-panel {
+    padding: 27px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.12);
+
+    background:
+        rgba(5, 17, 27, 0.8);
+}
+
+
+.review-panel-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding-bottom: 17px;
+
+    margin-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+}
+
+
+.review-panel-title > span {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.25);
+
+    color: #2bdcff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+.review-panel-title small {
+    color: #587482;
+
+    font-size: 7px;
+}
+
+
+.review-panel-title h3 {
+    margin:
+        3px
+        0
+        0;
+
+    color: #dff6ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+.review-text {
+    margin: 0;
+
+    color: #8ca3b0;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+
+.review-information-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.review-information-grid > div {
+    padding: 15px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.07);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.review-information-grid span {
+    color: #59727f;
+
+    font-size: 8px;
+}
+
+
+.review-information-grid strong {
+    color: #c9dfe8;
+
+    font-size: 11px;
+}
+
+
+/* ABILITY */
+
+.review-ability-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.review-ability {
+    display: grid;
+
+    grid-template-columns:
+        50px
+        1fr;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+}
+
+
+.review-ability-number {
+    display: grid;
+
+    place-items: center;
+
+    color: #2bdcff;
+
+    border-right:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+}
+
+
+.review-ability-info {
+    padding: 15px;
+}
+
+
+.review-ability-info strong {
+    color: #dff5ff;
+
+    font-size: 12px;
+}
+
+
+.review-ability-info p {
+    margin:
+        6px
+        0
+        0;
+
+    color: #718996;
+
+    line-height: 1.7;
+
+    font-size: 12px;
+}
+
+
+/* DANGER */
+
+.danger-panel {
+    border-color:
+        rgba(255, 100, 120, 0.13);
+}
+
+
+.review-danger-section + .review-danger-section {
+    margin-top: 22px;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.04);
+}
+
+
+.review-danger-section h4 {
+    color: #ff7b8d;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 9px;
+}
+
+
+/* ADMIN PANEL */
+
+.review-admin-panel {
+    align-self: start;
+
+    position: sticky;
+
+    top: 90px;
+
+    padding: 25px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.25);
+
+    background:
+        rgba(4, 14, 23, 0.97);
+}
+
+
+.review-admin-title span {
+    color: #2bdcff;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.review-admin-title h2 {
+    margin:
+        7px
+        0
+        22px;
+
+    color: #e5f8ff;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 14px;
+}
+
+
+/* THREAT COMPARISON */
+
+.review-threat-comparison {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+}
+
+
+.review-threat-comparison div {
+    padding: 15px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.review-threat-comparison span {
+    color: #5d7683;
+
+    font-size: 7px;
+}
+
+
+.review-threat-comparison strong {
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 24px;
+}
+
+
+/* FORM */
+
+.review-form-group {
+    margin-bottom: 20px;
+}
+
+
+.review-form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #8299a5;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.review-form-group select {
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        1px solid
+        rgba(43, 220, 255, 0.2);
+
+    outline: none;
+
+    background: #06121c;
+
+    color: #dff7ff;
+}
+
+
+/* WARNING */
+
+.review-warning {
+    margin-bottom: 20px;
+
+    padding: 15px;
+
+    border:
+        1px solid
+        rgba(255, 212, 92, 0.15);
+
+    background:
+        rgba(255, 212, 92, 0.03);
+}
+
+
+.review-warning strong {
+    color: #ffd45c;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+}
+
+
+.review-warning p {
+    color: #7c8d93;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* ACTIONS */
+
+.review-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+.review-action {
+    width: 100%;
+
+    padding: 13px;
+
+    cursor: pointer;
+
+    font-family:
+        "Orbitron",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 0.7px;
+
+    background: transparent;
+}
+
+
+.review-action.investigation {
+    color: #a88cff;
+
+    border:
+        1px solid
+        rgba(168, 140, 255, 0.4);
+}
+
+
+.review-action.conflicting {
+    color: #ff7588;
+
+    border:
+        1px solid
+        rgba(255, 117, 136, 0.4);
+}
+
+
+.review-action.verified {
+    color: #04130e;
+
+    border:
+        1px solid
+        #48e5a5;
+
+    background: #48e5a5;
+}
+
+
+.review-action:hover {
+    filter: brightness(1.15);
+}
+
+
+.review-action:disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+}
+
+
+.review-message {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.review-message.success {
+    color: #48e5a5;
+}
+
+
+.review-message.error {
+    color: #ff7185;
+}
+
+
+.review-back-admin {
+    display: block;
+
+    margin-top: 20px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid
+        rgba(43, 220, 255, 0.08);
+
+    color: #66808d;
+
+    text-decoration: none;
+
+    font-size: 9px;
+}
+
+
+.review-back-admin:hover {
+    color: #2bdcff;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+
+    .review-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    .review-admin-panel {
+        position: static;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .review-creature-summary {
+        grid-template-columns:
+            220px
+            1fr;
+    }
+
+
+    .review-proposed-threat {
+        grid-column:
+            1 / -1;
+
+        padding: 20px;
+
+        border-left: none;
+
+        border-top:
+            1px solid
+            rgba(43, 220, 255, 0.1);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .review-main {
+        padding:
+            25px
+            15px
+            60px;
+    }
+
+
+    .review-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .review-creature-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .review-image {
+        min-height: 300px;
+    }
+
+
+    .review-summary-grid,
+    .review-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kiểm duyệt hồ sơ | MCA</title>
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/admin-chi-tiet.css"
+    >
+</head>
+
+
+<body data-page="admin">
+
+    <div id="site-header"></div>
+
+
+    <main class="review-main">
+
+        <!-- LOADING -->
+
+        <section
+            class="review-loading"
+            id="reviewLoading"
+        >
+
+            <div class="review-loading-icon">
+                ◇
+            </div>
+
+            <p>
+                ĐANG TRUY XUẤT HỒ SƠ...
+            </p>
+
+        </section>
+
+
+        <!-- ERROR / ACCESS DENIED -->
+
+        <section
+            class="review-error"
+            id="reviewError"
+            hidden
+        >
+
+            <span>
+                MCA / ACCESS ERROR
+            </span>
+
+            <h1>
+                KHÔNG THỂ MỞ HỒ SƠ
+            </h1>
+
+            <p id="reviewErrorMessage">
+                Hồ sơ không tồn tại hoặc bạn không có quyền truy cập.
+            </p>
+
+            <a href="admin.html">
+                ← QUAY LẠI ADMIN
+            </a>
+
+        </section>
+
+
+        <!-- CONTENT -->
+
+        <div
+            class="review-content"
+            id="reviewContent"
+            hidden
+        >
+
+            <!-- BREADCRUMB -->
+
+            <nav class="review-breadcrumb">
+
+                <a href="admin.html">
+                    ADMIN
+                </a>
+
+                <span>/</span>
+
+                <span>
+                    REVIEW
+                </span>
+
+                <span>/</span>
+
+                <strong id="reviewBreadcrumbCode">
+                    VX-0000
+                </strong>
+
+            </nav>
+
+
+            <!-- HEADER -->
+
+            <section class="review-header">
+
+                <div>
+
+                    <span class="review-header-code">
+                        MCA / CREATURE REVIEW PROTOCOL
+                    </span>
+
+                    <h1>
+                        KIỂM DUYỆT HỒ SƠ
+                    </h1>
+
+                    <p>
+                        Kiểm tra dữ liệu trước khi đưa sinh vật
+                        vào cơ sở dữ liệu chính thức MCA.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="review-current-status"
+                    id="reviewCurrentStatus"
+                >
+                    CHỜ XÁC MINH
+                </div>
+
+            </section>
+
+
+            <!-- CREATURE SUMMARY -->
+
+            <section class="review-creature-summary">
+
+                <div class="review-image">
+
+                    <img
+                        id="reviewCreatureImage"
+                        src="assets/mca-background.png"
+                        alt="Sinh vật"
+                    >
+
+                    <span id="reviewImageCode">
+                        VX-0000
+                    </span>
+
+                </div>
+
+
+                <div class="review-summary-info">
+
+                    <span
+                        class="review-creature-code"
+                        id="reviewCreatureCode"
+                    >
+                        VX-0000
+                    </span>
+
+
+                    <h2 id="reviewCreatureName">
+                        UNKNOWN CREATURE
+                    </h2>
+
+
+                    <p id="reviewCreatureSpecies">
+                        Chưa xác định
+                    </p>
+
+
+                    <div class="review-summary-grid">
+
+                        <div>
+                            <span>VŨ TRỤ</span>
+                            <strong id="reviewUniverse">—</strong>
+                        </div>
+
+                        <div>
+                            <span>HÀNH TINH</span>
+                            <strong id="reviewPlanet">—</strong>
+                        </div>
+
+                        <div>
+                            <span>NGUYÊN TỐ</span>
+                            <strong id="reviewElement">—</strong>
+                        </div>
+
+                        <div>
+                            <span>ĐỘ HIẾM</span>
+                            <strong id="reviewRarity">—</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="review-proposed-threat">
+
+                    <span>
+                        THREAT ĐỀ XUẤT
+                    </span>
+
+                    <strong id="reviewProposedThreat">
+                        ?
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- MAIN -->
+
+            <section class="review-layout">
+
+                <!-- LEFT -->
+
+                <div class="review-data">
+
+
+                    <!-- DESCRIPTION -->
+
+                    <article class="review-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>01</span>
+
+                            <div>
+                                <small>DESCRIPTION</small>
+                                <h3>MÔ TẢ SINH VẬT</h3>
+                            </div>
+
+                        </div>
+
+                        <p
+                            class="review-text"
+                            id="reviewDescription"
+                        >
+                            —
+                        </p>
+
+                    </article>
+
+
+                    <!-- ORIGIN -->
+
+                    <article class="review-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>02</span>
+
+                            <div>
+                                <small>ORIGIN ANALYSIS</small>
+                                <h3>NGUỒN GỐC</h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-information-grid">
+
+                            <div>
+                                <span>Vũ trụ</span>
+                                <strong id="reviewOriginUniverse">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Thiên hà</span>
+                                <strong id="reviewGalaxy">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Hành tinh</span>
+                                <strong id="reviewOriginPlanet">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Thế giới / Khu vực</span>
+                                <strong id="reviewWorld">—</strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- CLASSIFICATION -->
+
+                    <article class="review-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>03</span>
+
+                            <div>
+                                <small>CLASSIFICATION</small>
+                                <h3>PHÂN LOẠI</h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-information-grid">
+
+                            <div>
+                                <span>Loài</span>
+                                <strong id="reviewSpecies">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Tuổi</span>
+                                <strong id="reviewAge">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Kích thước</span>
+                                <strong id="reviewSize">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Nguồn sức mạnh</span>
+                                <strong id="reviewPowerSource">—</strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- APPEARANCE -->
+
+                    <article class="review-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>04</span>
+
+                            <div>
+                                <small>VISUAL ANALYSIS</small>
+                                <h3>NGOẠI HÌNH</h3>
+                            </div>
+
+                        </div>
+
+                        <p
+                            class="review-text"
+                            id="reviewAppearance"
+                        >
+                            —
+                        </p>
+
+                    </article>
+
+
+                    <!-- ABILITIES -->
+
+                    <article class="review-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>05</span>
+
+                            <div>
+                                <small>ABILITY ANALYSIS</small>
+                                <h3>KỸ NĂNG</h3>
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="review-ability-list"
+                            id="reviewAbilityList"
+                        >
+                        </div>
+
+                    </article>
+
+
+                    <!-- WEAKNESS -->
+
+                    <article class="review-panel danger-panel">
+
+                        <div class="review-panel-title">
+
+                            <span>06</span>
+
+                            <div>
+                                <small>LIMITATION ANALYSIS</small>
+                                <h3>ĐIỂM YẾU & GIỚI HẠN</h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-danger-section">
+
+                            <h4>ĐIỂM YẾU</h4>
+
+                            <p
+                                class="review-text"
+                                id="reviewWeaknesses"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="review-danger-section">
+
+                            <h4>GIỚI HẠN</h4>
+
+                            <p
+                                class="review-text"
+                                id="reviewLimitations"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="review-danger-section">
+
+                            <h4>
+                                ĐIỀU KIỆN KÍCH HOẠT NĂNG LỰC MẠNH NHẤT
+                            </h4>
+
+                            <p
+                                class="review-text"
+                                id="reviewStrongestCondition"
+                            >
+                                —
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ADMIN PANEL -->
+
+                <aside class="review-admin-panel">
+
+                    <div class="review-admin-title">
+
+                        <span>
+                            ADMIN PROTOCOL
+                        </span>
+
+                        <h2>
+                            QUYẾT ĐỊNH KIỂM DUYỆT
+                        </h2>
+
+                    </div>
+
+
+                    <!-- PROPOSED -->
+
+                    <div class="review-threat-comparison">
+
+                        <div>
+
+                            <span>
+                                NGƯỜI DÙNG ĐỀ XUẤT
+                            </span>
+
+                            <strong id="adminProposedThreat">
+                                ?
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                MCA XÁC MINH
+                            </span>
+
+                            <strong id="adminVerifiedThreatPreview">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- THREAT SELECT -->
+
+                    <div class="review-form-group">
+
+                        <label for="adminThreatSelect">
+                            CẤP ĐE DỌA CHÍNH THỨC
+                        </label>
+
+                        <select id="adminThreatSelect">
+
+                            <option value="">
+                                -- Chọn cấp --
+                            </option>
+
+                            <option value="F">
+                                F
+                            </option>
+
+                            <option value="E">
+                                E
+                            </option>
+
+                            <option value="D">
+                                D
+                            </option>
+
+                            <option value="C">
+                                C
+                            </option>
+
+                            <option value="B">
+                                B
+                            </option>
+
+                            <option value="A">
+                                A
+                            </option>
+
+                            <option value="S">
+                                S
+                            </option>
+
+                            <option value="SS">
+                                SS
+                            </option>
+
+                            <option value="X">
+                                X
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- STATUS INFORMATION -->
+
+                    <div class="review-warning">
+
+                        <strong>
+                            QUY TẮC KIỂM DUYỆT
+                        </strong>
+
+                        <p>
+                            Chỉ chọn cấp đe dọa chính thức
+                            khi xác minh hồ sơ.
+                        </p>
+
+                        <p>
+                            Hồ sơ cần bổ sung thông tin nên
+                            chuyển sang Cần điều tra thêm.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="review-actions">
+
+                        <button
+                            type="button"
+                            class="review-action investigation"
+                            id="markInvestigationButton"
+                        >
+                            CẦN ĐIỀU TRA THÊM
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="review-action conflicting"
+                            id="markConflictingButton"
+                        >
+                            THÔNG TIN MÂU THUẪN
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="review-action verified"
+                            id="verifyCreatureButton"
+                        >
+                            ✓ XÁC MINH HỒ SƠ
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="review-message"
+                        id="reviewMessage"
+                    >
+                    </div>
+
+
+                    <a
+                        href="admin.html"
+                        class="review-back-admin"
+                    >
+                        ← QUAY LẠI DASHBOARD
+                    </a>
+
+                </aside>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <div id="site-footer"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/components.js"></script>
+
+    <script src="js/admin-chi-tiet.js"></script>
+
+</body>
+
+</html>
