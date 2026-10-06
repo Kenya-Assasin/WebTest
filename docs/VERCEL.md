@@ -33,6 +33,7 @@ Trong **Settings → Environment Variables**, thêm cho Production và Preview:
 | NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY | Publishable key đang dùng, lấy từ .env.local |
 | NEXT_PUBLIC_MCA_PHASE3 | true |
 | NEXT_PUBLIC_MCA_ORIGINS | true (SQL nguồn gốc đã được chủ dự án áp dụng và kiểm tra trực tuyến) |
+| NEXT_PUBLIC_MCA_TRAITS | Chỉ đặt true sau khi chạy apply-traits.sql và mca_traits_ready=true; xem TRAITS.md |
 
 Không đưa `.env.local` lên GitHub. Cờ giai đoạn 3 phải được đặt trước lúc build vì Next.js đưa biến NEXT_PUBLIC vào mã trình duyệt.
 

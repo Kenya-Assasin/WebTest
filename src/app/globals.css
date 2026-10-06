@@ -180,3 +180,14 @@
 .mca-origin-add { margin-top: 12px; padding: 14px; border: 1px solid #24424f; }
 .mca-origin-review { padding: 22px 0; border-top: 1px solid #24424f; }
 .mca-origin-review h2, .mca-origin-review p { overflow-wrap: anywhere; }
+.mca-term-picker { display:grid; gap:10px; margin:18px 0; min-width:0; }
+.mca-form .mca-term-checks { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:12px; border:1px solid var(--mca-border,#164653); max-height:320px; overflow:auto; }
+.mca-term-checks .mca-check { display:flex; flex-direction:row; align-items:center; gap:8px; overflow-wrap:anywhere; }
+.mca-term-checks input[type="checkbox"] { width:16px; height:16px; flex-shrink:0; margin:0; padding:0; }
+.mca-form .mca-dimensions { border:0; padding:0; margin:22px 0; }
+.mca-dimension-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.mca-dimension-grid > div { display:grid; gap:10px; min-width:0; }
+.mca-threat-options.mca-threat-expanded { display:flex; flex-direction:column; }
+.mca-threat-expanded button { width:100%; white-space:normal; text-align:left; }
+.mca-card-badges .mca-badge { white-space:normal; overflow-wrap:anywhere; }
+@media(max-width:640px) { .mca-dimension-grid { grid-template-columns:1fr; } .mca-form .mca-term-checks { grid-template-columns:1fr; } }

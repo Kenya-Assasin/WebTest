@@ -1,5 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { PAGE_SIZE, statusNames, threatLevels, type Ability, type Creature, type RecordId } from './model';
+import { modernThreats } from './traits';
+import { traitsEnabled } from '@/lib/supabase/features';
 
 export type Filters = { search: string; statuses: string[]; threats: string[]; species: string; element: string; origin: string; sort: 'newest' | 'oldest' | 'name' };
 export const defaultFilters: Filters = { search: '', statuses: [], threats: [], species: '', element: '', origin: '', sort: 'newest' };
@@ -11,10 +13,13 @@ export async function listCreatures(client: SupabaseClient, filters: Filters, pa
   if (search) query = query.or(`name.ilike.%${search}%,creature_code.ilike.%${search}%`);
   const statuses = filters.statuses.filter(value => value in statusNames);
   if (statuses.length) query = query.in('status', statuses);
-  const threats = filters.threats.filter(value => (threatLevels as readonly string[]).includes(value));
+  const threats = filters.threats.filter(value => [...threatLevels,...modernThreats].includes(value));
   if (threats.length) query = query.or(`verified_threat_level.in.(${threats.join(',')}),and(verified_threat_level.is.null,proposed_threat_level.in.(${threats.join(',')}))`);
   if (filters.species) query = query.eq('species', filters.species);
-  if (filters.element) query = query.eq('element', filters.element);
+  if (filters.element) {
+    if(traitsEnabled&&/^[A-Za-z0-9_-]{1,50}$/.test(filters.element))query=query.or(`element_codes.cs.{${filters.element}},and(element_codes.is.null,element.eq.${filters.element})`);
+    else query=query.eq('element',filters.element);
+  }
   if (filters.origin.trim()) query = query.ilike('galaxy', `%${filters.origin.trim().replace(/[%_]/g, '')}%`);
   query = query.order(filters.sort === 'name' ? 'name' : 'created_at', { ascending: filters.sort !== 'newest' }).order('id', { ascending: true });
   const start = Math.max(0, page - 1) * PAGE_SIZE;

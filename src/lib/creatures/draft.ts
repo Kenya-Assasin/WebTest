@@ -1,15 +1,17 @@
 import { speciesNames, threatLevels } from './model';
+import { emptyDimensions, modernThreats, newRarityNames, unitNames, validateDimensions, type Dimensions } from './traits';
 
 export type DraftAbility = { name: string; description: string };
 export type CreatureDraft = {
   name: string; species: string; universe: string; galaxy: string; planet: string; world: string;
   originPlanetId?: string;
   originIds?: string[];
+  traitsVersion?: 1; speciesTermId?: string; elementTermIds?: string[]; dimensions?: Dimensions;
   age: string; size: string; element: string; rarity: string; powerSource: string; threatLevel: string;
   description: string; appearance: string; weaknesses: string; limitations: string; strongestAbilityCondition: string;
   abilities: DraftAbility[];
 };
-export type DraftTextField = Exclude<keyof CreatureDraft, 'abilities' | 'originPlanetId' | 'originIds'>;
+export type DraftTextField = Exclude<keyof CreatureDraft, 'abilities' | 'originPlanetId' | 'originIds' | 'traitsVersion' | 'speciesTermId' | 'elementTermIds' | 'dimensions'>;
 export const emptyDraft = (): CreatureDraft => ({ name: '', species: '', universe: '', galaxy: '', planet: '', world: '', age: '', size: '', element: '', rarity: '', powerSource: '', threatLevel: '', description: '', appearance: '', weaknesses: '', limitations: '', strongestAbilityCondition: '', abilities: [{ name: '', description: '' }] });
 export const fieldLimits: Record<DraftTextField, number> = { name: 100, species: 50, universe: 100, galaxy: 100, planet: 100, world: 150, age: 50, size: 100, element: 50, rarity: 50, powerSource: 150, threatLevel: 10, description: 3000, appearance: 2000, weaknesses: 2000, limitations: 2000, strongestAbilityCondition: 1500 };
 
@@ -18,6 +20,12 @@ export function restoreDraft(value: unknown): CreatureDraft {
   if (!value || typeof value !== 'object') throw new Error('Bản nháp không hợp lệ.');
   const saved = value as Record<string, unknown>;
   const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if(saved.traitsVersion===1)result.traitsVersion=1;
+  if(typeof saved.speciesTermId==='string'&&uuid.test(saved.speciesTermId))result.speciesTermId=saved.speciesTermId;
+  if(Array.isArray(saved.elementTermIds))result.elementTermIds=[...new Set(saved.elementTermIds.filter((id):id is string=>typeof id==='string'&&uuid.test(id)))].slice(0,20);
+  if(saved.dimensions&&typeof saved.dimensions==='object'){
+    result.dimensions=emptyDimensions();for(const key of ['height','length','width'] as const){const d=(saved.dimensions as Dimensions)[key];if(d&&typeof d.value==='string')result.dimensions[key]={value:d.value.slice(0,43),unit:Object.hasOwn(unitNames,d.unit)?d.unit:'m'};}
+  }
   if (typeof saved.originPlanetId === 'string' && uuid.test(saved.originPlanetId)) result.originPlanetId = saved.originPlanetId;
   if (Array.isArray(saved.originIds)) result.originIds = saved.originIds.slice(0,5).map(id => typeof id === 'string' && uuid.test(id) ? id : '');
   for (const [key, limit] of Object.entries(fieldLimits)) {
@@ -29,10 +37,15 @@ export function restoreDraft(value: unknown): CreatureDraft {
 
 export function validateDraft(draft: CreatureDraft) {
   if (!draft.name.trim()) return 'Vui lòng nhập tên sinh vật.';
-  if (!(draft.species in speciesNames)) return 'Vui lòng chọn loài sinh vật.';
+  if (draft.traitsVersion===1?!draft.speciesTermId:!(draft.species in speciesNames)) return 'Vui lòng chọn loài sinh vật.';
   if (!draft.universe.trim()) return 'Vui lòng nhập vũ trụ.';
   if (!draft.planet.trim()) return 'Vui lòng nhập hành tinh.';
-  if (!(threatLevels as readonly string[]).includes(draft.threatLevel)) return 'Vui lòng chọn cấp độ đe dọa.';
+  if (!(draft.traitsVersion===1?modernThreats:threatLevels as readonly string[]).includes(draft.threatLevel)) return 'Vui lòng chọn cấp độ đe dọa.';
+  if(draft.traitsVersion===1){
+    if(draft.rarity&&!Object.hasOwn(newRarityNames,draft.rarity))return 'Hãy chọn độ hiếm trong bảy cấp mới.';
+    if(!Array.isArray(draft.elementTermIds)||draft.elementTermIds.length>20||new Set(draft.elementTermIds).size!==draft.elementTermIds.length)return 'Hãy chọn tối đa 20 nguyên tố khác nhau.';
+    const error=validateDimensions(draft.dimensions as Dimensions);if(error)return error;
+  }
   for (const [key, limit] of Object.entries(fieldLimits)) if (draft[key as DraftTextField].length > limit) return 'Một trường dữ liệu vượt quá độ dài cho phép.';
   if (draft.description.trim().length < 30) return 'Mô tả sinh vật phải có ít nhất 30 ký tự.';
   if (!draft.weaknesses.trim()) return 'Sinh vật phải có ít nhất một điểm yếu.';

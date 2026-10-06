@@ -1,5 +1,8 @@
 'use client';
 import Link from 'next/link';
+import { traitsEnabled } from '@/lib/supabase/features';
+import { createClient } from '@/lib/supabase/client';
+import { listTerms, modernThreats, threatName } from '@/lib/creatures/traits';
 import { useEffect, useState } from 'react';
 import { elementNames, label, speciesNames, statusNames, threatLevels } from '@/lib/creatures/model';
 import { type Filters } from '@/lib/creatures/queries';
@@ -8,6 +11,9 @@ import { useStatistics } from './use-statistics';
 import { CreatureCard, Empty, Feedback, Pagination } from './shared';
 
 export function Explorer({ home = false, initialSearch = '' }: { home?: boolean; initialSearch?: string }) {
+  const [speciesOptions,setSpeciesOptions]=useState(speciesNames);const [elementOptions,setElementOptions]=useState(elementNames);const [catalogError,setCatalogError]=useState('');const [catalogRevision,setCatalogRevision]=useState(0);
+  useEffect(()=>{if(!traitsEnabled)return;const abort=new AbortController();setCatalogError('');Promise.all([listTerms(createClient(),'species',abort.signal),listTerms(createClient(),'element',abort.signal)]).then(([species,elements])=>{if(abort.signal.aborted)return;setSpeciesOptions(Object.fromEntries(species.filter(n=>n.status==='approved').map(n=>[n.code,n.name])));setElementOptions(Object.fromEntries(elements.filter(n=>n.status==='approved').map(n=>[n.code,n.name])));}).catch(()=>{if(!abort.signal.aborted)setCatalogError('Chưa tải được danh mục loài và nguyên tố mới.');});return()=>abort.abort();},[catalogRevision]);
+  const visibleThreats=traitsEnabled?[...modernThreats,'SS','X']:threatLevels;
   const list = useCreatureList({ search: initialSearch });
   const statistics = useStatistics();
   const [view, setView] = useState<'grid' | 'list'>('grid');
@@ -30,10 +36,10 @@ export function Explorer({ home = false, initialSearch = '' }: { home?: boolean;
       <aside className="mca-panel mca-filters">
         <div className="mca-panel-heading"><h2>Bộ lọc</h2><button type="button" className="mca-text-button" onClick={list.resetFilters}>Xóa bộ lọc</button></div>
         <fieldset><legend>Trạng thái</legend>{Object.entries(statusNames).map(([value, name]) => <label key={value} className="mca-check"><input type="checkbox" checked={list.filters.statuses.includes(value)} onChange={() => toggle('statuses', value)} />{name}</label>)}</fieldset>
-        <fieldset><legend>Cấp đe dọa</legend><div className="mca-threat-options">{threatLevels.map(value => <button key={value} className={list.filters.threats.includes(value) ? 'active' : ''} type="button" aria-pressed={list.filters.threats.includes(value)} onClick={() => toggle('threats', value)}>{value}</button>)}</div></fieldset>
-        <label>Loài<select id="archiveSpecies" value={list.filters.species} onChange={event => list.updateFilters({ species: event.target.value })}><option value="">Mọi loài</option>{Object.entries(speciesNames).map(([value, name]) => <option key={value} value={value}>{name}</option>)}</select></label>
-        <label>Nguyên tố<select id="archiveElement" value={list.filters.element} onChange={event => list.updateFilters({ element: event.target.value })}><option value="">Mọi nguyên tố</option>{Object.entries(elementNames).map(([value, name]) => <option key={value} value={value}>{name}</option>)}</select></label>
-        <label>Thiên hà<input id="archiveOrigin" value={list.filters.origin} onChange={event => list.updateFilters({ origin: event.target.value })} placeholder="Tìm thiên hà..." /></label>
+        <fieldset><legend>Cấp đe dọa</legend><div className={`mca-threat-options ${traitsEnabled?'mca-threat-expanded':''}`}>{visibleThreats.map(value => <button key={value} className={list.filters.threats.includes(value) ? 'active' : ''} type="button" aria-pressed={list.filters.threats.includes(value)} onClick={() => toggle('threats', value)}>{traitsEnabled?(['SS','X'].includes(value)?`${value} (cũ)`:threatName(value)):value}</button>)}</div></fieldset>
+        <label>Loài<select id="archiveSpecies" value={list.filters.species} onChange={event => list.updateFilters({ species: event.target.value })}><option value="">Mọi loài</option>{Object.entries(speciesOptions).map(([value, name]) => <option key={value} value={value}>{name}</option>)}</select></label>
+        <label>Nguyên tố<select id="archiveElement" value={list.filters.element} onChange={event => list.updateFilters({ element: event.target.value })}><option value="">Mọi nguyên tố</option>{Object.entries(elementOptions).map(([value, name]) => <option key={value} value={value}>{name}</option>)}</select></label>
+        {catalogError&&<div role="alert"><p>{catalogError}</p><button type="button" onClick={()=>setCatalogRevision(n=>n+1)}>Thử lại danh mục</button></div>}<label>Thiên hà<input id="archiveOrigin" value={list.filters.origin} onChange={event => list.updateFilters({ origin: event.target.value })} placeholder="Tìm thiên hà..." /></label>
       </aside>
       <section className="mca-results" aria-label="Hồ sơ sinh vật">
         <div className="mca-toolbar"><label className="mca-search"><span className="mca-sr-only">Tìm tên sinh vật hoặc mã hồ sơ</span><input type="search" id={home ? 'homeSearchInput' : 'archiveSearchInput'} value={list.filters.search} onChange={event => list.updateFilters({ search: event.target.value })} placeholder="Tìm tên sinh vật hoặc mã hồ sơ..." /></label>
@@ -41,7 +47,7 @@ export function Explorer({ home = false, initialSearch = '' }: { home?: boolean;
           <div className="mca-view"><button aria-label="Dạng lưới" aria-pressed={view === 'grid'} onClick={() => changeView('grid')}>▦</button><button aria-label="Dạng danh sách" aria-pressed={view === 'list'} onClick={() => changeView('list')}>☰</button></div>
         </div>
         <div className="mca-results-heading"><h2>{home ? 'Hồ sơ mới nhất' : 'Kết quả tìm kiếm'}</h2><span id="archiveResultCount">{list.loading ? 'Đang tải...' : `${list.total} hồ sơ`}</span></div>
-        {active && <div className="mca-filter-tags"><span>{list.filters.search && `Tìm kiếm: ${list.filters.search}`}</span>{list.filters.statuses.map(value => <button key={value} onClick={() => toggle('statuses', value)}>{label(statusNames, value)} ×</button>)}{list.filters.threats.map(value => <button key={value} onClick={() => toggle('threats', value)}>Cấp {value} ×</button>)}<button onClick={list.resetFilters}>Xóa tất cả ×</button></div>}
+        {active && <div className="mca-filter-tags"><span>{list.filters.search && `Tìm kiếm: ${list.filters.search}`}</span>{list.filters.statuses.map(value => <button key={value} onClick={() => toggle('statuses', value)}>{label(statusNames, value)} ×</button>)}{list.filters.threats.map(value => <button key={value} onClick={() => toggle('threats', value)}>Cấp {traitsEnabled?threatName(value):value} ×</button>)}<button onClick={list.resetFilters}>Xóa tất cả ×</button></div>}
         <Feedback loading={list.loading} error={list.error} onRetry={list.reload} />
         {!list.loading && !list.error && <><div id="archiveCreatureGrid" className={`mca-creature-grid ${view === 'list' ? 'mca-list-view' : ''}`}>{list.creatures.map(creature => <CreatureCard key={creature.id} creature={creature} />)}</div>{!list.creatures.length && <Empty />}<Pagination page={list.page} total={list.total} onPage={list.setPage} /></>}
       </section>

@@ -1,4 +1,6 @@
 import type { TableRow } from '@/lib/supabase/database.types';
+import { traitsEnabled } from '@/lib/supabase/features';
+import { dimensionsLabel, newRarityNames, threatName } from './traits';
 
 export type RecordId = number | string;
 export type Creature = TableRow<'creatures'>;
@@ -10,7 +12,12 @@ export const statusNames: Record<string, string> = { pending: 'Chờ xác minh',
 export const threatLevels = ['F', 'E', 'D', 'C', 'B', 'A', 'S', 'SS', 'X'] as const;
 export const PAGE_SIZE = 12;
 export const creatureCode = (creature: Creature) => creature.creature_code || `MCA-${creature.id}`;
-export const threatLevel = (creature: Creature) => creature.verified_threat_level || creature.proposed_threat_level || '?';
+export const creatureThreatLabel=(creature:Creature,value:string)=>traitsEnabled||creature.traits_version===1?threatName(value):value;
+export const threatLevel = (creature: Creature) => creatureThreatLabel(creature,creature.verified_threat_level || creature.proposed_threat_level || '?');
+export const creatureSpecies=(creature:Creature)=>creature.species_name||label(speciesNames,creature.species);
+export const creatureElements=(creature:Creature)=>creature.element_names?.join(' · ')||label(elementNames,creature.element);
+export const creatureSize=(creature:Creature)=>dimensionsLabel(creature.dimensions)||creature.size;
+export const creatureRarity=(creature:Creature)=>creature.rarity?newRarityNames[({common:'normal',uncommon:'special',legendary:'legend'} as Record<string,string>)[creature.rarity]||creature.rarity]||label(rarityNames,creature.rarity):'Chưa xác định';
 export const detailPath = (id: RecordId, review = false) => `/${review ? 'admin-chi-tiet' : 'chi-tiet-sinh-vat'}?id=${encodeURIComponent(id)}`;
 export function label(names: Record<string, string>, value: string | null | undefined) { return value ? names[value] || value : 'Chưa xác định'; }
 export function formatDate(value: string | null | undefined) {

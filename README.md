@@ -1,5 +1,7 @@
 # MCA — Next.js + Supabase
 
+Đã chuẩn bị thêm loài/nguyên tố do người dùng đề xuất có admin duyệt, nhiều nguyên tố trong một hồ sơ, ba chiều kích thước kèm đơn vị và hệ độ hiếm/đe dọa mới. Còn chờ áp dụng `supabase/apply-traits.sql` rồi bật `NEXT_PUBLIC_MCA_TRAITS=true`; xem [TRAITS.md](docs/TRAITS.md).
+
 Đã bổ sung nguồn gốc **Vũ trụ → Thiên hà → Tinh vân → Hệ sao → Hành tinh**, danh sách phụ thuộc cấp cha và đề xuất địa danh cần admin duyệt. Chủ dự án đã chạy SQL bổ sung trên Supabase thật; sáu kiểm tra quyền/schema trực tuyến đạt, cờ nguồn gốc trên máy đã bật. Vercel còn cần thêm `NEXT_PUBLIC_MCA_ORIGINS=true` và triển khai code mới. Xem [hướng dẫn nguồn gốc](docs/ORIGINS.md).
 
 Frontend đã chuyển sang Next.js App Router, TypeScript và React cho toàn bộ 9 trang. Backend tiếp tục dùng dự án Supabase hiện có (Auth, Postgres, Storage và RPC). **Giai đoạn 2 đã chuyển các màn hình nghiệp vụ sang React và bỏ lớp tương thích.** Chủ dự án đã xác nhận áp dụng SQL giai đoạn 3 trên Supabase thật ngày 06/10/2026; bản chạy trên máy đã bật yêu thích theo tài khoản và RPC giao dịch/duyệt mới, biên dịch và kiểm tra khi chưa đăng nhập thành công. Đã chọn Vercel với tên miền `mo-mca.vercel.app`; đang sửa cấu hình triển khai trả 404, còn kiểm thử bằng tài khoản thật. Xem hướng dẫn trong `docs/PHASE3.md` và `docs/VERCEL.md`.
@@ -46,6 +48,7 @@ Trong Supabase → Authentication → URL Configuration, thêm `http://localhost
 | Quản trị | `/admin` | React; kiểm tra vai trò trên máy chủ, danh sách và bộ lọc |
 | Duyệt hồ sơ | `/admin-chi-tiet?id=...` | React; xác nhận thao tác, gọi RPC giai đoạn 3 có kiểm tra admin |
 | Duyệt địa danh | `/admin-nguon-goc` | React; duyệt/từ chối theo cấp cha, chỉ bật sau SQL nguồn gốc |
+| Duyệt loài/nguyên tố | `/admin-phan-loai` | React; duyệt/từ chối đề xuất, chỉ bật sau SQL phân loại |
 
 URL `.html` cũ được chuyển hướng 308 và giữ tham số truy vấn. Điều hướng nội bộ dùng Next Link, không tải lại toàn bộ tài liệu. Thư viện Supabase được cài qua npm. Menu chỉ hiển thị các trang có thật. Những đường dẫn tới chức năng chưa xây dựng trả về màn hình 404.
 
@@ -84,7 +87,7 @@ npm run test:install
 npm test
 ```
 
-`npm test` chạy 44 kiểm thử SQL trên PostgreSQL cục bộ bằng PGlite, sau đó 22 kiểm thử frontend giai đoạn 2, 8 kiểm thử frontend giai đoạn 3 và 7 kiểm thử nguồn gốc. Kiểm thử SQL dùng fixture bigint/UUID và schema public/quyền/trigger tái dựng từ audit Supabase do chủ dự án cung cấp. Auth/Storage được mô phỏng tối thiểu; chưa thay thế kiểm tra trực tuyến.
+`npm test` chạy 54 kiểm thử SQL trên PostgreSQL cục bộ bằng PGlite, sau đó 22 kiểm thử frontend giai đoạn 2, 8 kiểm thử frontend giai đoạn 3, 7 kiểm thử nguồn gốc và 9 kiểm thử phân loại/kích thước/sức mạnh. Kiểm thử SQL dùng fixture bigint/UUID và schema public/quyền/trigger tái dựng từ audit Supabase do chủ dự án cung cấp. Auth/Storage được mô phỏng tối thiểu; chưa thay thế kiểm tra trực tuyến.
 
 Các kiểm thử trình duyệt chạy với Next.js riêng tại `127.0.0.1:3100` và Supabase giả lập tại `127.0.0.1:54399`, dùng thư mục build `.next-test`. Chúng kiểm tra cả phiên đăng nhập qua cookie và vai trò phía máy chủ. Tạo hồ sơ, tải ảnh, hoàn tác lỗi, sửa tên và duyệt hồ sơ chỉ ghi vào bộ nhớ của backend giả lập. Không ghi Supabase thật.
 

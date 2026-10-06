@@ -6,11 +6,13 @@ import { randomUUID } from 'node:crypto';
 const require = createRequire(import.meta.url);
 const owner = '11111111-1111-4111-8111-111111111111';
 const adminId = '22222222-2222-4222-8222-222222222222';
-let records, abilities, calls, failures, usernames, favorites, submissions, origins;
+let records, abilities, calls, failures, usernames, favorites, submissions, origins, terms;
 function reset() {
   records = Array.from({ length: 25 }, (_, index) => ({ id: index + 1, creator_id: owner, creature_code: `VX-${String(index + 1).padStart(4, '0')}`, name: index === 0 ? 'Sinh vật kiểm thử' : `Sinh vật ${index + 1}`, species: index % 2 ? 'dragon' : 'beast', universe: 'Vũ trụ thử nghiệm', galaxy: 'Ngân Hà', planet: 'Hành tinh thử nghiệm', element: index % 2 ? 'fire' : 'water', rarity: 'rare', proposed_threat_level: 'B', verified_threat_level: index % 2 ? 'A' : null, status: index % 2 ? 'verified' : 'pending', description: 'Một sinh vật có mô tả đầy đủ để dùng trong kiểm thử.', weaknesses: 'Ánh sáng mạnh', created_at: `2026-09-${String(index + 1).padStart(2, '0')}T00:00:00Z`, image_url: null }));
   abilities = [{ id: 1, creature_id: 1, ability_name: 'Dịch chuyển', ability_description: 'Mở cổng không gian.' }];
   calls = []; failures = {}; favorites = []; submissions = new Map(); usernames = { [owner]: 'Điều tra viên thật', [adminId]: 'Quản trị viên' };
+  const species={dragon:'Rồng',beast:'Thú',entity:'Thực thể',insect:'Côn trùng',mythical:'Sinh vật thần thoại',humanoid:'Dạng người',machine:'Sinh vật cơ giới',plant:'Thực vật',unknown:'Chưa xác định'};const elements={fire:'Lửa',ice:'Băng',water:'Nước',earth:'Đất',wind:'Gió',light:'Ánh sáng',dark:'Bóng tối',void:'Hư không',space:'Không gian',crystal:'Tinh thể',electric:'Điện',multi:'Đa thuộc tính',unknown:'Chưa xác định'};
+  terms=[...Object.entries(species).map(([code,name])=>({kind:'species',code,name})),...Object.entries(elements).map(([code,name])=>({kind:'element',code,name}))].map((n,index)=>({...n,id:`cccccccc-cccc-4ccc-8ccc-${String(index+1).padStart(12,'0')}`,status:'approved',created_by:null,review_note:null}));
   origins=['universe','galaxy','nebula','star_system','planet'].map((kind,index)=>({id:`aaaaaaaa-aaaa-4aaa-8aaa-${String(index+1).padStart(12,'0')}`,kind,name:['Vũ trụ A','Thiên hà A','Tinh vân A','Hệ sao A','Hành tinh A'][index],parent_id:index?`aaaaaaaa-aaaa-4aaa-8aaa-${String(index).padStart(12,'0')}`:null,status:'approved',review_note:null,created_by:null}));
   origins.push({id:'bbbbbbbb-bbbb-4bbb-8bbb-000000000001',kind:'universe',name:'Vũ trụ B',parent_id:null,status:'approved',review_note:null,created_by:null});
 }
@@ -47,6 +49,7 @@ function filter(rows, params) {
   if (search) result = result.filter(row => `${row.name} ${row.creature_code}`.toLowerCase().includes(search.toLowerCase()));
   const threats = or.match(/verified_threat_level\.in\.\(([^)]*)\)/)?.[1].split(',');
   if (threats) result = result.filter(row => threats.includes(row.verified_threat_level || row.proposed_threat_level));
+  const element=or.match(/element_codes\.cs\.\{([^}]*)\}/)?.[1];if(element)result=result.filter(row=>row.element_codes?row.element_codes.includes(element):row.element===element);
   const origin = params.get('galaxy');
   if (origin?.startsWith('ilike.')) result = result.filter(row => row.galaxy?.toLowerCase().includes(origin.slice(6).replaceAll('%', '').toLowerCase()));
   const order = params.get('order')?.split(',')[0];
@@ -58,7 +61,7 @@ const backend = http.createServer(async (request, response) => {
     const url = new URL(request.url, 'http://127.0.0.1:54399');
     if (request.method === 'OPTIONS') return send(response, 200);
     if (url.pathname === '/__test/reset') { reset(); return send(response, 200, {}); }
-    if (url.pathname === '/__test/state') return send(response, 200, { records, abilities, calls, favorites, origins });
+    if (url.pathname === '/__test/state') return send(response, 200, { records, abilities, calls, favorites, origins, terms });
     if (url.pathname === '/__test/fail') { Object.assign(failures, await body(request)); return send(response, 200, {}); }
     if (url.pathname === '/__test/seed-favorites') {
       const { count=25 }=await body(request);
@@ -103,6 +106,20 @@ const backend = http.createServer(async (request, response) => {
       const data=matched.slice(start,start+limit);
       return send(response,200,url.searchParams.get('select')?.includes('creature:') ? data.map(row=>({creature:records.find(creature=>String(creature.id)===String(row.creature_id))})) : data,{'Content-Range':`${start}-${Math.max(start,start+data.length-1)}/${matched.length}`});
     }
+    if(url.pathname==='/rest/v1/creature_terms'){
+      if(request.method!=='GET')return send(response,403,{message:'WRITE_DENIED'});if(failures.terms)return send(response,500,{message:'TERMS_FAILED'});
+      const matched=filter(terms.filter(n=>n.status==='approved'||(claims&&(n.created_by===claims.sub||claims.sub===adminId))),url.searchParams);const start=Number(url.searchParams.get('offset')||0),limit=Number(url.searchParams.get('limit')||500);return send(response,200,matched.slice(start,start+limit),{'Content-Range':`${start}-${Math.max(start,start+Math.min(limit,matched.length)-1)}/${matched.length}`});
+    }
+    if(url.pathname==='/rest/v1/rpc/mca_add_term'){
+      const values=await body(request);calls.push({method:'POST',table:'add_term',body:values});if(!claims)return send(response,403,{message:'AUTH_REQUIRED'});if(failures.addTerm)return send(response,500,{message:'ADD_TERM_FAILED'});
+      const name=values.p_name?.trim().replace(/\s+/g,' ');if(!name||name.length>100)return send(response,400,{message:'TERM_NAME_INVALID'});
+      const existing=terms.find(n=>n.kind===values.p_kind&&n.name.toLowerCase()===name.toLowerCase());if(existing){if(existing.status==='rejected')return send(response,400,{message:'TERM_REJECTED'});if(existing.status!=='approved'&&existing.created_by!==claims.sub)return send(response,400,{message:'TERM_NAME_RESERVED'});return send(response,200,existing);}
+      const id=randomUUID();const term={id,kind:values.p_kind,code:'custom_'+id,name,status:'pending',review_note:null,created_by:claims.sub};terms.push(term);return send(response,200,term);
+    }
+    if(url.pathname==='/rest/v1/rpc/mca_review_term'){
+      const values=await body(request);calls.push({method:'POST',table:'review_term',body:values});if(claims?.sub!==adminId)return send(response,403,{message:'ADMIN_REQUIRED'});
+      const node=terms.find(n=>n.id===values.p_id);if(!node)return send(response,404,{message:'TERM_NOT_FOUND'});node.status=values.p_status;node.review_note=values.p_note;return send(response,200,null);
+    }
     if (url.pathname === '/rest/v1/origin_locations') {
       if(request.method!=='GET')return send(response,403,{message:'WRITE_DENIED'});
       if(failures.origins)return send(response,500,{message:'CATALOG_FAILED'});
@@ -127,7 +144,7 @@ const backend = http.createServer(async (request, response) => {
       if(values.p_status==='approved'&&node.parent_id&&origins.find(n=>n.id===node.parent_id)?.status!=='approved')return send(response,400,{message:'ORIGIN_APPROVE_PARENT_FIRST'});
       node.status=values.p_status;node.review_note=values.p_note;return send(response,200,null);
     }
-    if (url.pathname === '/rest/v1/rpc/mca_submit_creature' || url.pathname === '/rest/v1/rpc/mca_submit_creature_with_origin') {
+    if (url.pathname === '/rest/v1/rpc/mca_submit_creature' || url.pathname === '/rest/v1/rpc/mca_submit_creature_with_origin' || url.pathname === '/rest/v1/rpc/mca_submit_creature_v2') {
       const values=await body(request); calls.push({method:'POST',table:'submit_rpc',body:values});
       if (!claims) return send(response,403,{message:'AUTH_REQUIRED'});
       if (failures.submitMissing) return send(response,404,{code:'PGRST202',message:'Function not found'});
@@ -137,11 +154,16 @@ const backend = http.createServer(async (request, response) => {
       if (failures.creature_abilities) return send(response,500,{message:'ABILITY_FAILED'});
       const draft=values.p_draft;
       const created={...draft,id:100+records.length,creator_id:claims.sub,creature_code:`VX-${100+records.length}`,proposed_threat_level:draft.threatLevel,verified_threat_level:null,status:'pending',image_url:values.p_image_path?`/storage/v1/object/public/creature-images/${values.p_image_path}`:null,created_at:new Date().toISOString()};
-      if(url.pathname.endsWith('mca_submit_creature_with_origin')){
+      if(url.pathname.endsWith('mca_submit_creature_with_origin')||url.pathname.endsWith('mca_submit_creature_v2')){
         const chain=[];let node=origins.find(n=>n.id===draft.originPlanetId);
         while(node&&chain.length<5){chain.unshift(node);node=origins.find(n=>n.id===node.parent_id);}
         if(chain.length!==5||chain.some(n=>!(n.status==='approved'||(n.status==='pending'&&n.created_by===claims.sub))))return send(response,400,{code:'22023',message:'DRAFT_INVALID: origin'});
         Object.assign(created,{universe:chain[0].name,galaxy:chain[1].name,nebula:chain[2].name,star_system:chain[3].name,planet:chain[4].name,origin_planet_id:chain[4].id});
+      }
+      if(url.pathname.endsWith('mca_submit_creature_v2')){
+        const species=terms.find(n=>n.id===draft.speciesTermId&&n.kind==='species');const selected=(draft.elementTermIds||[]).map(id=>terms.find(n=>n.id===id&&n.kind==='element'));
+        if(!species||[species,...selected].some(n=>!n||!(n.status==='approved'||n.status==='pending'&&n.created_by===claims.sub)))return send(response,400,{code:'22023',message:'DRAFT_INVALID: terms'});
+        Object.assign(created,{traits_version:1,species:species.code,species_term_id:species.id,species_name:species.name,element_codes:selected.map(n=>n.code),element_names:selected.map(n=>n.name),element:selected[0]?.code||null,dimensions:draft.dimensions,size:null});
       }
       records.push(created);
       abilities.push(...draft.abilities.map((ability,index)=>({id:100+abilities.length+index,creature_id:created.id,ability_name:ability.name,ability_description:ability.description})));
@@ -195,7 +217,7 @@ const backend = http.createServer(async (request, response) => {
 });
 backend.listen(54399, '127.0.0.1', () => console.log('Mock Supabase ready at 127.0.0.1:54399'));
 const next = spawn(process.execPath, [require.resolve('next/dist/bin/next'), 'dev', '--hostname', '127.0.0.1', '--port', '3100'], {
-  stdio: 'inherit', env: { ...process.env, MCA_TEST: '1', NEXT_PUBLIC_MCA_ORIGINS: process.env.MCA_TEST_ORIGINS==='1'?'true':'false', NEXT_PUBLIC_MCA_PHASE3: process.env.MCA_TEST_PHASE3 === '1' ? 'true' : 'false', NEXT_PUBLIC_SUPABASE_URL: 'http://127.0.0.1:54399', NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_test' },
+  stdio: 'inherit', env: { ...process.env, MCA_TEST: '1', NEXT_PUBLIC_MCA_TRAITS: process.env.MCA_TEST_TRAITS==='1'?'true':'false', NEXT_PUBLIC_MCA_ORIGINS: process.env.MCA_TEST_ORIGINS==='1'?'true':'false', NEXT_PUBLIC_MCA_PHASE3: process.env.MCA_TEST_PHASE3 === '1' ? 'true' : 'false', NEXT_PUBLIC_SUPABASE_URL: 'http://127.0.0.1:54399', NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_test' },
 });
 next.on('exit', code => { backend.close(); process.exit(code ?? 1); });
 process.on('SIGTERM', () => { next.kill(); backend.close(); });

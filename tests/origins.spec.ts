@@ -29,7 +29,7 @@ test('users propose a complete private chain and submit its canonical names via 
 });
 test('admin approves a proposal before it becomes visible to the public',async({page,browser,request})=>{
   await login(page);await propose(page,0,'Vũ trụ chờ duyệt');const adminContext=await browser.newContext();const admin=await adminContext.newPage();await login(admin,true,'/admin-nguon-goc');
-  await expect(admin.getByRole('heading',{name:'Vũ trụ chờ duyệt',exact:true})).toBeVisible();admin.once('dialog',dialog=>dialog.accept());await admin.getByRole('button',{name:'Duyệt Vũ trụ chờ duyệt',exact:true}).click();await expect(admin.getByRole('status')).toContainText('Đã duyệt');
+  await expect(admin.getByRole('heading',{name:'Vũ trụ chờ duyệt',exact:true})).toBeVisible();admin.once('dialog',dialog=>dialog.accept());await admin.getByRole('button',{name:'Duyệt Vũ trụ chờ duyệt',exact:true}).click();await expect(admin.getByRole('status').filter({hasText:'Đã duyệt'})).toContainText('Đã duyệt');
   const publicNodes=await(await request.get(`${backend}/rest/v1/origin_locations`)).json();expect(publicNodes.some((n:{name:string;status:string})=>n.name==='Vũ trụ chờ duyệt'&&n.status==='approved')).toBe(true);await adminContext.close();
 });
 test('catalog/add errors are retryable and phone fields do not overflow',async({page,request})=>{
@@ -55,7 +55,7 @@ test('a rejected proposal displays the admin note and cannot remain selected',as
   const adminContext=await browser.newContext();const admin=await adminContext.newPage();await login(admin,true,'/admin-nguon-goc');
   await admin.getByLabel('Ghi chú cho người đề xuất').fill('Hãy dùng tên đầy đủ.');
   admin.once('dialog',dialog=>dialog.accept());await admin.getByRole('button',{name:'Từ chối Vũ trụ sai tên',exact:true}).click();
-  await expect(admin.getByRole('status')).toContainText('Đã từ chối');await page.reload();
+  await expect(admin.getByRole('status').filter({hasText:'Đã từ chối'})).toContainText('Đã từ chối');await page.reload();
   await expect(page.locator('#origin-universe')).toHaveValue('');
   await expect(page.getByText('Vũ trụ sai tên: Hãy dùng tên đầy đủ.',{exact:true})).toBeVisible();
   await expect(page.locator('#origin-universe option').filter({hasText:'Vũ trụ sai tên'})).toHaveJSProperty('disabled',true);

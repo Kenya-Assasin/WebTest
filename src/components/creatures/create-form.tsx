@@ -5,7 +5,10 @@ import { createClient } from '@/lib/supabase/client';
 import { creatureCode, detailPath, elementNames, rarityNames, speciesNames, threatLevels, type Creature, type RecordId } from '@/lib/creatures/model';
 import { emptyDraft, fieldLimits, restoreDraft, validateDraft, validateImage, type CreatureDraft, type DraftTextField } from '@/lib/creatures/draft';
 import { SubmissionError, submitCreature } from '@/lib/creatures/mutations';
-import { phase3Enabled, originsEnabled } from '@/lib/supabase/features';
+import { phase3Enabled, originsEnabled, traitsEnabled } from '@/lib/supabase/features';
+import { TermPicker } from './term-picker';
+import { DimensionFields, ThreatFields } from './trait-fields';
+import { emptyDimensions, newRarityNames } from '@/lib/creatures/traits';
 import { OriginPicker } from './origin-picker';
 import type { Origin } from '@/lib/creatures/origins';
 import { prepareAttempt, restoreAttempt, submissionKey, submitAtomic, type SubmissionAttempt } from '@/lib/creatures/atomic';
@@ -47,6 +50,7 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
   const latest = useRef(draft);
   latest.current = draft;
   const key = `mcaCreatureDraft:${owner}`;
+  const modernForm=traitsEnabled&&(!attempt||attempt.draft.traitsVersion===1);
 
   useEffect(() => {
     let pendingFound = false;
@@ -120,14 +124,15 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
     event.preventDefault();
     if (submitting.current || originBusy || (blocked && !attempt) || complete.current) return;
     if(originsEnabled&&!attempt&&!draft.originPlanetId){setMessage('Hãy chọn đủ nguồn gốc từ vũ trụ đến hành tinh.');return;}
-    const validation = validateDraft(attempt?.draft || draft);
+    const submittedDraft=attempt?.draft||(modernForm?{...draft,traitsVersion:1 as const,elementTermIds:draft.elementTermIds||[],dimensions:draft.dimensions||emptyDimensions()}:draft);
+    const validation = validateDraft(submittedDraft);
     if (validation) { setMessage(validation); return; }
     submitting.current = true; setBusy(true); setMessage('');
     try {
       const client = createClient();
       let saved;
       if (phase3Enabled) {
-        const request = attempt || await prepareAttempt(client, draft, image, owner);
+        const request = attempt || await prepareAttempt(client, submittedDraft, image, owner);
         setAttempt(request);
         saved = await submitAtomic(client, request, owner);
       } else saved = await submitCreature(client, draft, image, owner);
@@ -142,12 +147,12 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
     } finally { setBusy(false); submitting.current = false; }
   }
   function renderFields(keys: Field[]) {
-    return <div className="mca-form-grid">{fields.filter(field => keys.includes(field.key)).map(field => <label className={field.text ? 'mca-full-width' : ''} key={field.key} htmlFor={field.id}>{field.label}{field.required && <span className="mca-required"> *</span>}
+    return <div className="mca-form-grid">{fields.filter(field => keys.includes(field.key)).map(original => {const field=original.key==='rarity'&&modernForm?{...original,options:newRarityNames}:original;return <label className={field.text ? 'mca-full-width' : ''} key={field.key} htmlFor={field.id}>{field.label}{field.required && <span className="mca-required"> *</span>}
       {field.options ? <select id={field.id} name={field.key} value={draft[field.key]} required={field.required} onChange={event => update(field.key, event.target.value)}><option value="">Chọn {field.label.toLowerCase()}...</option>{Object.entries(field.options).map(([value, name]) => <option key={value} value={value}>{name}</option>)}</select>
         : field.text ? <textarea id={field.id} name={field.key} value={draft[field.key]} maxLength={fieldLimits[field.key]} required={field.required} rows={4} onChange={event => update(field.key, event.target.value)} />
           : <input id={field.id} name={field.key} value={draft[field.key]} maxLength={fieldLimits[field.key]} required={field.required} onChange={event => update(field.key, event.target.value)} />}
       {field.key === 'description' && <small>Tối thiểu 30 ký tự · {draft.description.length}/3000</small>}
-    </label>)}</div>;
+    </label>;})}</div>;
   }
 
   if (result) return <main className="mca-main"><section className="mca-panel mca-success" role="status"><span className="mca-eyebrow">HỒ SƠ ĐÃ GỬI</span><h1>{result.creature.name}</h1><p>{creatureCode(result.creature)} · Chờ xác minh</p><p>Hồ sơ và kỹ năng đã được lưu. Quản trị viên sẽ xem xét cấp đe dọa đề xuất của bạn.</p>{result.warnings.map(warning => <p key={warning}>{warning}</p>)}<div className="mca-actions"><Link className="mca-button" href={detailPath(result.creature.id)}>Xem hồ sơ</Link><Link href="/dieu-tra-vien" className="mca-button secondary">Hồ sơ của tôi</Link></div></section></main>;
@@ -156,9 +161,9 @@ export function CreateCreatureForm({ owner }: { owner: string }) {
     {legacyDraft && <div className="mca-panel"><p>Có bản nháp từ phiên bản cũ trên trình duyệt này.</p><button type="button" onClick={importOldDraft}>Khôi phục bản nháp cũ</button></div>}
     <form id="creatureForm" className="mca-form" onSubmit={submit} noValidate>
       <fieldset disabled={busy || originBusy || !ready || blocked}>
-        <section className="mca-panel"><h2>01 · Thông tin cơ bản</h2>{renderFields(['name', 'species', 'age', 'size', 'element', 'rarity'])}</section>
+        <section className="mca-panel"><h2>01 · Thông tin cơ bản</h2>{modernForm?<>{renderFields(['name','age'])}<TermPicker kind="species" locked={Boolean(attempt)} ids={draft.speciesTermId?[draft.speciesTermId]:[]} legacyCode={draft.species} onBusy={setOriginBusy} onChange={nodes=>setDraft(old=>({...old,speciesTermId:nodes[0]?.id,species:nodes[0]?.code||''}))}/><DimensionFields value={draft.dimensions} onChange={dimensions=>setDraft(old=>({...old,dimensions}))}/><TermPicker kind="element" locked={Boolean(attempt)} ids={draft.elementTermIds||[]} legacyCode={draft.element} onBusy={setOriginBusy} onChange={nodes=>setDraft(old=>({...old,elementTermIds:nodes.map(n=>n.id),element:nodes[0]?.code||''}))}/>{renderFields(['rarity'])}<p className="mca-muted">Loài và nguyên tố bạn đề xuất chỉ xuất hiện chung sau khi admin duyệt.</p></>:renderFields(['name', 'species', 'age', 'size', 'element', 'rarity'])}</section>
         <section className="mca-panel"><h2>02 · Nguồn gốc</h2>{originsEnabled&&(!attempt||attempt.draft.originPlanetId)?<OriginPicker locked={Boolean(attempt)} ids={draft.originIds||[]} onChange={selectOrigin} onBusy={setOriginBusy}/>:renderFields(['universe', 'galaxy', 'planet', 'world'])}</section>
-        <section className="mca-panel"><h2>03 · Sức mạnh</h2>{renderFields(['threatLevel', 'powerSource'])}<p className="mca-muted">Cấp đe dọa chính thức do quản trị viên xác minh.</p></section>
+        <section className="mca-panel"><h2>03 · Sức mạnh</h2>{modernForm?<><ThreatFields id="creatureThreat" value={draft.threatLevel} onChange={value=>update('threatLevel',value)}/>{renderFields(['powerSource'])}</>:renderFields(['threatLevel', 'powerSource'])}<p className="mca-muted">Cấp đe dọa chính thức do quản trị viên xác minh.</p></section>
         <section className="mca-panel"><h2>04 · Ảnh sinh vật</h2><label htmlFor="creatureImage">Chọn ảnh JPG, PNG hoặc WEBP · tối đa 5MB</label><input ref={imageInput} id="creatureImage" type="file" accept="image/jpeg,image/png,image/webp" onChange={event => { const file = event.target.files?.[0]; if (!file) { setImage(null); return; } const error = validateImage(file); if (error) { setMessage(error); event.target.value = ''; setImage(null); } else { setImage(file); setMessage(''); } }} />{preview && <div className="mca-upload-preview"><img id="creatureImagePreview" src={preview} alt="Ảnh sinh vật đang chọn" /><button type="button" onClick={() => { setImage(null); if (imageInput.current) imageInput.current.value = ''; }}>Bỏ ảnh</button></div>}<p className="mca-muted">Ảnh không được lưu trong bản nháp. Hãy chọn lại ảnh sau khi khôi phục.</p></section>
         <section className="mca-panel"><h2>05 · Mô tả và ngoại hình</h2>{renderFields(['description', 'appearance'])}</section>
         <section className="mca-panel"><div className="mca-panel-heading"><h2>06 · Kỹ năng</h2><span id="abilityCounter">{draft.abilities.length}/5</span></div><div id="abilityList">{draft.abilities.map((ability, index) => <div className="mca-ability ability-item" key={index}><span>{index + 1}</span><div className="mca-ability-fields"><label htmlFor={`abilityName${index}`}>Tên kỹ năng {index + 1}<input id={`abilityName${index}`} className="ability-name" value={ability.name} required maxLength={100} onChange={event => updateAbility(index, 'name', event.target.value)} /></label><label htmlFor={`abilityDescription${index}`}>Mô tả kỹ năng {index + 1}<textarea id={`abilityDescription${index}`} className="ability-description" value={ability.description} rows={3} maxLength={1000} onChange={event => updateAbility(index, 'description', event.target.value)} /></label></div><button type="button" className="remove-ability" aria-label={`Xóa kỹ năng ${index + 1}`} disabled={draft.abilities.length === 1} onClick={() => setDraft(old => ({ ...old, abilities: old.abilities.filter((_, i) => index !== i) }))}>×</button></div>)}</div><button type="button" id="addAbilityButton" disabled={draft.abilities.length >= 5} onClick={() => setDraft(old => ({ ...old, abilities: [...old.abilities, { name: '', description: '' }] }))}>+ Thêm kỹ năng</button></section>
