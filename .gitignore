@@ -1,12 +1,9 @@
 node_modules/
-.npm-cache/
-.playwright/
 .next/
 .next-test/
-out/
+.vercel/
+.playwright/
 .env*
-!.env.example
 *.tsbuildinfo
 playwright-report/
 test-results/
-

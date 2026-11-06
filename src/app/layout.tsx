@@ -1,20 +1,14 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { FavoritesProvider } from '@/components/creatures/favorites-provider';
-import './globals.css';
+import { MinecraftFooter, MinecraftHeader } from '@/components/minecraft/shell';
+import './(minecraft)/minecraft.css';
 
 export const metadata: Metadata = {
-  title: { default: 'MCA — Multiverse Creature Archive', template: '%s | MCA' },
-  description: 'Cơ sở dữ liệu lưu trữ và nghiên cứu các sinh vật trên khắp đa vũ trụ.',
+  title: { default: 'Mod Atlas — Thư viện Minecraft', template: '%s | Mod Atlas' },
+  description: 'Tra cứu mod, modpack, resource pack và hướng dẫn vật phẩm Minecraft Java bằng tiếng Việt.',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi" data-scroll-behavior="smooth"><body>
-    <link rel="stylesheet" href="/styles/layout.css" />
-    <FavoritesProvider><div id="site-header"><Header /></div>
-    {children}
-    <div id="site-footer"><Footer /></div></FavoritesProvider>
-  </body></html>;
+  return <html lang="vi"><body><div className="mc-app">
+    <MinecraftHeader />{children}<MinecraftFooter />
+  </div></body></html>;
 }
-

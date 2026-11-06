@@ -1,38 +1,27 @@
 {
+  "name": "mod-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "engines": { "node": ">=20.9.0" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node scripts/playwright.mjs test",
+    "test:install": "node scripts/playwright.mjs install chromium"
+  },
   "dependencies": {
-    "@supabase/ssr": "^0.12.7",
-    "@supabase/supabase-js": "^2.117.2",
     "next": "^16.3.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.5.8",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^7.0.2"
-  },
-  "name": "mca-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "test": "node scripts/test.mjs",
-    "test:ui": "node scripts/playwright.mjs test --ui",
-    "test:install": "node scripts/playwright.mjs install chromium",
-    "test:db": "node --test tests/database.test.mjs tests/audited-database.test.mjs tests/origins-database.test.mjs tests/traits-database.test.mjs",
-    "test:phase2": "node scripts/playwright.mjs test tests/migration.spec.ts tests/phase2.spec.ts",
-    "test:phase3": "node scripts/playwright-phase3.mjs test tests/phase3.spec.ts",
-    "test:origins": "node scripts/playwright-origins.mjs test tests/origins.spec.ts",
-    "test:traits": "node scripts/playwright-traits.mjs test tests/traits.spec.ts"
-  },
-  "engines": {
-    "node": ">=20.9.0"
   }
 }
