@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { Icon } from './icons';
+import { AtlasSigil, Icon } from './icons';
 
 export function MinecraftHeader() {
   return <header className="mc-header"><div className="mc-wrap mc-header-inner">
-    <Link href="/" className="mc-brand"><span className="mc-brand-icon"><Icon name="mod" size={23} /></span>
+    <Link href="/" className="mc-brand"><span className="mc-brand-icon"><AtlasSigil /></span>
       <span>Mod<span className="mc-brand-accent"> Atlas</span></span></Link>
     <nav aria-label="Điều hướng Minecraft">
       <Link href="/thu-vien" prefetch={false}>Thư viện</Link>
