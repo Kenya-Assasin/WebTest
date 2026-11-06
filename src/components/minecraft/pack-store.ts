@@ -33,15 +33,15 @@ export function removeProject(id: string) {
   const plan = readPlan(snapshot());
   return save({ ...plan, entries: plan.entries.filter(entry => entry.id !== id) });
 }
-export function addProject(entry: PlanEntry, target: Target) {
+export function addProject(entry: PlanEntry, target: Target): 'full' | 'storage' | null {
   const plan = readPlan(snapshot());
   const exists = plan.entries.some(other => other.id === entry.id);
-  if (!exists && plan.entries.length >= maxPlanEntries) return 'Gói đã có 60 dự án. Hãy bỏ một mục trước khi thêm.';
+  if (!exists && plan.entries.length >= maxPlanEntries) return 'full';
   const releaseLoader = entry.release.loaders.length === 1 ? entry.release.loaders[0] : '';
   const newTarget: Target = plan.entries.length > 0 ? plan.target : {
     mc: plan.target.mc || target.mc || (entry.release.gameVersions.length === 1 ? entry.release.gameVersions[0] : ''),
     loader: plan.target.loader || (entry.kind !== 'resourcepack' ? target.loader || (isLoader(releaseLoader) ? releaseLoader : '') : ''),
   };
   return save({ target: newTarget, entries: [...plan.entries.filter(other => other.id !== entry.id), entry] })
-    ? '' : 'Không lưu được gói trên trình duyệt này.';
+    ? null : 'storage';
 }

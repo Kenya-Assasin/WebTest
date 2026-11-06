@@ -1,3 +1,5 @@
+import { translator, type Locale } from './locale';
+
 export const kinds = ['mod', 'modpack', 'resourcepack'] as const;
 export const kindLabel = { mod: 'Mod', modpack: 'Modpack', resourcepack: 'Resource pack' };
 export const loaders = ['fabric', 'forge', 'neoforge', 'quilt'] as const;
@@ -64,11 +66,14 @@ export function sourcePath(project: Pick<Project, 'slug' | 'kind'>, versionId?: 
     (versionId ? '/version/' + encodeURIComponent(versionId) : '');
 }
 
-export const relationLabel: Record<Relation, string> = {
-  required: 'Bắt buộc', optional: 'Tùy chọn', incompatible: 'Không tương thích', embedded: 'Đóng kèm',
-};
-export function dependencyName(dep: Dependency) {
-  return dep.title ?? dep.file ?? (dep.projectId ? 'Dự án ' + dep.projectId : dep.versionId ? 'Bản phát hành ' + dep.versionId : 'Thành phần chưa xác định');
+export const relationLabel = {
+  required: ['Bắt buộc', 'Required'], optional: ['Tùy chọn', 'Optional'],
+  incompatible: ['Không tương thích', 'Incompatible'], embedded: ['Đóng kèm', 'Embedded'],
+} as const satisfies Record<Relation, readonly [string, string]>;
+export function dependencyName(dep: Dependency, locale: Locale) {
+  const t = translator(locale);
+  return dep.title ?? dep.file ?? (dep.projectId ? t('Dự án ', 'Project ') + dep.projectId
+    : dep.versionId ? t('Bản phát hành ', 'Release ') + dep.versionId : t('Thành phần chưa xác định', 'Unknown dependency'));
 }
 export function normalizeSearch(value: string) {
   return value.toLocaleLowerCase('vi').normalize('NFD').replace(/\p{M}/gu, '').replaceAll('đ', 'd').trim();
