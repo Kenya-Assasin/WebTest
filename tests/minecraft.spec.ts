@@ -97,3 +97,39 @@ test('the publication has no creature archive or legacy account routes', async (
   await page.goto('/');
   await expect(page.getByRole('link', { name: 'Kho sinh vật cũ' })).toHaveCount(0);
 });
+
+test('switching language keeps the current page, filters and saved pack', async ({ page, browser }) => {
+  const detail = '/thu-vien/iris?mc=1.20.1&loader=fabric';
+  await page.goto(detail);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
+  await page.getByRole('button', { name: 'Thêm vào gói' }).click();
+  await page.getByRole('button', { name: 'English', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page).toHaveURL(detail);
+  await expect(page.getByLabel('Minecraft version')).toHaveValue('1.20.1');
+  await expect(page.getByLabel('Mod loader')).toHaveValue('fabric');
+  await expect(page.getByRole('button', { name: 'Already in pack' })).toBeDisabled();
+
+  await page.getByRole('link', { name: 'My Pack', exact: true }).click();
+  await expect(page.getByText('Missing required dependency:')).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'My Pack', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Iris Shaders', exact: true })).toBeVisible();
+  await page.goto('/vat-pham?q=may+ep');
+  const guide = page.locator('#mechanical-press');
+  await expect(guide.getByRole('heading', { name: 'Mechanical Press' })).toBeVisible();
+  await guide.getByText('How it works and how to use it').click();
+  await expect(guide.getByText('Connect its shaft to a source of rotational power.')).toBeVisible();
+  await page.getByRole('button', { name: 'Tiếng Việt', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
+  await expect(page).toHaveURL('/vat-pham?q=may+ep');
+  await expect(guide.getByRole('heading', { name: 'Máy ép cơ khí' })).toBeVisible();
+
+  const visitor = await browser.newPage();
+  try {
+    await visitor.goto(new URL('/', page.url()).href);
+    await expect(visitor.locator('html')).toHaveAttribute('lang', 'vi');
+  } finally {
+    await visitor.close();
+  }
+});
